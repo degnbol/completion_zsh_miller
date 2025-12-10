@@ -13,7 +13,8 @@ echo 'Print auxiliary functions.' > verb/aux-list.help
 
 # write verb/*.desc
 for file in verb/*.help; do
-    grep -v '^Usage:' $file | ./text_grep.py --stop "^Option|options:$|^$|^-" > $file.desc
+    # Extract description by excluding a Usage line and keeping lines up until options gets listed.
+    grep -v '^Usage:' $file | sed -nE '/^Option|options:$|^$|^-/q;p' > $file.desc
 done
 # fix top's alternative section order
 grep -v '^Usage:' verb/top.help | grep -v -- '^[ -]' > verb/top.help.desc
