@@ -1,0 +1,4 @@
+-n[{repeat count} Repeat each input record this many times.]
+-f[{field name} Same, but take the repeat count from the specified]
+-h
+--help

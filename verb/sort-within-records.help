@@ -1,0 +1,5 @@
+Usage: mlr sort-within-records [options]
+Outputs records sorted lexically ascending by keys.
+Options:
+-r        Recursively sort subobjects/submaps, e.g. for JSON input.
+-h|--help Show this message.

@@ -1,0 +1,4 @@
+-i[{integer format} Defaults to "%d".]
+-f[{float format} Defaults to "%f".]
+-s[{string format} Defaults to "%s".]
+-n[Coerce field values autodetected as int to float, and then]

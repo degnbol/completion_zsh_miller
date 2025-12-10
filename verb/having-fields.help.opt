@@ -1,0 +1,6 @@
+--at-least[{comma-separated names}]
+--which-are[{comma-separated names}]
+--at-most[{comma-separated names}]
+--all-matching[{regular expression}]
+--any-matching[{regular expression}]
+--none-matching[{regular expression}]

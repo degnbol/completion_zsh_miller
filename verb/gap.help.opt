@@ -1,0 +1,5 @@
+-g[{a,b,c} Print a gap whenever values of these fields (e.g. a,b,c) changes.]
+-n[{n} Print a gap every n records.]
+-n[is ignored if -g is present.]
+-h
+--help

@@ -1,0 +1,2 @@
+Recursively converts record strings from Latin-1 to UTF-8.
+For field-level control, please see the latin1_to_utf8 DSL function.

@@ -1,0 +1,3 @@
+-r[Recursively sort subobjects/submaps, e.g. for JSON input.]
+-h
+--help

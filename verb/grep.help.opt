@@ -1,0 +1,4 @@
+-i[Use case-insensitive search.]
+-v[Invert: pass through records which do not match the regex.]
+-h
+--help

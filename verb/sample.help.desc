@@ -1,0 +1,2 @@
+Reservoir sampling (subsampling without replacement), optionally by category.
+See also mlr bootstrap and mlr shuffle.

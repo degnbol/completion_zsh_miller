@@ -1,0 +1,7 @@
+Usage: mlr unflatten [options]
+Reverses flatten. Example: field with name 'a.b.c' and value 4
+becomes name 'a' and value '{"b": { "c": 4 }}'.
+Options:
+-f {a,b,c} Comma-separated list of field names to unflatten (default all).
+-s {string} Separator, defaulting to mlr --flatsep value.
+-h|--help Show this message.

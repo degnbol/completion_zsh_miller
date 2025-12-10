@@ -1,0 +1,13 @@
+Usage: mlr clean-whitespace [options]
+For each record, for each field in the record, whitespace-cleans the keys and/or
+values. Whitespace-cleaning entails stripping leading and trailing whitespace,
+and replacing multiple whitespace with singles. For finer-grained control,
+please see the DSL functions lstrip, rstrip, strip, collapse_whitespace,
+and clean_whitespace.
+
+Options:
+-k|--keys-only    Do not touch values.
+-v|--values-only  Do not touch keys.
+It is an error to specify -k as well as -v -- to clean keys and values,
+leave off -k as well as -v.
+-h|--help Show this message.

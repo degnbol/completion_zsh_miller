@@ -1,0 +1,2 @@
+Emits an n-sample, with replacement, of the input records.
+See also mlr sample and mlr shuffle.

@@ -1,0 +1,4 @@
+Usage: mlr altkv [options]
+Given fields with values of the form a,b,c,d,e,f emits a=b,c=d,e=f pairs.
+Options:
+-h|--help Show this message.

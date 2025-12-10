@@ -1,0 +1,2 @@
+Computes bivariate statistics for one or more given field-name pairs,
+accumulated across the input record stream.

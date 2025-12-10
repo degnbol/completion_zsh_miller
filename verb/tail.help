@@ -1,0 +1,6 @@
+Usage: mlr tail [options]
+Passes through the last n records, optionally by category.
+Options:
+-g {a,b,c} Optional group-by-field names for head counts, e.g. a,b,c.
+-n {n} Head-count to print. Default 10.
+-h|--help Show this message.

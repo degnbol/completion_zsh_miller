@@ -1,0 +1,2 @@
+Computes univariate statistics for one or more given fields, accumulated across
+the input record stream.

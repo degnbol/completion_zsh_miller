@@ -1,0 +1,7 @@
+Usage: mlr count [options]
+Prints number of records, optionally grouped by distinct values for specified field names.
+Options:
+-g {a,b,c} Optional group-by-field names for counts, e.g. a,b,c
+-n {n} Show only the number of distinct values. Not interesting without -g.
+-o {name} Field name for output-count. Default "count".
+-h|--help Show this message.

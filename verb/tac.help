@@ -1,0 +1,4 @@
+Usage: mlr tac [options]
+Prints records in reverse order from the order in which they were encountered.
+Options:
+-h|--help Show this message.

@@ -1,0 +1,4 @@
+-g[{a,b,c} Group-by-field names for counts, e.g. a,b,c]
+-o[{name} Field name for output-counts. Defaults to "count".]
+-h
+--help

@@ -1,0 +1,4 @@
+-a[Append to existing file, if any, rather than overwriting.]
+-p[Treat filename as a pipe-to command.]
+-h
+--help

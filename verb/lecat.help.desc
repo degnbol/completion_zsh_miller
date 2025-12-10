@@ -1,0 +1,2 @@
+Simply echoes input, but flags CR characters in red and LF characters in green.
+If zero file names are supplied, standard input is read.

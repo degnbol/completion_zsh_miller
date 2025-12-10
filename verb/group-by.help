@@ -1,0 +1,3 @@
+Usage: mlr group-by [options] {comma-separated field names}
+Outputs records in batches having identical values at specified field names.Options:
+-h|--help Show this message.

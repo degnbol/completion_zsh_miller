@@ -1,0 +1,7 @@
+-f[{a,b,c} Value-field names for top counts.]
+-g[{d,e,f} Optional group-by-field names for top counts.]
+-n[{count} How many records to print per category; default 1.]
+-a[Print all fields for top-value records; default is]
+--min[Print top smallest values; default is top largest values.]
+-F[Keep top values as floats even if they look like integers.]
+-o[{name} Field name for output indices. Default "top_idx".]

@@ -1,0 +1,2 @@
+Shows the most frequently occurring distinct values for specified field names.
+The first entry is the statistical mode; the remaining are runners-up.

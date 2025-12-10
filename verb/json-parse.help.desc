@@ -1,0 +1,1 @@
+Tries to convert string field values to parsed JSON, e.g. "[1,2,3]" -> [1,2,3].

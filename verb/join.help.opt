@@ -1,0 +1,25 @@
+-f[{left file name}]:filename:_files
+-j[{a,b,c} Comma-separated join-field names for output]
+-l[{a,b,c} Comma-separated join-field names for left input file;]
+-r[{a,b,c} Comma-separated join-field names for right input file(s);]
+--lk[{a,b,c} If supplied, this means keep only the specified field]
+--left-keep-field-names[{a,b,c} If supplied, this means keep only the specified field]
+--lp[{text} Additional prefix for non-join output field names from]
+--rp[{text} Additional prefix for non-join output field names from]
+--np[Do not emit paired records]
+--ul[Emit unpaired records from the left file]
+--ur[Emit unpaired records from the right file(s)]
+-s[Require sorted input: records must be sorted]
+--sorted-input[Require sorted input: records must be sorted]
+-u[Enable unsorted input. (This is the default even without -u.)]
+--prepipe[{command} As in main input options; see mlr --help for details.]
+--prepipex[{command} Likewise.]
+-i[{one of csv,dkvp,nidx,pprint,xtab}]
+--irs[{record-separator character}]
+--ifs[{field-separator character}]
+--ips[{pair-separator character}]
+--repifs
+--implicit-csv-header
+--implicit-tsv-header
+--no-implicit-csv-header
+--no-implicit-tsv-header

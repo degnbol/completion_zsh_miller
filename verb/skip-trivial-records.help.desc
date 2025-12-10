@@ -1,0 +1,2 @@
+Passes through all records except those with zero fields,
+or those for which all fields have empty value.

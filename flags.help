@@ -1,0 +1,229 @@
+--pass-comments[Immediately print commented lines (prefixed by `#`)…]
+--pass-comments-with[{string}]
+--skip-comments[Ignore commented lines (prefixed by `#`) within the…]
+--skip-comments-with[{string}]
+--bz2in[Uncompress bzip2 within the Miller process. Done by…]
+--gzin[Uncompress gzip within the Miller process. Done by…]
+--prepipe[{decompression command}]
+--prepipe-bz2[Same as `--prepipe bz2`, except this is allowed in…]
+--prepipe-gunzip[Same as `--prepipe gunzip`, except this is allowed in…]
+--prepipe-zcat[Same as `--prepipe zcat`, except this is allowed in…]
+--prepipex[{decompression command}]
+--zin[Uncompress zlib within the Miller process. Done by…]
+--allow-ragged-csv-input
+--ragged
+--allow-ragged-tsv-input
+--headerless-csv-output
+--ho
+--headerless-tsv-output
+--implicit-csv-header
+--headerless-csv-input
+--hi
+--implicit-tsv-header
+--lazy-quotes[Accepts quotes appearing in unquoted fields, and…]
+--no-implicit-csv-header
+--no-implicit-tsv-header
+-N[Keystroke-saver for `--implicit-csv-header…]
+--asv[Use ASV format for input and output data.]
+--asvlite[Use ASV format for input and output data.]
+--csv[Use CSV format for input and output data.]
+-c[Use CSV format for input and output data.]
+--csvlite[Use CSV-lite format for input and output data.]
+--dkvp[Use DKVP format for input and output data.]
+--gen-field-name[Specify field name for --igen. Defaults to "i".]
+--gen-start[Specify start value for --igen. Defaults to 1.]
+--gen-step[Specify step value for --igen. Defaults to 1.]
+--gen-stop[Specify stop value for --igen. Defaults to 100.]
+--iasv[Use ASV format for input data.]
+--iasvlite[Use ASV format for input data.]
+--icsv[Use CSV format for input data.]
+--icsvlite[Use CSV-lite format for input data.]
+--idkvp[Use DKVP format for input data.]
+--igen[Ignore input files and instead generate sequential…]
+--ijson[Use JSON format for input data.]
+--ijsonl[Use JSON Lines format for input data.]
+--inidx[Use NIDX format for input data.]
+--io[{format name} Use format name for input and output data. For…]
+--ipprint[Use PPRINT format for input data.]
+--itsv[Use TSV format for input data.]
+--itsvlite[Use TSV-lite format for input data.]
+--iusv[Use USV format for input data.]
+--iusvlite[Use USV format for input data.]
+--ixtab[Use XTAB format for input data.]
+--json[Use JSON format for input and output data.]
+-j[Use JSON format for input and output data.]
+--jsonl[Use JSON Lines format for input and output data.]
+--nidx[Use NIDX format for input and output data.]
+--oasv[Use ASV format for output data.]
+--oasvlite[Use ASV format for output data.]
+--ocsv[Use CSV format for output data.]
+--ocsvlite[Use CSV-lite format for output data.]
+--odkvp[Use DKVP format for output data.]
+--ojson[Use JSON format for output data.]
+--ojsonl[Use JSON Lines format for output data.]
+--omd[Use markdown-tabular format for output data.]
+--onidx[Use NIDX format for output data.]
+--opprint[Use PPRINT format for output data.]
+--otsv[Use TSV format for output data.]
+--otsvlite[Use TSV-lite format for output data.]
+--ousv[Use USV format for output data.]
+--ousvlite[Use USV format for output data.]
+--oxtab[Use XTAB format for output data.]
+--pprint[Use PPRINT format for input and output data.]
+--tsv[Use TSV format for input and output data.]
+-t[Use TSV format for input and output data.]
+--tsvlite[Use TSV-lite format for input and output data.]
+--usv[Use USV format for input and output data.]
+--usvlite[Use USV format for input and output data.]
+--xtab[Use XTAB format for input and output data.]
+--xvright[Right-justify values for XTAB format.]
+-i[{format name} Use format name for input data. For example: `-i csv`…]
+-o[{format name} Use format name for output data. For example: `-o…]
+--flatsep[{string}]
+--jflatsep[{string}]
+--no-auto-flatten[When output is non-JSON, suppress the default…]
+--no-auto-unflatten[When input non-JSON and output is JSON, suppress the…]
+-p[Keystroke-saver for `--nidx --fs space --repifs`.]
+-T[Keystroke-saver for `--nidx --fs tab`.]
+--jknquoteint[Type information from JSON input files is now…]
+--jlistwrap[Wrap JSON output in outermost `\[ \]`. This is the…]
+--jl[Wrap JSON output in outermost `\[ \]`. This is the…]
+--jquoteall[Type information from JSON input files is now…]
+--json-fatal-arrays-on-input
+--json-map-arrays-on-input
+--json-skip-arrays-on-input
+--jsonx[The `--jvstack` flag is now default true in Miller 6.]
+--jvquoteall[Type information from JSON input files is now…]
+--jvstack[Put one key-value pair per line for JSON output…]
+--mmap[Miller no longer uses memory-mapping to access data…]
+--no-jlistwrap[Wrap JSON output in outermost `\[ \]`. This is the…]
+--no-jvstack[Put objects/arrays all on one line for JSON output.]
+--no-mmap[Miller no longer uses memory-mapping to access data…]
+--ojsonx[The `--jvstack` flag is now default true in Miller 6.]
+--quote-all[Ignored as of version 6. Types are inferred/retained…]
+--quote-minimal[Ignored as of version 6. Types are inferred/retained…]
+--quote-none[Ignored as of version 6. Types are inferred/retained…]
+--quote-numeric[Ignored as of version 6. Types are inferred/retained…]
+--quote-original[Ignored as of version 6. Types are inferred/retained…]
+--vflatsep[Ignored as of version 6. This functionality is…]
+--fflush[Force buffered output to be written after every…]
+--from[{filename} Use this to specify an input file before the verb(s),…]:filename:_files
+--hash-records[This is an internal parameter which normally does not…]
+--infer-int-as-float
+-A
+--infer-none[Don't treat values like 123 or 456.7 in data files as…]
+-S[Don't treat values like 123 or 456.7 in data files as…]
+--infer-octal[Treat numbers like 0123 in data files as numeric;…]
+-O[Treat numbers like 0123 in data files as numeric;…]
+--load[{filename} Load DSL script file for all put/filter operations on…]
+--mfrom[{filenames} Use this to specify one of more input files before…]
+--mload[{filenames} Like `--load` but works with more than one filename,…]
+--no-dedupe-field-names[By default, if an input record has a field named `x`…]
+--no-fflush[Let buffered output not be written after every output…]
+--no-hash-records[See --hash-records.]
+--nr-progress-mod[{m} With m a positive integer: print filename and record…]
+--ofmt[{format} E.g. `%.18f`, `%.0f`, `%9.6e`. Please use…]
+--records-per-batch[{n} This is an internal parameter for maximum number of…]
+--seed[{n} with `n` of the form `12345678` or `0xcafefeed`. For…]
+--tz[{timezone} Specify timezone, overriding `$TZ` environment…]
+-I[Process files in-place. For each file name on the…]
+-n[Process no input files, nor standard input either.]
+-s[{file name} Take command-line flags from file name. For more…]
+--always-color[Instructs Miller to colorize output even when it…]
+-C[Instructs Miller to colorize output even when it…]
+--fail-color[Specify the color (see `--list-color-codes` and…]
+--help-color[Specify the color (see `--list-color-codes` and…]
+--key-color[Specify the color (see `--list-color-codes` and…]
+--list-color-codes[Show the available color codes in the range 0..255,…]
+--list-color-names[Show the names for the available color codes, such as…]
+--no-color[Instructs Miller to not colorize any output.]
+-M[Instructs Miller to not colorize any output.]
+--pass-color[Specify the color (see `--list-color-codes` and…]
+--value-color[Specify the color (see `--list-color-codes` and…]
+--barred[Prints a border around PPRINT output (not available…]
+--right[Right-justifies all fields for PPRINT output.]
+--cpuprofile[{CPU-profile file name}]
+--time[Print elapsed execution time in seconds to stderr at…]
+--traceprofile[Create a trace-profile file for performance analysis.]
+--fs[{string} Specify FS for input and output.]
+--ifs[{string} Specify FS for input.]
+--ifs-regex[{string} Specify FS for input as a regular expression.]
+--ips[{string} Specify PS for input.]
+--ips-regex[{string} Specify PS for input as a regular expression.]
+--irs[{string} Specify RS for input.]
+--ofs[{string} Specify FS for output.]
+--ops[{string} Specify PS for output.]
+--ors[{string} Specify RS for output.]
+--ps[{string} Specify PS for input and output.]
+--repifs[Let IFS be repeated: e.g. for splitting on multiple…]
+--rs[{string} Specify RS for input and output.]
+--c2t
+--c2j
+--c2l
+--c2d
+--c2n
+--c2x
+--c2p
+--c2m
+--t2c
+--t2j
+--t2l
+--t2d
+--t2n
+--t2x
+--t2p
+--t2m
+--j2c
+--j2t
+--j2l
+--j2d
+--j2n
+--j2x
+--j2p
+--j2m
+--l2c
+--l2t
+--l2d
+--l2n
+--l2x
+--l2p
+--l2m
+--d2c
+--d2t
+--d2j
+--d2l
+--d2n
+--d2x
+--d2p
+--d2m
+--n2c
+--n2t
+--n2j
+--n2l
+--n2d
+--n2x
+--n2p
+--n2m
+--x2c
+--x2t
+--x2j
+--x2l
+--x2d
+--x2n
+--x2p
+--x2m
+--p2c
+--p2t
+--p2j
+--p2l
+--p2d
+--p2n
+--p2x
+--p2m
+-g[help flags]
+-l[help list-verbs]
+-L[help usage-verbs]
+-f[help list-functions]
+-F[help usage-functions]
+-k[help list-keywords]
+-K[help usage-keywords]

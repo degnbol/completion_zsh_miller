@@ -1,0 +1,2 @@
+Prints number of records having distinct values for specified field names.
+Same as uniq -c.

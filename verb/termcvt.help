@@ -1,0 +1,12 @@
+Usage: mlr termcvt [option] {zero or more file names}
+Option (exactly one is required):
+--cr2crlf
+--lf2crlf
+--crlf2cr
+--crlf2lf
+--cr2lf
+--lf2cr
+-I in-place processing (default is to write to stdout)
+-h or --help: print this message
+Zero file names means read from standard input.
+Output is always to standard output; files are not written in-place.

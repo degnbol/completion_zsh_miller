@@ -1,0 +1,5 @@
+Usage: mlr skip-trivial-records [options]
+Passes through all records except those with zero fields,
+or those for which all fields have empty value.
+Options:
+-h|--help Show this message.

@@ -1,0 +1,71 @@
+#compdef mlr
+
+# Used _spt as template.
+
+
+_mlr() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    _arguments_options=(-s -S -C)
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" \
+'-t [tab]' \
+'--c2t [comma 2 tab]' \
+":: :_mlr_commands" \
+"*::: :->mlr-tui" \
+&& ret=0
+    case $state in
+    (mlr-tui)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:mlr-command-$line[1]:"
+        case $line[1] in
+(uniq)
+_arguments "${_arguments_options[@]}" \
+'-c+[count]' \
+'--Count=[count]' \
+&& ret=0
+;;
+(count)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_mlr_commands] )) ||
+_mlr_commands() {
+    local commands; commands=(
+"uniq:description of: uniq" \
+"count:lots of counts" \
+    )
+    _describe -t commands 'mlr commands' commands "$@"
+}
+(( $+functions[_mlr__help_commands] )) ||
+_mlr__help_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'mlr help commands' commands "$@"
+}
+(( $+functions[_mlr__uniq_commands] )) ||
+_mlr__uniq_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'mlr uniq commands' commands "$@"
+}
+(( $+functions[_mlr__count_commands] )) ||
+_mlr__count_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'mlr count commands' commands "$@"
+}
+
+_mlr "$@"

@@ -1,0 +1,9 @@
+-n[{n}: Cap file sizes at N records.]
+-m[{m}: Produce M files, round-robining records among them.]
+-g[{a,b,c}: Write separate files with records having distinct values for fields named a,b,c.]
+--prefix[{p} Specify filename prefix; default "split".]
+--suffix[{s} Specify filename suffix; default is from mlr output format, e.g. "csv".]
+-a[Append to existing file(s), if any, rather than overwriting.]
+-v[Send records along to downstream verbs as well as splitting to files.]
+-h
+--help

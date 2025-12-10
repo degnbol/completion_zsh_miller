@@ -1,0 +1,5 @@
+-g[{d,e,f} Group-by-field names for uniq counts.]
+-c[Show repeat counts in addition to unique values.]
+-n[Show only the number of distinct values.]
+-o[{name} Field name for output count. Default "count".]
+-a[Output each unique record only once. Incompatible with -g.]

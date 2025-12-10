@@ -1,0 +1,7 @@
+Usage: mlr sample [options]
+Reservoir sampling (subsampling without replacement), optionally by category.
+See also mlr bootstrap and mlr shuffle.
+Options:
+-g {a,b,c} Optional: group-by-field names for samples, e.g. a,b,c.
+-k {k} Required: number of records to output in total, or by group if using -g.
+-h|--help Show this message.

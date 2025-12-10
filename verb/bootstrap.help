@@ -1,0 +1,7 @@
+Usage: mlr bootstrap [options]
+Emits an n-sample, with replacement, of the input records.
+See also mlr sample and mlr shuffle.
+Options:
+ -n Number of samples to output. Defaults to number of input records.
+    Must be non-negative.
+-h|--help Show this message.

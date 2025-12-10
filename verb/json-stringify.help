@@ -1,0 +1,7 @@
+Usage: mlr json-stringify [options]
+Produces string field values from field-value data, e.g. [1,2,3] -> "[1,2,3]".
+Options:
+-f {...} Comma-separated list of field names to json-parse (default all).
+--jvstack Produce multi-line JSON output.
+--no-jvstack Produce single-line JSON output per record (default).
+-h|--help Show this message.

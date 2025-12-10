@@ -1,0 +1,12 @@
+-a[{sum,count,...} Names of accumulators: one or more of:]
+-f[{a,b,c} Value-field names on which to compute statistics]
+--fr[{regex} Regex for value-field names on which to compute statistics]
+--fx[{regex} Inverted regex for value-field names on which to compute statistics]
+-g[{d,e,f} Optional group-by-field names]
+--gr[{regex} Regex for optional group-by-field names]
+--gx[{regex} Inverted regex for optional group-by-field names]
+--grfx[{regex} Shorthand for --gr {regex} --fx {that same regex}]
+-i[Use interpolated percentiles, like R\'s type=7; default like type=1.]
+-s[Print iterative stats. Useful in tail -f contexts (in which]
+-h
+--help

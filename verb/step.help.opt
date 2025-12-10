@@ -1,0 +1,8 @@
+-a[{delta,rsum,...} Names of steppers: comma-separated, one or more of:]
+-f[{a,b,c} Value-field names on which to compute statistics]
+-g[{d,e,f} Optional group-by-field names]
+-F[Computes integerable things (e.g. counter) in floating point.]
+-d[{x,y,z} Weights for EWMA. 1 means current sample gets all weight (no]
+-o[{a,b,c} Custom suffixes for EWMA output fields. If omitted, these default to]
+-h
+--help

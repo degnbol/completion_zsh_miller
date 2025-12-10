@@ -1,0 +1,1 @@
+Emits an empty record every n records, or when certain values change.

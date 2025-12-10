@@ -1,0 +1,5 @@
+Sorts records primarily by the first specified field, secondarily by the second
+field, and so on.  (Any records not having all specified sort keys will appear
+at the end of the output, in the order they were encountered, regardless of the
+specified sort order.) The sort is stable: records that compare equal will sort
+in the order they were encountered in the input record stream.

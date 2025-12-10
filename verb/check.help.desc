@@ -1,0 +1,2 @@
+Consumes records without printing any output.
+Useful for doing a well-formatted check on input data.

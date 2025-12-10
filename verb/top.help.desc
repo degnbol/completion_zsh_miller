@@ -1,0 +1,5 @@
+Prints the n records with smallest/largest values at specified fields,
+optionally by category. If -a is given, then the top records are emitted
+with the same fields as they appeared in the input. Without -a, only fields
+from -f, fields from -g, and the top-index field are emitted. For more information
+please see https://miller.readthedocs.io/en/latest/reference-verbs#top

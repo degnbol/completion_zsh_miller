@@ -1,0 +1,6 @@
+Usage: mlr lecat [options] {zero or more file names}
+Simply echoes input, but flags CR characters in red and LF characters in green.
+If zero file names are supplied, standard input is read.
+Options:
+--mono: don't try to colorize the output
+-h or --help: print this message

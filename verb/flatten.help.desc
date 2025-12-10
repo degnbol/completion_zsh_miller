@@ -1,0 +1,2 @@
+Flattens multi-level maps to single-level ones. Example: field with name 'a'
+and value '{"b": { "c": 4 }}' becomes name 'a.b.c' and value 4.

@@ -1,0 +1,5 @@
+Usage: mlr nothing [options]
+Drops all input records. Useful for testing, or after tee/print/etc. have
+produced other output.
+Options:
+-h|--help Show this message.

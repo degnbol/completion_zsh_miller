@@ -1,0 +1,8 @@
+-f[{a,b,c} Value-field names for histogram counts]
+--lo[{lo} Histogram low value]
+--hi[{hi} Histogram high value]
+--nbins[{n} Number of histogram bins. Defaults to 20.]
+--auto[Automatically computes limits, ignoring --lo and --hi.]
+-o[{prefix} Prefix for output field name. Default: no prefix.]
+-h
+--help

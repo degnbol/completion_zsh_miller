@@ -1,0 +1,6 @@
+Replaces a numeric field representing seconds since the epoch with the
+corresponding GMT timestamp; leaves non-numbers as-is. This is nothing
+more than a keystroke-saver for the sec2gmt function:
+  mlr sec2gmt time1,time2
+is the same as
+  mlr put '$time1 = sec2gmt($time1); $time2 = sec2gmt($time2)'

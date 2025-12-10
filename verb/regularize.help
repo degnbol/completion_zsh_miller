@@ -1,0 +1,4 @@
+Usage: mlr regularize [options]
+Outputs records sorted lexically ascending by keys.
+Options:
+-h|--help Show this message.

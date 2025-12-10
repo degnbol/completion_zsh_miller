@@ -1,0 +1,7 @@
+-f[{a,b,c} Comma-separated field names for cut, e.g. a,b,c.]
+-o[Retain fields in the order specified here in the argument list.]
+-x[Exclude, rather than include, field names specified by -f.]
+--complement[Exclude, rather than include, field names specified by -f.]
+-r[Treat field names as regular expressions. "ab", "a.*b" will]
+-h
+--help

@@ -1,0 +1,4 @@
+-f[{a,b,c} Comma-separated list of field names to unflatten (default all).]
+-s[{string} Separator, defaulting to mlr --flatsep value.]
+-h
+--help

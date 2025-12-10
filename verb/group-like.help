@@ -1,0 +1,4 @@
+Usage: mlr group-like [options]
+Outputs records in batches having identical field names.
+Options:
+-h|--help Show this message.

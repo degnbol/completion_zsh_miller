@@ -1,0 +1,5 @@
+Usage: mlr unhex [option] {zero or more file names}
+Options:
+-h or --help: print this message
+Zero file names means read from standard input.
+Output is always to standard output; files are not written in-place.

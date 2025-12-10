@@ -1,0 +1,4 @@
+Joins records from specified left file name with records from all file names
+at the end of the Miller argument list.
+Functionality is essentially the same as the system "join" command, but for
+record streams.

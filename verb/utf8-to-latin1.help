@@ -1,0 +1,5 @@
+Usage: mlr utf8-to-latin1, with no options.
+Recursively converts record strings from Latin-1 to UTF-8.
+For field-level control, please see the utf8_to_latin1 DSL function.
+Options:
+-h|--help Show this message.

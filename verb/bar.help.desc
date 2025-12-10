@@ -1,0 +1,2 @@
+Replaces a numeric field with a number of asterisks, allowing for cheesy
+bar plots. These align best with --opprint or --oxtab output format.

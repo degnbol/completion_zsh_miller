@@ -1,0 +1,8 @@
+--cr2crlf
+--lf2crlf
+--crlf2cr
+--crlf2lf
+--cr2lf
+--lf2cr
+-I[in-place processing (default is to write to stdout)]
+-h[or --help: print this message]

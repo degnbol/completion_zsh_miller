@@ -1,0 +1,2 @@
+Shows the least frequently occurring distinct values for specified field names.
+The first entry is the statistical anti-mode; the remaining are runners-up.

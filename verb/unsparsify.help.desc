@@ -1,0 +1,3 @@
+Prints records with the union of field names over all input records.
+For field names absent in a given record but present in others, fills in
+a value. This verb retains all input before producing any output.

@@ -1,0 +1,5 @@
+-f[{...} Comma-separated list of field names to json-parse (default all).]
+--jvstack[Produce multi-line JSON output.]
+--no-jvstack[Produce single-line JSON output per record (default).]
+-h
+--help

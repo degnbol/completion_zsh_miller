@@ -1,0 +1,6 @@
+Usage: mlr hex [options] {zero or more file names}
+Simple hex-dump.
+If zero file names are supplied, standard input is read.
+Options:
+-r: print only raw hex without leading offset indicators or trailing ASCII dump.
+-h or --help: print this message

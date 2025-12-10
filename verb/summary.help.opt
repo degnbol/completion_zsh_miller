@@ -1,0 +1,5 @@
+-a[{mean,sum,etc.} Use only the specified summarizers.]
+-x[{mean,sum,etc.} Use all summarizers, except the specified ones.]
+--all[Use all available summarizers.]
+-h
+--help

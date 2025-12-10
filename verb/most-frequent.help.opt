@@ -1,0 +1,4 @@
+-f[{one or more comma-separated field names}. Required flag.]
+-n[{count}. Optional flag defaulting to 10.]
+-b[Suppress counts; show only field values.]
+-o[{name} Field name for output count. Default "count".]

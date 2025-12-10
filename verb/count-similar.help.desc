@@ -1,0 +1,2 @@
+Ingests all records, then emits each record augmented by a count of
+the number of other records having the same group-by field values.

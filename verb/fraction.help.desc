@@ -1,0 +1,4 @@
+For each record's value in specified fields, computes the ratio of that
+value to the sum of values in that field over all input records.
+E.g. with input records  x=1  x=2  x=3  and  x=4, emits output records
+x=1,x_fraction=0.1  x=2,x_fraction=0.2  x=3,x_fraction=0.3  and  x=4,x_fraction=0.4

@@ -1,0 +1,3 @@
+Places input-record fields in the order specified by list of column names.
+If the input record is missing a specified field, it will be filled with the fill-with.
+If the input record possesses an unspecified field, it will be discarded.

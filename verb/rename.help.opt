@@ -1,0 +1,4 @@
+-r[Treat old field names as regular expressions. "ab", "a.*b"]
+-g[Do global replacement within each field name rather than]
+-h
+--help

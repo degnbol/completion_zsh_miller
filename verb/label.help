@@ -1,0 +1,8 @@
+Usage: mlr label [options] {new1,new2,new3,...}
+Given n comma-separated names, renames the first n fields of each record to
+have the respective name. (Fields past the nth are left with their original
+names.) Particularly useful with --inidx or --implicit-csv-header, to give
+useful names to otherwise integer-indexed fields.
+
+Options:
+-h|--help Show this message.

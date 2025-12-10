@@ -1,0 +1,4 @@
+Applies format strings to all field values, depending on autodetected type.
+* If a field value is detected to be integer, applies integer format.
+* Else, if a field value is detected to be float, applies float format.
+* Else, applies string format.

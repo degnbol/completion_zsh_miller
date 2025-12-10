@@ -1,0 +1,8 @@
+Usage: mlr decimate [options]
+Passes through one of every n records, optionally by category.
+Options:
+ -b Decimate by printing first of every n.
+ -e Decimate by printing last of every n (default).
+ -g {a,b,c} Optional group-by-field names for decimate counts, e.g. a,b,c.
+ -n {n} Decimation factor (default 10).
+-h|--help Show this message.

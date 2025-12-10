@@ -1,0 +1,10 @@
+-v[Prints the expressions\'s AST (abstract syntax tree), which gives]
+-d[Like -v but uses a parenthesized-expression format for the AST.]
+-D[Like -d but with output all on one line.]
+-w[Show warnings about uninitialized variables]
+-q[Don\'t show startup banner]
+-s[Don\'t show prompts]
+--load[{DSL script file} Load script file before presenting the prompt.]:filename:_files
+--mload[{DSL script files} -- Like --load but works with more than one filename,]:filename:_files
+-h
+--help

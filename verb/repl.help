@@ -1,0 +1,28 @@
+Usage: mlr repl [options] {zero or more data-file names}
+-v Prints the expressions's AST (abstract syntax tree), which gives
+   full transparency on the precedence and associativity rules of
+   Miller's grammar, to stdout.
+
+-d Like -v but uses a parenthesized-expression format for the AST.
+
+-D Like -d but with output all on one line.
+
+-w Show warnings about uninitialized variables
+
+-q Don't show startup banner
+
+-s Don't show prompts
+
+--load {DSL script file} Load script file before presenting the prompt.
+   If the name following --load is a directory, load all "*.mlr" files
+   in that directory.
+
+--mload {DSL script files} -- Like --load but works with more than one filename,
+   e.g. '--mload *.mlr --'.
+
+-h|--help Show this message.
+
+Or any --icsv, --ojson, etc. reader/writer options as for the main Miller command line.
+
+Any data-file names are opened just as if you had waited and typed :open {filenames}
+at the Miller REPL prompt.

@@ -1,0 +1,2 @@
+-r:[print only raw hex without leading offset indicators or trailing ASCII dump.]
+-h[or --help: print this message]

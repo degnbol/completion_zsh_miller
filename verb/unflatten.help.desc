@@ -1,0 +1,2 @@
+Reverses flatten. Example: field with name 'a.b.c' and value 4
+becomes name 'a' and value '{"b": { "c": 4 }}'.

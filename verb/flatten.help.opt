@@ -1,0 +1,4 @@
+-f[Comma-separated list of field names to flatten (default all).]
+-s[Separator, defaulting to mlr --flatsep value.]
+-h
+--help

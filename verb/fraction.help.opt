@@ -1,0 +1,4 @@
+-f[{a,b,c} Field name(s) for fraction calculation]
+-g[{d,e,f} Optional group-by-field name(s) for fraction counts]
+-p[Produce percents [0..100], not fractions [0..1]. Output field names]
+-c[Produce cumulative distributions, i.e. running sums: each output]

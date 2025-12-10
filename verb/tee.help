@@ -1,0 +1,10 @@
+Usage: mlr tee [options] {filename}
+Options:
+-a    Append to existing file, if any, rather than overwriting.
+-p    Treat filename as a pipe-to command.
+Any of the output-format command-line flags (see mlr -h). Example: using
+  mlr --icsv --opprint put '...' then tee --ojson ./mytap.dat then stats1 ...
+the input is CSV, the output is pretty-print tabular, but the tee-file output
+is written in JSON format.
+
+-h|--help Show this message.

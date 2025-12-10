@@ -1,0 +1,16 @@
+-f[{file name} File containing a DSL expression (see examples below). If the filename]:filename:_files
+-e[{expression} You can use this after -f to add an expression. Example use]
+-s[name=value: Predefines out-of-stream variable @name to have ]
+-x[(default false) Prints records for which {expression} evaluates to false, not true,]
+-q[Does not include the modified record in the output stream.]
+-S[and -F: There are no-ops in Miller 6 and above, since now type-inferencing is done]
+-h
+--help
+-w[Print warnings about things like uninitialized variables.]
+-W[Same as -w, but exit the process if there are any warnings.]
+-p[Prints the expressions\'s AST (abstract syntax tree), which gives full]
+-d[Like -p but uses a parenthesized-expression format for the AST.]
+-D[Like -d but with output all on one line.]
+-E[Echo DSL expression before printing parse-tree]
+-v[Same as -E -p.]
+-X[Exit after parsing but before stream-processing. Useful with -v/-d/-D, if you]

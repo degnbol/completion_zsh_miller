@@ -1,0 +1,5 @@
+-f[{a,b,c} Comma-separated field names for template, e.g. a,b,c.]
+-t[{filename} CSV file whose header line will be used for template.]:filename:_files
+--fill-with[{filler string} What to fill absent fields with. Defaults to the empty string.]
+-h
+--help

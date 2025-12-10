@@ -1,0 +1,4 @@
+Usage: mlr remove-empty-columns [options]
+Omits fields which are empty on every input row. Non-streaming.
+Options:
+-h|--help Show this message.

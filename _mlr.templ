@@ -1,0 +1,153 @@
+#compdef mlr
+
+# Used _spt as template.
+
+
+_mlr() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    _arguments_options=(-s -S -C)
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" \
+#FLAGS
+":: :_mlr_commands" \
+"*::: :->mlr-tui" \
+&& ret=0
+    case $state in
+    mlr-tui)
+        # Support verb chaining with 'then' or '+'
+        # e.g. mlr --csv head -n 5 then cut -f name then sort
+        local -i delim_pos=0
+        local -i idx=$#line
+        while (( idx >= 1 )); do
+            if [[ "${line[idx]}" == "then" || "${line[idx]}" == "+" ]]; then
+                delim_pos=$idx
+                break
+            fi
+            (( idx-- ))
+        done
+
+        if (( delim_pos > 0 )); then
+            line=("${line[@]:$delim_pos}")
+        fi
+
+        if [[ -z "$line[1]" ]]; then
+            # Right after 'then' or '+', complete verb names
+            _mlr_commands
+        else
+            # Extract verb and its arguments from BUFFER
+            # BUFFER contains the full command line
+            local -a buf_words verb_words
+            local verb_found=0 verb_name="$line[1]"
+            buf_words=("${(z)BUFFER}")
+
+            # Find verb position and extract verb + its args
+            local idx=1
+            while (( idx <= ${#buf_words} )); do
+                if [[ "$verb_found" -eq 1 ]]; then
+                    # After verb, collect all remaining words
+                    verb_words+=("${buf_words[idx]}")
+                elif [[ "${buf_words[idx]}" == "$verb_name" ]]; then
+                    verb_found=1
+                    verb_words+=("${buf_words[idx]}")
+                fi
+                (( idx++ ))
+            done
+
+            # Set words and CURRENT for verb completion
+            # Only override if we found the verb in BUFFER
+            if (( ${#verb_words} > 0 )); then
+                words=("${verb_words[@]}")
+                # If BUFFER ends with space, we're completing a new word
+                if [[ "$BUFFER" == *" " ]]; then
+                    words+=("")
+                    CURRENT=${#words}
+                else
+                    CURRENT=${#verb_words}
+                fi
+            else
+                # Fallback to original pattern
+                words=($line[1] "${words[@]}")
+                (( CURRENT += 1 ))
+            fi
+
+            curcontext="${curcontext%:*:*}:mlr-command-$verb_name:"
+            case $verb_name in
+#SUBCMDS
+            esac
+        fi
+    ;;
+esac
+}
+
+(( $+functions[_mlr_commands] )) ||
+_mlr_commands() {
+    local commands; commands=(
+#DESCS
+    )
+    _describe -t commands 'mlr commands' commands "$@"
+}
+
+# Complete files and chain keywords (then/+)
+(( $+functions[_mlr_files_or_chain] )) ||
+_mlr_files_or_chain() {
+    _alternative \
+        'chain:chain operator:((then\:"chain next verb" +\:"chain next verb"))' \
+        'files:filename:_files'
+}
+
+# Complete field names from input file
+(( $+functions[_mlr_field_names] )) ||
+_mlr_field_names() {
+    local file=""
+    local -a format_flags=()
+    local -a buf_words
+
+    # Parse BUFFER to get the full command line
+    buf_words=("${(z)BUFFER}")
+
+    # Find --from argument
+    local idx=1
+    while (( idx <= ${#buf_words} )); do
+        if [[ "${buf_words[idx]}" == "--from" && -n "${buf_words[idx+1]}" ]]; then
+            file="${buf_words[idx+1]}"
+            break
+        fi
+        (( idx++ ))
+    done
+
+    # If no --from, look for trailing file arguments
+    if [[ -z "$file" ]]; then
+        for w in "${buf_words[@]}"; do
+            [[ -f "$w" ]] && file="$w" && break
+        done
+    fi
+
+    [[ -z "$file" || ! -f "$file" ]] && return 1
+
+    # Extract input format flags from command line
+    for w in "${buf_words[@]}"; do
+        case "$w" in
+            --csv|--icsv|-c|--tsv|--itsv|-t|--json|--ijson|-j|--jsonl|--ijsonl|\
+            --dkvp|--idkvp|--nidx|--inidx|--pprint|--ipprint|--xtab|--ixtab)
+                format_flags+=("$w")
+                ;;
+            --c2*|--t2*|--j2*|--d2*|--p2*|--x2*)
+                format_flags+=("$w")
+                ;;
+        esac
+    done
+
+    # Use mlr to get first record as JSON, then extract keys
+    local -a cols
+    cols=("${(@f)$(mlr ${format_flags[@]} --ojsonl head -n 1 "$file" 2>/dev/null | jq -r 'keys[]' 2>/dev/null)}")
+
+    [[ ${#cols} -eq 0 ]] && return 1
+
+    _describe -t fields 'field name' cols
+}
+
+_mlr "$@"

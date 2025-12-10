@@ -1,0 +1,5 @@
+Usage: mlr shuffle [options]
+Outputs records randomly permuted. No output records are produced until
+all input records are read. See also mlr bootstrap and mlr sample.
+Options:
+-h|--help Show this message.

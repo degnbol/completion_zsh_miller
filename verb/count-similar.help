@@ -1,0 +1,7 @@
+Usage: mlr count-similar [options]
+Ingests all records, then emits each record augmented by a count of
+the number of other records having the same group-by field values.
+Options:
+-g {a,b,c} Group-by-field names for counts, e.g. a,b,c
+-o {name} Field name for output-counts. Defaults to "count".
+-h|--help Show this message.
