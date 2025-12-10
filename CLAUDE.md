@@ -183,3 +183,15 @@ Usually caused by unescaped special characters. Check for:
 - Unescaped backticks in double-quoted strings
 - Verb names with special characters (hyphens in case labels need quoting)
 - Missing escape for `{`, `}`, `'`, `"`
+
+**Square brackets in option descriptions must be escaped:**
+Zsh's `_arguments` uses `[description]` syntax, so nested brackets in descriptions cause parse errors:
+```zsh
+# Bad: nested [0..100] breaks _arguments parsing
+"-p[Produce percents [0..100], not fractions [0..1]]"
+# Error: _arguments:comparguments:327: invalid option definition
+
+# Good: inner brackets escaped
+"-p[Produce percents \[0..100\], not fractions \[0..1\]]"
+```
+The `escape_inner_brackets` function in `_mlr.sh` handles this automatically using awk to escape `[` and `]` inside the description while preserving the outer delimiters.

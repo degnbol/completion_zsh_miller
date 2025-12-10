@@ -20,6 +20,24 @@ template_section() {
     fi
 }
 
+# Helper function: escape [ and ] inside option descriptions
+# Input: -p[description with [nested] brackets]
+# Output: -p[description with \[nested\] brackets]
+escape_inner_brackets() {
+    awk '{
+        if (match($0, /^-[a-zA-Z-]+\[/)) {
+            prefix = substr($0, 1, RLENGTH)
+            rest = substr($0, RLENGTH + 1)
+            desc = substr(rest, 1, length(rest) - 1)
+            gsub(/\[/, "\\[", desc)
+            gsub(/\]/, "\\]", desc)
+            print prefix desc "]"
+        } else {
+            print
+        }
+    }'
+}
+
 # Section 1: beginning to #FLAGS
 template_section "" "#FLAGS" > _mlr
 
@@ -57,19 +75,19 @@ for file in verb/*opt; do
             # Pass positional args through as-is (e.g., "1:old:")
             echo "\"${line}\" \\"
         elif (( is_filename )); then
-            # Escape special characters using sed (zsh parameter expansion has issues with })
-            line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g')
+            # Escape special characters: quotes, braces, and nested brackets in description
+            line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g' | escape_inner_brackets)
             echo "\"${line}\" \\"
         elif (( is_fieldname )); then
-            # Escape special characters using sed (zsh parameter expansion has issues with })
-            line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g')
+            # Escape special characters: quotes, braces, and nested brackets in description
+            line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g' | escape_inner_brackets)
             # Add + after flag name to indicate it takes an argument
             # -f[desc] becomes -f+[desc]:field:_mlr_field_names
             line=$(echo "$line" | sed 's/^\(-[a-zA-Z-]*\)\[/\1+[/')
             echo "\"${line}:field:_mlr_field_names\" \\"
         else
-            # Escape special characters using sed (zsh parameter expansion has issues with })
-            line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g')
+            # Escape special characters: quotes, braces, and nested brackets in description
+            line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g' | escape_inner_brackets)
             echo "\"${line}\" \\"
         fi
     done < "$file" >> _mlr

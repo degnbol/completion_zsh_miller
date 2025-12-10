@@ -506,7 +506,7 @@ _arguments "${_arguments_options[@]}" \
 ;;
 filter)
 _arguments "${_arguments_options[@]}" \
-"-f[\{file name\} File containing a DSL expression (see examples below). If the filename]:filename:_files" \
+"-f[\{file name\} File containing a DSL expression (see examples below). If the filename\]:filename:_file]" \
 "-e[\{expression\} You can use this after -f to add an expression. Example use]" \
 "-s[name=value: Predefines out-of-stream variable @name to have]" \
 "-x[(default false) Prints records for which \{expression\} evaluates to false, not true,]" \
@@ -547,7 +547,7 @@ fraction)
 _arguments "${_arguments_options[@]}" \
 "-f+[\{a,b,c\} Field name(s) for fraction calculation]:field:_mlr_field_names" \
 "-g+[\{d,e,f\} Optional group-by-field name(s) for fraction counts]:field:_mlr_field_names" \
-"-p[Produce percents [0..100], not fractions [0..1]. Output field names]" \
+"-p[Produce percents \[0..100\], not fractions \[0..1\]. Output field names]" \
 "-c[Produce cumulative distributions, i.e. running sums: each output]" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
@@ -640,7 +640,7 @@ _arguments "${_arguments_options[@]}" \
 ;;
 join)
 _arguments "${_arguments_options[@]}" \
-"-f[\{left file name\}]:filename:_files" \
+"-f[\{left file name\}\]:filename:_file]" \
 "-j+[\{a,b,c\} Comma-separated join-field names for output]:field:_mlr_field_names" \
 "-l+[\{a,b,c\} Comma-separated join-field names for left input file;]:field:_mlr_field_names" \
 "-r+[\{a,b,c\} Comma-separated join-field names for right input file(s);]:field:_mlr_field_names" \
@@ -760,7 +760,7 @@ _arguments "${_arguments_options[@]}" \
 ;;
 put)
 _arguments "${_arguments_options[@]}" \
-"-f[\{file name\} File containing a DSL expression (see examples below). If the filename]:filename:_files" \
+"-f[\{file name\} File containing a DSL expression (see examples below). If the filename\]:filename:_file]" \
 "-e[\{expression\} You can use this after -f to add an expression. Example use]" \
 "-s[name=value: Predefines out-of-stream variable @name to have]" \
 "-x[(default false) Prints records for which \{expression\} evaluates to false, not true,]" \
@@ -844,8 +844,8 @@ _arguments "${_arguments_options[@]}" \
 "-w[Show warnings about uninitialized variables]" \
 "-q[Don\'t show startup banner]" \
 "-s[Don\'t show prompts]" \
-"--load[\{DSL script file\} Load script file before presenting the prompt.]:filename:_files" \
-"--mload[\{DSL script files\} -- Like --load but works with more than one filename,]:filename:_files" \
+"--load[\{DSL script file\} Load script file before presenting the prompt.\]:filename:_file]" \
+"--mload[\{DSL script files\} -- Like --load but works with more than one filename,\]:filename:_file]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -1072,7 +1072,7 @@ _arguments "${_arguments_options[@]}" \
 template)
 _arguments "${_arguments_options[@]}" \
 "-f+[\{a,b,c\} Comma-separated field names for template, e.g. a,b,c.]:field:_mlr_field_names" \
-"-t[\{filename\} CSV file whose header line will be used for template.]:filename:_files" \
+"-t[\{filename\} CSV file whose header line will be used for template.\]:filename:_file]" \
 "--fill-with[\{filler string\} What to fill absent fields with. Defaults to the empty string.]" \
 "-h" \
 "--help" \
