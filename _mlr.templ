@@ -8,7 +8,10 @@ _mlr() {
     typeset -a _arguments_options
     local ret=1
 
-    _arguments_options=(-s -S -C)
+    # -S: don't complete options after --
+    # -C: modify curcontext for state actions
+    # Note: -s (option stacking) removed as it causes cursor jump issues
+    _arguments_options=(-S -C)
 
     local context curcontext="$curcontext" state line
     _arguments "${_arguments_options[@]}" \
@@ -16,6 +19,9 @@ _mlr() {
 ":: :_mlr_commands" \
 "*::: :->mlr-tui" \
 && ret=0
+    # Skip mlr-tui state handling if we're completing options (line is empty)
+    # but still handle other states like from_file
+    [[ -z "$line" && "$state" == "mlr-tui" ]] && return ret
     case $state in
     from_file)
         # Use _alternative for proper substring matching support
