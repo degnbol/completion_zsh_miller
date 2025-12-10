@@ -1,0 +1,9 @@
+-k[Case only keys, not keys and values.]
+-v[Case only values, not keys and values.]
+-f[{a,b,c} Specify which field names to case (default: all)]
+-u[Convert to uppercase]
+-l[Convert to lowercase]
+-s[Convert to sentence case (capitalize first letter)]
+-t[Convert to title case (capitalize words)]
+-h
+--help

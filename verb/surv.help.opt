@@ -1,0 +1,3 @@
+-d[{field} Name of duration field (time-to-event or censoring).]
+-s[{field} Name of status field (0=censored, 1=event).]
+-h,[--help Show this message.]

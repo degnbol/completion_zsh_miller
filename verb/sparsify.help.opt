@@ -1,0 +1,4 @@
+-s[{filler string} What values to remove. Defaults to the empty string.]
+-f[{a,b,c} Specify field names to be operated on; any other fields won\'t be]
+-h
+--help

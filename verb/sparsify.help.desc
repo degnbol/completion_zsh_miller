@@ -1,0 +1,2 @@
+Unsets fields for which the key is the empty string (or, optionally, another
+specified value). Only makes sense with output format not being CSV or TSV.
