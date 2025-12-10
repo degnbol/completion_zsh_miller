@@ -39,9 +39,12 @@ for file in verb/*opt; do
     # - Add field completion for flags with field name patterns (but not :filename:_files)
     while IFS= read -r line; do
         # Check patterns BEFORE escaping
-        local is_filename=0 is_fieldname=0
+        local is_filename=0 is_fieldname=0 is_positional=0
         if [[ "$line" == *":filename:_files"* ]]; then
             is_filename=1
+        # Positional arguments like "1:old:" don't start with -
+        elif [[ "$line" =~ ^[0-9]+: ]]; then
+            is_positional=1
         # Only match flags where the description STARTS with field-name indicators
         # e.g. "-f[{a,b,c} ..." or "-g[{comma-separated ..."
         # This avoids matching "-x[... field names specified by -f]"
@@ -49,18 +52,24 @@ for file in verb/*opt; do
             is_fieldname=1
         fi
 
-        # Escape special characters using sed (zsh parameter expansion has issues with })
-        line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g')
-
         # Output with appropriate completion
-        if (( is_filename )); then
+        if (( is_positional )); then
+            # Pass positional args through as-is (e.g., "1:old:")
+            echo "\"${line}\" \\"
+        elif (( is_filename )); then
+            # Escape special characters using sed (zsh parameter expansion has issues with })
+            line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g')
             echo "\"${line}\" \\"
         elif (( is_fieldname )); then
+            # Escape special characters using sed (zsh parameter expansion has issues with })
+            line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g')
             # Add + after flag name to indicate it takes an argument
             # -f[desc] becomes -f+[desc]:field:_mlr_field_names
             line=$(echo "$line" | sed 's/^\(-[a-zA-Z-]*\)\[/\1+[/')
             echo "\"${line}:field:_mlr_field_names\" \\"
         else
+            # Escape special characters using sed (zsh parameter expansion has issues with })
+            line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g')
             echo "\"${line}\" \\"
         fi
     done < "$file" >> _mlr

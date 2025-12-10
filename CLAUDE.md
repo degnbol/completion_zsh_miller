@@ -85,6 +85,20 @@ The `mlr-tui` state handler detects chain delimiters and resets completion conte
 
 `_mlr_field_names` reads the input file (from `--from` or trailing args), extracts column names using `mlr --ojsonl head -n 1 | jq -r 'keys[]'`, and offers them as completions for flags like `-f`, `-g`.
 
+### Positional Arguments
+
+Some verbs require positional arguments not documented in `--help`. These are added manually in `RUNME.zsh`:
+
+```zsh
+# sub/gsub/ssub require old and new pattern args
+for verb in sub gsub ssub; do
+    echo '1:old:' >> verb/$verb.help.opt
+    echo '2:new:' >> verb/$verb.help.opt
+done
+```
+
+The `_mlr.sh` script detects lines starting with `N:` (e.g., `1:old:`) and passes them through as positional argument specs without escaping.
+
 ## Zsh Completion Concepts
 
 ### Matcher List (in `~/dotfiles/zsh/completion.zsh`)

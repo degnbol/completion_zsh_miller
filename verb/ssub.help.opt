@@ -3,3 +3,5 @@
 -a[Convert all field names.]
 -h
 --help
+1:old:
+2:new:

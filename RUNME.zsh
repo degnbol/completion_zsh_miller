@@ -41,6 +41,12 @@ sed -i '' '/-g\[/a\
 -f[{d,e,f} Synonym for -g.]
 ' verb/uniq.help.opt
 
+# sub/gsub/ssub: add positional args for old and new patterns (not listed in --help)
+for verb in sub gsub ssub; do
+    echo '1:old:' >> verb/$verb.help.opt
+    echo '2:new:' >> verb/$verb.help.opt
+done
+
 # remove help options since we add subcommands specifically for mlr help in _mlr.sh
 rm verb/help.help.opt
 # list subcommands for mlr help. Added in _mlr.sh
