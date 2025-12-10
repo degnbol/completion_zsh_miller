@@ -22,11 +22,14 @@ _mlr() {
 '--prepipe-bz2[Same as `--prepipe bz2`, except this is allowed in…]' \
 '--prepipe-gunzip[Same as `--prepipe gunzip`, except this is allowed in…]' \
 '--prepipe-zcat[Same as `--prepipe zcat`, except this is allowed in…]' \
+'--prepipe-zstdcat[Same as `--prepipe zstdcat`, except this is allowed…]' \
 '--prepipex[\{decompression command\}]' \
 '--zin[Uncompress zlib within the Miller process. Done by…]' \
+'--zstdin[Uncompress zstd within the Miller process. Done by…]' \
 '--allow-ragged-csv-input' \
 '--ragged' \
 '--allow-ragged-tsv-input' \
+'--csv-trim-leading-space[Trims leading spaces in CSV data. Use this for data…]' \
 '--headerless-csv-output' \
 '--ho' \
 '--headerless-tsv-output' \
@@ -35,15 +38,20 @@ _mlr() {
 '--hi' \
 '--implicit-tsv-header' \
 '--lazy-quotes[Accepts quotes appearing in unquoted fields, and…]' \
+'--no-auto-unsparsify[For CSV/TSV output: if the record keys change from…]' \
 '--no-implicit-csv-header' \
 '--no-implicit-tsv-header' \
+'--quote-all[Force double-quoting of CSV fields.]' \
 '-N[Keystroke-saver for `--implicit-csv-header…]' \
+'--incr-key[Without this option, keyless DKVP fields are keyed by…]' \
 '--asv[Use ASV format for input and output data.]' \
 '--asvlite[Use ASV format for input and output data.]' \
 '--csv[Use CSV format for input and output data.]' \
 '-c[Use CSV format for input and output data.]' \
+'--c2c[Use CSV format for input and output data.]' \
 '--csvlite[Use CSV-lite format for input and output data.]' \
 '--dkvp[Use DKVP format for input and output data.]' \
+'--d2d[Use DKVP format for input and output data.]' \
 '--gen-field-name[Specify field name for --igen. Defaults to "i".]' \
 '--gen-start[Specify start value for --igen. Defaults to 1.]' \
 '--gen-step[Specify step value for --igen. Defaults to 1.]' \
@@ -56,6 +64,8 @@ _mlr() {
 '--igen[Ignore input files and instead generate sequential…]' \
 '--ijson[Use JSON format for input data.]' \
 '--ijsonl[Use JSON Lines format for input data.]' \
+'--imd[Use markdown-tabular format for input data.]' \
+'--imarkdown[Use markdown-tabular format for input data.]' \
 '--inidx[Use NIDX format for input data.]' \
 '--io[\{format name\} Use format name for input and output data. For…]' \
 '--ipprint[Use PPRINT format for input data.]' \
@@ -66,8 +76,11 @@ _mlr() {
 '--ixtab[Use XTAB format for input data.]' \
 '--json[Use JSON format for input and output data.]' \
 '-j[Use JSON format for input and output data.]' \
+'--j2j[Use JSON format for input and output data.]' \
 '--jsonl[Use JSON Lines format for input and output data.]' \
+'--l2l[Use JSON Lines format for input and output data.]' \
 '--nidx[Use NIDX format for input and output data.]' \
+'--n2n[Use NIDX format for input and output data.]' \
 '--oasv[Use ASV format for output data.]' \
 '--oasvlite[Use ASV format for output data.]' \
 '--ocsv[Use CSV format for output data.]' \
@@ -76,6 +89,7 @@ _mlr() {
 '--ojson[Use JSON format for output data.]' \
 '--ojsonl[Use JSON Lines format for output data.]' \
 '--omd[Use markdown-tabular format for output data.]' \
+'--omarkdown[Use markdown-tabular format for output data.]' \
 '--onidx[Use NIDX format for output data.]' \
 '--opprint[Use PPRINT format for output data.]' \
 '--otsv[Use TSV format for output data.]' \
@@ -84,44 +98,47 @@ _mlr() {
 '--ousvlite[Use USV format for output data.]' \
 '--oxtab[Use XTAB format for output data.]' \
 '--pprint[Use PPRINT format for input and output data.]' \
+'--p2p[Use PPRINT format for input and output data.]' \
 '--tsv[Use TSV format for input and output data.]' \
 '-t[Use TSV format for input and output data.]' \
+'--t2t[Use TSV format for input and output data.]' \
 '--tsvlite[Use TSV-lite format for input and output data.]' \
 '--usv[Use USV format for input and output data.]' \
 '--usvlite[Use USV format for input and output data.]' \
 '--xtab[Use XTAB format for input and output data.]' \
+'--x2x[Use XTAB format for input and output data.]' \
 '--xvright[Right-justify values for XTAB format.]' \
 '-i[\{format name\} Use format name for input data. For example: `-i csv`…]' \
 '-o[\{format name\} Use format name for output data. For example: `-o…]' \
 '--flatsep[\{string\}]' \
 '--jflatsep[\{string\}]' \
 '--no-auto-flatten[When output is non-JSON, suppress the default…]' \
-'--no-auto-unflatten[When input non-JSON and output is JSON, suppress the…]' \
+'--no-auto-unflatten[When input is non-JSON and output is JSON, suppress…]' \
 '-p[Keystroke-saver for `--nidx --fs space --repifs`.]' \
 '-T[Keystroke-saver for `--nidx --fs tab`.]' \
-'--jknquoteint[Type information from JSON input files is now…]' \
 '--jlistwrap[Wrap JSON output in outermost `\[ \]`. This is the…]' \
 '--jl[Wrap JSON output in outermost `\[ \]`. This is the…]' \
+'--jvquoteall[Force all JSON values -- recursively into lists and…]' \
+'--jvstack[Put one key-value pair per line for JSON output…]' \
+'--no-jlistwrap[Do not wrap JSON output in outermost `\[ \]`. This is…]' \
+'--no-jvstack[Put objects/arrays all on one line for JSON output.]' \
+'--jknquoteint[Type information from JSON input files is now…]' \
 '--jquoteall[Type information from JSON input files is now…]' \
 '--json-fatal-arrays-on-input' \
 '--json-map-arrays-on-input' \
 '--json-skip-arrays-on-input' \
 '--jsonx[The `--jvstack` flag is now default true in Miller 6.]' \
-'--jvquoteall[Type information from JSON input files is now…]' \
-'--jvstack[Put one key-value pair per line for JSON output…]' \
 '--mmap[Miller no longer uses memory-mapping to access data…]' \
-'--no-jlistwrap[Wrap JSON output in outermost `\[ \]`. This is the…]' \
-'--no-jvstack[Put objects/arrays all on one line for JSON output.]' \
 '--no-mmap[Miller no longer uses memory-mapping to access data…]' \
 '--ojsonx[The `--jvstack` flag is now default true in Miller 6.]' \
-'--quote-all[Ignored as of version 6. Types are inferred/retained…]' \
 '--quote-minimal[Ignored as of version 6. Types are inferred/retained…]' \
 '--quote-none[Ignored as of version 6. Types are inferred/retained…]' \
 '--quote-numeric[Ignored as of version 6. Types are inferred/retained…]' \
 '--quote-original[Ignored as of version 6. Types are inferred/retained…]' \
 '--vflatsep[Ignored as of version 6. This functionality is…]' \
 '--fflush[Force buffered output to be written after every…]' \
-'--from[\{filename\} Use this to specify an input file before the verb(s),…]:filename:_files' \
+'--files[\{filename\} Use this to specify a file which itself contains, one…]' \
+'--from[\{filename\} Use this to specify an input file before the verb(s),…]: :->from_file' \
 '--hash-records[This is an internal parameter which normally does not…]' \
 '--infer-int-as-float' \
 '-A' \
@@ -135,14 +152,20 @@ _mlr() {
 '--no-dedupe-field-names[By default, if an input record has a field named `x`…]' \
 '--no-fflush[Let buffered output not be written after every output…]' \
 '--no-hash-records[See --hash-records.]' \
+'--norc[Do not load a .mlrrc file.]' \
 '--nr-progress-mod[\{m\} With m a positive integer: print filename and record…]' \
 '--ofmt[\{format\} E.g. `%.18f`, `%.0f`, `%9.6e`. Please use…]' \
+'--ofmte[\{n\} Use --ofmte 6 as shorthand for --ofmt %.6e, etc.]' \
+'--ofmtf[\{n\} Use --ofmtf 6 as shorthand for --ofmt %.6f, etc.]' \
+'--ofmtg[\{n\} Use --ofmtg 6 as shorthand for --ofmt %.6g, etc.]' \
 '--records-per-batch[\{n\} This is an internal parameter for maximum number of…]' \
+'--s-no-comment-strip[\{file name\}]' \
 '--seed[\{n\} with `n` of the form `12345678` or `0xcafefeed`. For…]' \
 '--tz[\{timezone\} Specify timezone, overriding `$TZ` environment…]' \
 '-I[Process files in-place. For each file name on the…]' \
 '-n[Process no input files, nor standard input either.]' \
 '-s[\{file name\} Take command-line flags from file name. For more…]' \
+'-x[If any record has an error value in it, report it and…]' \
 '--always-color[Instructs Miller to colorize output even when it…]' \
 '-C[Instructs Miller to colorize output even when it…]' \
 '--fail-color[Specify the color (see `--list-color-codes` and…]' \
@@ -154,7 +177,9 @@ _mlr() {
 '-M[Instructs Miller to not colorize any output.]' \
 '--pass-color[Specify the color (see `--list-color-codes` and…]' \
 '--value-color[Specify the color (see `--list-color-codes` and…]' \
-'--barred[Prints a border around PPRINT output (not available…]' \
+'--barred' \
+'--barred-output' \
+'--barred-input[When used in conjunction with --pprint, accepts…]' \
 '--right[Right-justifies all fields for PPRINT output.]' \
 '--cpuprofile[\{CPU-profile file name\}]' \
 '--time[Print elapsed execution time in seconds to stderr at…]' \
@@ -171,6 +196,7 @@ _mlr() {
 '--ps[\{string\} Specify PS for input and output.]' \
 '--repifs[Let IFS be repeated: e.g. for splitting on multiple…]' \
 '--rs[\{string\} Specify RS for input and output.]' \
+'--c2c,-c' \
 '--c2t' \
 '--c2j' \
 '--c2l' \
@@ -180,6 +206,7 @@ _mlr() {
 '--c2p' \
 '--c2m' \
 '--t2c' \
+'--t2t,-t' \
 '--t2j' \
 '--t2l' \
 '--t2d' \
@@ -189,6 +216,7 @@ _mlr() {
 '--t2m' \
 '--j2c' \
 '--j2t' \
+'--j2j,-j' \
 '--j2l' \
 '--j2d' \
 '--j2n' \
@@ -197,6 +225,8 @@ _mlr() {
 '--j2m' \
 '--l2c' \
 '--l2t' \
+'--l2j' \
+'--l2l' \
 '--l2d' \
 '--l2n' \
 '--l2x' \
@@ -206,6 +236,7 @@ _mlr() {
 '--d2t' \
 '--d2j' \
 '--d2l' \
+'--d2d' \
 '--d2n' \
 '--d2x' \
 '--d2p' \
@@ -215,6 +246,7 @@ _mlr() {
 '--n2j' \
 '--n2l' \
 '--n2d' \
+'--n2n' \
 '--n2x' \
 '--n2p' \
 '--n2m' \
@@ -224,6 +256,7 @@ _mlr() {
 '--x2l' \
 '--x2d' \
 '--x2n' \
+'--x2x' \
 '--x2p' \
 '--x2m' \
 '--p2c' \
@@ -234,6 +267,14 @@ _mlr() {
 '--p2n' \
 '--p2x' \
 '--p2m' \
+'--m2c' \
+'--m2t' \
+'--m2j' \
+'--m2l' \
+'--m2d' \
+'--m2n' \
+'--m2x' \
+'--m2p' \
 '-g[help flags]' \
 '-l[help list-verbs]' \
 '-L[help usage-verbs]' \
@@ -245,6 +286,10 @@ _mlr() {
 "*::: :->mlr-tui" \
 && ret=0
     case $state in
+    from_file)
+        # Use _alternative for proper substring matching support
+        _alternative 'files:filename:_files'
+        ;;
     mlr-tui)
         # Support verb chaining with 'then' or '+'
         # e.g. mlr --csv head -n 5 then cut -f name then sort

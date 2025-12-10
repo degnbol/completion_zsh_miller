@@ -17,6 +17,10 @@ _mlr() {
 "*::: :->mlr-tui" \
 && ret=0
     case $state in
+    from_file)
+        # Use _alternative for proper substring matching support
+        _alternative 'files:filename:_files'
+        ;;
     mlr-tui)
         # Support verb chaining with 'then' or '+'
         # e.g. mlr --csv head -n 5 then cut -f name then sort
