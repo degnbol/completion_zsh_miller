@@ -13,6 +13,8 @@ Options:
   --lk|--left-keep-field-names {a,b,c} If supplied, this means keep only the specified field
                names from the left file. Automatically includes the join-field name(s). Helpful
                for when you only want a limited subset of information from the left file.
+               Tip: you can use --lk "": this means the left file becomes solely a row-selector
+               for the input files.
   --lp {text}  Additional prefix for non-join output field names from
                the left file
   --rp {text}  Additional prefix for non-join output field names from
@@ -47,5 +49,5 @@ be specified CSV as well unless you override with 'mlr --csv ... join --ijson -l
 Likewise, if you have 'mlr --csv --implicit-csv-header ...' then the join-in file will be
 expected to be headerless as well unless you put '--no-implicit-csv-header' after 'join'.
 Please use "mlr --usage-separator-options" for information on specifying separators.
-Please see https://miller.readthedocs.io/en/latest/reference-verbs.html#join for more information
+Please see https://miller.readthedocs.io/en/latest/reference-verbs#join for more information
 including examples.

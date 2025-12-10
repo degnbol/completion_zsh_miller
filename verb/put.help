@@ -1,4 +1,7 @@
 Usage: mlr put [options] {DSL expression}
+Lets you use a domain-specific language to programmatically alter stream records.
+See also: https://miller.readthedocs.io/en/latest/reference-verbs
+
 Options:
 -f {file name} File containing a DSL expression (see examples below). If the filename
    is a directory, all *.mlr files in that directory are loaded.
@@ -11,7 +14,7 @@ Options:
 Since the expression pieces are simply concatenated, please be sure to use intervening
 semicolons to separate expressions.)
 
--s name=value: Predefines out-of-stream variable @name to have 
+-s name=value: Predefines out-of-stream variable @name to have
     Thus mlr put -s foo=97 '$column += @foo' is like
     mlr put 'begin {@foo = 97} $column += @foo'.
     The value part is subject to type-inferencing.
@@ -56,13 +59,13 @@ Examples:
 More example put expressions:
   If-statements:
     'if ($flag == true) { $quantity *= 10}'
-    'if ($x > 0.0 { $y=log10($x); $z=sqrt($y) } else {$y = 0.0; $z = 0.0}'
+    'if ($x > 0.0) { $y=log10($x); $z=sqrt($y) } else {$y = 0.0; $z = 0.0}'
   Newly created fields can be read after being written:
     '$new_field = $index**2; $qn = $quantity * $new_field'
   Regex-replacement:
     '$name = sub($name, "http.*com"i, "")'
   Regex-capture:
-    'if ($a =~ "([a-z]+)_([0-9]+)) { $b = "left_\1"; $c = "right_\2" }'
+	'if ($a =~ "([a-z]+)_([0-9]+)") { $b = "left_\1"; $c = "right_\2" }'
   Built-in variables:
     '$filename = FILENAME'
   Aggregations (use mlr put -q):

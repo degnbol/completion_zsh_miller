@@ -1,6 +1,7 @@
 altkv
 bar
 bootstrap
+case
 cat
 check
 clean-whitespace
@@ -19,6 +20,7 @@ gap
 grep
 group-by
 group-like
+gsub
 having-fields
 head
 histogram
@@ -47,11 +49,15 @@ shuffle
 skip-trivial-records
 sort
 sort-within-records
+sparsify
 split
+ssub
 stats1
 stats2
 step
+sub
 summary
+surv
 tac
 tail
 tee
@@ -60,13 +66,10 @@ top
 utf8-to-latin1
 unflatten
 uniq
+unspace
 unsparsify
 aux-list
 hex
 lecat
 termcvt
 unhex
-help
-regtest
-repl
-version

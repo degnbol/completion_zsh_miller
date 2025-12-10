@@ -1,0 +1,3 @@
+Lets you use a domain-specific language to programmatically filter which
+stream records will be output.
+See also: https://miller.readthedocs.io/en/latest/reference-verbs

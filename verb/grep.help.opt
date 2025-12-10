@@ -1,4 +1,5 @@
 -i[Use case-insensitive search.]
 -v[Invert: pass through records which do not match the regex.]
+-a[Only grep for values, not keys and values.]
 -h
 --help

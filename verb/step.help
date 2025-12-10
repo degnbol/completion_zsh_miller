@@ -7,6 +7,7 @@ Options:
   ewma       Exponentially weighted moving average over successive records
   from-first Compute differences in field(s) from first record
   ratio      Compute ratios in field(s) between successive records
+  rprod      Compute running products of field(s) between successive records
   rsum       Compute running sums of field(s) between successive records
   shift      Alias for shift_lag
   shift_lag  Include value(s) in field(s) from the previous record, if any
@@ -19,7 +20,7 @@ Options:
              As of Miller 6 this happens automatically, but the flag is accepted
              as a no-op for backward compatibility with Miller 5 and below.
 -d {x,y,z}   Weights for EWMA. 1 means current sample gets all weight (no
-             smoothing), near under under 1 is light smoothing, near over 0 is
+             smoothing), near under 1 is light smoothing, near over 0 is
              heavy smoothing. Multiple weights may be specified, e.g.
              "mlr step -a ewma -f sys_load -d 0.01,0.1,0.9". Default if omitted
              is "-d 0.5".

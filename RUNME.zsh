@@ -3,7 +3,7 @@
 
 mkdir -p verb/
 mlr -l > verbs.list
-mlr aux-list | grep '^ ' | sed 's/^ *//' >> verbs.list
+mlr aux-list | grep '^ ' | sed 's/^ *//' | sed 's/^mlr //' >> verbs.list
 cat verbs.list | while read verb; do
     mlr $verb --help > verb/$verb.help
 done
@@ -35,6 +35,11 @@ done
 sed -i '' '/{.*file.*}/s/$/:filename:_files/' verb/*.help.opt
 # help doesn't print "this message"
 sed -i '' 's/\[Show this message.\]//' verb/*.opt
+
+# uniq: -f is a synonym for -g (not listed in --help but documented)
+sed -i '' '/-g\[/a\
+-f[{d,e,f} Synonym for -g.]
+' verb/uniq.help.opt
 
 # remove help options since we add subcommands specifically for mlr help in _mlr.sh
 rm verb/help.help.opt

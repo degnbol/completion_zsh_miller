@@ -13,9 +13,10 @@ accumulated across the input record stream.
                There must be an even number of names.
 -g {e,f,g}     Optional group-by-field names.
 -v             Print additional output for linreg-pca.
--s             Print iterative stats. Useful in tail -f contexts (in which
+-s             Print iterative stats. Useful in tail -f contexts, in which
                case please avoid pprint-format output since end of input
-               stream will never be seen).
+               stream will never be seen. Likewise, if input is coming from
+               `tail -f`, be sure to use `--records-per-batch 1`.
 --fit          Rather than printing regression parameters, applies them to
                the input data to compute new fit fields. All input records are
                held in memory until end of input stream. Has effect only for

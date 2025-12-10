@@ -7,6 +7,6 @@
 --gx[{regex} Inverted regex for optional group-by-field names]
 --grfx[{regex} Shorthand for --gr {regex} --fx {that same regex}]
 -i[Use interpolated percentiles, like R\'s type=7; default like type=1.]
--s[Print iterative stats. Useful in tail -f contexts (in which]
+-s[Print iterative stats. Useful in tail -f contexts, in which]
 -h
 --help

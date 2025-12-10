@@ -2,5 +2,5 @@
 -f[{a,b,c,d} Value-field name-pairs on which to compute statistics.]
 -g[{e,f,g} Optional group-by-field names.]
 -v[Print additional output for linreg-pca.]
--s[Print iterative stats. Useful in tail -f contexts (in which]
+-s[Print iterative stats. Useful in tail -f contexts, in which]
 --fit[Rather than printing regression parameters, applies them to]

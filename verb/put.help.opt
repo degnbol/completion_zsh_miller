@@ -1,6 +1,6 @@
 -f[{file name} File containing a DSL expression (see examples below). If the filename]:filename:_files
 -e[{expression} You can use this after -f to add an expression. Example use]
--s[name=value: Predefines out-of-stream variable @name to have ]
+-s[name=value: Predefines out-of-stream variable @name to have]
 -x[(default false) Prints records for which {expression} evaluates to false, not true,]
 -q[Does not include the modified record in the output stream.]
 -S[and -F: There are no-ops in Miller 6 and above, since now type-inferencing is done]

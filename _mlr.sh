@@ -83,8 +83,8 @@ esac
 # Section 3: #SUBCMDS to #DESCS
 template_section "#SUBCMDS" "#DESCS" >> _mlr
 
-# add verb descriptions
-sed 's/"/\\"/g' descs.help | sed 's/^/"/' | sed 's/$/" \\/' >> _mlr
+# add verb descriptions (escape backticks to prevent command substitution)
+sed 's/"/\\"/g' descs.help | sed 's/`/\\`/g' | sed 's/^/"/' | sed 's/$/" \\/' >> _mlr
 
 # Section 4: #DESCS to end
 template_section "#DESCS" "" >> _mlr

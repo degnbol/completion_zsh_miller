@@ -1,4 +1,5 @@
 -f[{a,b,c} Field names for distinct count.]
+-x[{a,b,c} Field names to exclude for distinct count: use each record\'s others instead.]
 -n[Show only the number of distinct values. Not compatible with -u.]
 -o[{name} Field name for output count. Default "count".]
 -u[Do unlashed counts for multiple field names. With -f a,b and]

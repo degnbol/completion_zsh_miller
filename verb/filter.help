@@ -1,4 +1,8 @@
 Usage: mlr filter [options] {DSL expression}
+Lets you use a domain-specific language to programmatically filter which
+stream records will be output.
+See also: https://miller.readthedocs.io/en/latest/reference-verbs
+
 Options:
 -f {file name} File containing a DSL expression (see examples below). If the filename
    is a directory, all *.mlr files in that directory are loaded.
@@ -11,7 +15,7 @@ Options:
 Since the expression pieces are simply concatenated, please be sure to use intervening
 semicolons to separate expressions.)
 
--s name=value: Predefines out-of-stream variable @name to have 
+-s name=value: Predefines out-of-stream variable @name to have
     Thus mlr put -s foo=97 '$column += @foo' is like
     mlr put 'begin {@foo = 97} $column += @foo'.
     The value part is subject to type-inferencing.

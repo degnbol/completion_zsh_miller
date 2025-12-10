@@ -7,8 +7,8 @@ Options:
   -f {field name}       Required.
   --nested-fs {string}  Defaults to ";". Field separator for nested values.
   --nested-ps {string}  Defaults to ":". Pair separator for nested key-value pairs.
-  --evar {string}       Shorthand for --explode --values ---across-records --nested-fs {string}
-  --ivar {string}       Shorthand for --implode --values ---across-records --nested-fs {string}
+  --evar {string}       Shorthand for --explode --values --across-records --nested-fs {string}
+  --ivar {string}       Shorthand for --implode --values --across-records --nested-fs {string}
 Please use "mlr --usage-separator-options" for information on specifying separators.
 
 Examples:
@@ -40,8 +40,9 @@ Notes:
   been lost.
 * The combination "--implode --values --across-records" is non-streaming:
   no output records are produced until all input records have been read. In
-  particular, this means it won't work in tail -f contexts. But all other flag
-  combinations result in streaming (tail -f friendly) data processing.
+  particular, this means it won't work in `tail -f` contexts. But all other flag
+  combinations result in streaming (`tail -f` friendly) data processing.
+  If input is coming from `tail -f`, be sure to use `--records-per-batch 1`.
 * It's up to you to ensure that the nested-fs is distinct from your data's IFS:
   e.g. by default the former is semicolon and the latter is comma.
 See also mlr reshape.

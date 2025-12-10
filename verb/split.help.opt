@@ -5,5 +5,7 @@
 --suffix[{s} Specify filename suffix; default is from mlr output format, e.g. "csv".]
 -a[Append to existing file(s), if any, rather than overwriting.]
 -v[Send records along to downstream verbs as well as splitting to files.]
+-e[Do NOT URL-escape names of output files.]
+-j[{J} Use string J to join filename parts; default "_".]
 -h
 --help
