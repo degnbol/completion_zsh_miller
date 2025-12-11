@@ -51,6 +51,16 @@ if [[ "$cols" != "$expected_cols" ]]; then
     errors+=("Column extraction failed: expected '$expected_cols', got '$cols'")
 fi
 
+# Check comma-separated field support (compset -P '*,')
+if ! grep -A60 '_mlr_field_names()' _mlr | grep -q "compset -P '\*,'"; then
+    errors+=("_mlr_field_names should support comma-separated fields with compset -P '*,'")
+fi
+
+# Check suffix comma is added for multi-value completion
+if ! grep -A60 '_mlr_field_names()' _mlr | grep -q "\-S ','"; then
+    errors+=("_mlr_field_names should add comma suffix with -S ','")
+fi
+
 if [[ ${#errors} -gt 0 ]]; then
     echo "Field name completion errors:" >&2
     printf '  - %s\n' "${errors[@]}" >&2

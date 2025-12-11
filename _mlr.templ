@@ -157,7 +157,11 @@ _mlr_field_names() {
 
     [[ ${#cols} -eq 0 ]] && return 1
 
-    _describe -t fields 'field name' cols
+    # Support comma-separated field names (e.g., -f name,age,<TAB>)
+    # compset -P '*,' strips everything up to the last comma
+    compset -P '*,'
+
+    _describe -t fields 'field name' cols -S ','
 }
 
 _mlr "$@"
