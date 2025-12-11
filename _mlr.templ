@@ -138,10 +138,17 @@ _mlr_field_names() {
 
     [[ -z "$file" || ! -f "$file" ]] && return 1
 
-    # Extract input format flags from command line
+    # Extract input format flags from command line (only before the verb)
+    # Stop when we hit a verb (word that doesn't start with -)
+    local found_verb=0
     for w in "${buf_words[@]}"; do
+        # Skip 'mlr' itself and arguments to flags
+        [[ "$w" == "mlr" ]] && continue
+        # If word doesn't start with -, it's likely a verb - stop looking for format flags
+        [[ "$w" != -* && "$found_verb" -eq 0 && "$w" != "$file" ]] && found_verb=1
+        (( found_verb )) && break
         case "$w" in
-            --csv|--icsv|-c|--tsv|--itsv|-t|--json|--ijson|-j|--jsonl|--ijsonl|\
+            --csv|--icsv|-c|--tsv|--itsv|-t|--json|--ijson|--jsonl|--ijsonl|\
             --dkvp|--idkvp|--nidx|--inidx|--pprint|--ipprint|--xtab|--ixtab)
                 format_flags+=("$w")
                 ;;
@@ -161,6 +168,55 @@ _mlr_field_names() {
     # compset -P '*,' strips everything up to the last comma
     compset -P '*,'
 
+    _describe -t fields 'field name' cols -S ','
+}
+
+# Complete field names from join left file (-f option)
+# Used for join -l which needs columns from the left file, not the main input
+(( $+functions[_mlr_join_left_field_names] )) ||
+_mlr_join_left_field_names() {
+    local file=""
+    local -a format_flags=()
+    local -a buf_words
+
+    buf_words=("${(z)BUFFER}")
+
+    # Find -f argument (join's left file)
+    local idx=1
+    while (( idx <= ${#buf_words} )); do
+        if [[ "${buf_words[idx]}" == "-f" && -n "${buf_words[idx+1]}" ]]; then
+            file="${buf_words[idx+1]}"
+            break
+        fi
+        (( idx++ ))
+    done
+
+    [[ -z "$file" || ! -f "$file" ]] && return 1
+
+    # Extract input format flags from command line (only before the verb)
+    local found_verb=0
+    for w in "${buf_words[@]}"; do
+        [[ "$w" == "mlr" ]] && continue
+        [[ "$w" != -* && "$found_verb" -eq 0 && "$w" != "$file" ]] && found_verb=1
+        (( found_verb )) && break
+        case "$w" in
+            --csv|--icsv|-c|--tsv|--itsv|-t|--json|--ijson|--jsonl|--ijsonl|\
+            --dkvp|--idkvp|--nidx|--inidx|--pprint|--ipprint|--xtab|--ixtab)
+                format_flags+=("$w")
+                ;;
+            --c2*|--t2*|--j2*|--d2*|--p2*|--x2*)
+                format_flags+=("$w")
+                ;;
+        esac
+    done
+
+    # Use mlr to get first record as JSON, then extract keys
+    local -a cols
+    cols=("${(@f)$(mlr ${format_flags[@]} --ojsonl head -n 1 "$file" 2>/dev/null | jq -r 'keys[]' 2>/dev/null)}")
+
+    [[ ${#cols} -eq 0 ]] && return 1
+
+    compset -P '*,'
     _describe -t fields 'field name' cols -S ','
 }
 

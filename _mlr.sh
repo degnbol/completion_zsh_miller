@@ -57,12 +57,15 @@ for file in verb/*opt; do
     # - Add field completion for flags with field name patterns (but not :filename:_files)
     while IFS= read -r line; do
         # Check patterns BEFORE escaping
-        local is_filename=0 is_fieldname=0 is_positional=0
+        local is_filename=0 is_fieldname=0 is_left_fieldname=0 is_positional=0
         if [[ "$line" == *":filename:_files"* ]]; then
             is_filename=1
         # Positional arguments like "1:old:" don't start with -
         elif [[ "$line" =~ ^[0-9]+: ]]; then
             is_positional=1
+        # Join left file fields (marked with {left-file-fields} in RUNME.zsh)
+        elif [[ "$line" =~ ^-[a-zA-Z-]+'\[\{left-file-fields\}' ]]; then
+            is_left_fieldname=1
         # Only match flags where the description STARTS with field-name indicators
         # e.g. "-f[{a,b,c} ..." or "-g[{comma-separated ..."
         # This avoids matching "-x[... field names specified by -f]"
@@ -78,6 +81,11 @@ for file in verb/*opt; do
             # Escape special characters: quotes, braces, and nested brackets in description
             line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g' | escape_inner_brackets)
             echo "\"${line}\" \\"
+        elif (( is_left_fieldname )); then
+            # Join -l/--lk: complete field names from left file (-f)
+            line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g' | escape_inner_brackets)
+            line=$(echo "$line" | sed 's/^\(-[a-zA-Z-]*\)\[/\1+[/')
+            echo "\"${line}:field:_mlr_join_left_field_names\" \\"
         elif (( is_fieldname )); then
             # Escape special characters: quotes, braces, and nested brackets in description
             line=$(echo "$line" | sed 's/"/\\"/g; s/{/\\{/g; s/}/\\}/g' | escape_inner_brackets)

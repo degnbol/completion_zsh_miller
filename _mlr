@@ -642,10 +642,10 @@ join)
 _arguments "${_arguments_options[@]}" \
 "-f[\{left file name\}\]:filename:_file]" \
 "-j+[\{a,b,c\} Comma-separated join-field names for output]:field:_mlr_field_names" \
-"-l+[\{a,b,c\} Comma-separated join-field names for left input file;]:field:_mlr_field_names" \
+"-l+[\{left-file-fields\} \{a,b,c\} Comma-separated join-field names for left input file;]:field:_mlr_join_left_field_names" \
 "-r+[\{a,b,c\} Comma-separated join-field names for right input file(s);]:field:_mlr_field_names" \
-"--lk+[\{a,b,c\} If supplied, this means keep only the specified field]:field:_mlr_field_names" \
-"--left-keep-field-names+[\{a,b,c\} If supplied, this means keep only the specified field]:field:_mlr_field_names" \
+"--lk+[\{left-file-fields\} \{a,b,c\} If supplied, this means keep only the specified field]:field:_mlr_join_left_field_names" \
+"--left-keep-field-names+[\{left-file-fields\} \{a,b,c\} If supplied, this means keep only the specified field]:field:_mlr_join_left_field_names" \
 "--lp[\{text\} Additional prefix for non-join output field names from]" \
 "--rp[\{text\} Additional prefix for non-join output field names from]" \
 "--np[Do not emit paired records]" \
@@ -1122,12 +1122,12 @@ _arguments "${_arguments_options[@]}" \
 uniq)
 _arguments "${_arguments_options[@]}" \
 "-g+[\{d,e,f\} Group-by-field names for uniq counts.]:field:_mlr_field_names" \
-"-f+[\{d,e,f\} Synonym for -g.]:field:_mlr_field_names" \
 "-x+[\{a,b,c\} Field names to exclude for uniq: use each record\'s others instead.]:field:_mlr_field_names" \
 "-c[Show repeat counts in addition to unique values.]" \
 "-n[Show only the number of distinct values.]" \
 "-o[\{name\} Field name for output count. Default \"count\".]" \
 "-a[Output each unique record only once. Incompatible with -g.]" \
+"-f+[\{d,e,f\} Synonym for -g.]:field:_mlr_field_names" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
@@ -1350,10 +1350,17 @@ _mlr_field_names() {
 
     [[ -z "$file" || ! -f "$file" ]] && return 1
 
-    # Extract input format flags from command line
+    # Extract input format flags from command line (only before the verb)
+    # Stop when we hit a verb (word that doesn't start with -)
+    local found_verb=0
     for w in "${buf_words[@]}"; do
+        # Skip 'mlr' itself and arguments to flags
+        [[ "$w" == "mlr" ]] && continue
+        # If word doesn't start with -, it's likely a verb - stop looking for format flags
+        [[ "$w" != -* && "$found_verb" -eq 0 && "$w" != "$file" ]] && found_verb=1
+        (( found_verb )) && break
         case "$w" in
-            --csv|--icsv|-c|--tsv|--itsv|-t|--json|--ijson|-j|--jsonl|--ijsonl|\
+            --csv|--icsv|-c|--tsv|--itsv|-t|--json|--ijson|--jsonl|--ijsonl|\
             --dkvp|--idkvp|--nidx|--inidx|--pprint|--ipprint|--xtab|--ixtab)
                 format_flags+=("$w")
                 ;;
@@ -1373,6 +1380,55 @@ _mlr_field_names() {
     # compset -P '*,' strips everything up to the last comma
     compset -P '*,'
 
+    _describe -t fields 'field name' cols -S ','
+}
+
+# Complete field names from join left file (-f option)
+# Used for join -l which needs columns from the left file, not the main input
+(( $+functions[_mlr_join_left_field_names] )) ||
+_mlr_join_left_field_names() {
+    local file=""
+    local -a format_flags=()
+    local -a buf_words
+
+    buf_words=("${(z)BUFFER}")
+
+    # Find -f argument (join's left file)
+    local idx=1
+    while (( idx <= ${#buf_words} )); do
+        if [[ "${buf_words[idx]}" == "-f" && -n "${buf_words[idx+1]}" ]]; then
+            file="${buf_words[idx+1]}"
+            break
+        fi
+        (( idx++ ))
+    done
+
+    [[ -z "$file" || ! -f "$file" ]] && return 1
+
+    # Extract input format flags from command line (only before the verb)
+    local found_verb=0
+    for w in "${buf_words[@]}"; do
+        [[ "$w" == "mlr" ]] && continue
+        [[ "$w" != -* && "$found_verb" -eq 0 && "$w" != "$file" ]] && found_verb=1
+        (( found_verb )) && break
+        case "$w" in
+            --csv|--icsv|-c|--tsv|--itsv|-t|--json|--ijson|--jsonl|--ijsonl|\
+            --dkvp|--idkvp|--nidx|--inidx|--pprint|--ipprint|--xtab|--ixtab)
+                format_flags+=("$w")
+                ;;
+            --c2*|--t2*|--j2*|--d2*|--p2*|--x2*)
+                format_flags+=("$w")
+                ;;
+        esac
+    done
+
+    # Use mlr to get first record as JSON, then extract keys
+    local -a cols
+    cols=("${(@f)$(mlr ${format_flags[@]} --ojsonl head -n 1 "$file" 2>/dev/null | jq -r 'keys[]' 2>/dev/null)}")
+
+    [[ ${#cols} -eq 0 ]] && return 1
+
+    compset -P '*,'
     _describe -t fields 'field name' cols -S ','
 }
 

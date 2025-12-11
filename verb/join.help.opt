@@ -1,9 +1,9 @@
 -f[{left file name}]:filename:_files
 -j[{a,b,c} Comma-separated join-field names for output]
--l[{a,b,c} Comma-separated join-field names for left input file;]
+-l[{left-file-fields} {a,b,c} Comma-separated join-field names for left input file;]
 -r[{a,b,c} Comma-separated join-field names for right input file(s);]
---lk[{a,b,c} If supplied, this means keep only the specified field]
---left-keep-field-names[{a,b,c} If supplied, this means keep only the specified field]
+--lk[{left-file-fields} {a,b,c} If supplied, this means keep only the specified field]
+--left-keep-field-names[{left-file-fields} {a,b,c} If supplied, this means keep only the specified field]
 --lp[{text} Additional prefix for non-join output field names from]
 --rp[{text} Additional prefix for non-join output field names from]
 --np[Do not emit paired records]
