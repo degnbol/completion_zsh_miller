@@ -87,6 +87,17 @@ The `mlr-tui` state handler detects chain delimiters and resets completion conte
 
 **Important:** Field name completion does not add any suffix (comma or space). Adding a trailing comma causes silent failures in mlr (e.g., `-f name,` produces wrong results). Users type commas themselves when building multi-field lists.
 
+**Known limitation:** Completing with empty prefix and text after cursor (e.g., `mlr uniq -f <TAB>,other`) doesn't show completions. This is a zsh edge case where PREFIX is empty but SUFFIX exists - zsh's completion matching doesn't handle this well. Workaround: type at least one character before TAB.
+
+### Rename Field Completion
+
+`_mlr_rename_field_names` handles the `rename` verb's `old1,new1,old2,new2,...` argument format:
+- Counts commas in IPREFIX to determine position (odd = old name, even = new name)
+- Only completes at "old" name positions (field names from input file)
+- Adds comma suffix since pairs are comma-separated
+
+**Note:** Same empty PREFIX limitation as `_mlr_field_names` applies here (see above).
+
 ### Positional Arguments
 
 Some verbs require positional arguments not documented in `--help`. These are added manually in `RUNME.zsh`:

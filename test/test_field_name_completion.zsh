@@ -88,6 +88,21 @@ if sed -n '/mlr-tui)/,/^[[:space:]]*;;/p' _mlr | grep -q 'line\[idx\].*==.*then'
     errors+=("mlr-tui chain detection should search buf_words, not line (to ignore text after cursor)")
 fi
 
+# Check _mlr_rename_field_names function exists and handles odd/even positions
+if ! grep -q '_mlr_rename_field_names()' _mlr; then
+    errors+=("_mlr_rename_field_names function not found")
+fi
+
+# Check rename verb uses _mlr_rename_field_names for positional arg
+if ! sed -n '/^rename)/,/^;;/p' _mlr | grep -q '_mlr_rename_field_names'; then
+    errors+=("rename verb should use _mlr_rename_field_names for field completion")
+fi
+
+# Check rename function counts commas to determine position
+if ! grep -A60 '_mlr_rename_field_names()' _mlr | grep -q '#commas.*%'; then
+    errors+=("_mlr_rename_field_names should count commas to determine old/new position")
+fi
+
 if [[ ${#errors} -gt 0 ]]; then
     echo "Field name completion errors:" >&2
     printf '  - %s\n' "${errors[@]}" >&2

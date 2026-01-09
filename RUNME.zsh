@@ -53,6 +53,9 @@ for verb in sub gsub ssub; do
     echo '2:new:' >> verb/$verb.help.opt
 done
 
+# rename: positional arg is old1,new1,old2,new2,... - complete old names from input file
+echo '1:old,new pairs:_mlr_rename_field_names' >> verb/rename.help.opt
+
 # join: -l and --lk need fields from left file (-f), not main input
 # Mark these with special suffix that _mlr.sh will recognize
 sedi verb/join.help.opt 's/^-l\[/-l[{left-file-fields} /'

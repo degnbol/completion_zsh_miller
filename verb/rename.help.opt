@@ -2,3 +2,4 @@
 -g[Do global replacement within each field name rather than]
 -h
 --help
+1:old,new pairs:_mlr_rename_field_names
