@@ -28,31 +28,43 @@ _mlr() {
         _alternative 'files:filename:_files'
         ;;
     mlr-tui)
+        # Parse LBUFFER to detect chains (ignoring text after cursor)
+        local -a buf_words verb_words
+        buf_words=("${(z)LBUFFER}")
+
         # Support verb chaining with 'then' or '+'
         # e.g. mlr --csv head -n 5 then cut -f name then sort
+        # IMPORTANT: search buf_words (from LBUFFER), not line, to ignore text after cursor
         local -i delim_pos=0
-        local -i idx=$#line
+        local -i idx=${#buf_words}
         while (( idx >= 1 )); do
-            if [[ "${line[idx]}" == "then" || "${line[idx]}" == "+" ]]; then
+            if [[ "${buf_words[idx]}" == "then" || "${buf_words[idx]}" == "+" ]]; then
                 delim_pos=$idx
                 break
             fi
             (( idx-- ))
         done
 
+        # Get verb name: use line[1] from _arguments (correctly parsed),
+        # but if we found a chain delimiter in LBUFFER, find verb after it
+        local verb_name=""
         if (( delim_pos > 0 )); then
-            line=("${line[@]:$delim_pos}")
+            # Find first non-flag word after delimiter in buf_words
+            for (( idx=delim_pos+1; idx <= ${#buf_words}; idx++ )); do
+                [[ "${buf_words[idx]}" == -* ]] && continue
+                verb_name="${buf_words[idx]}"
+                break
+            done
+        else
+            # No chain in LBUFFER, use line[1] from _arguments
+            verb_name="$line[1]"
         fi
 
-        if [[ -z "$line[1]" ]]; then
-            # Right after 'then' or '+', complete verb names
+        if [[ -z "$verb_name" ]]; then
+            # No verb yet (or right after 'then'/'+'), complete verb names
             _mlr_commands
         else
-            # Extract verb and its arguments from BUFFER
-            # BUFFER contains the full command line
-            local -a buf_words verb_words
-            local verb_found=0 verb_name="$line[1]"
-            buf_words=("${(z)BUFFER}")
+            local verb_found=0
 
             # Find verb position and extract verb + its args
             local idx=1
@@ -68,11 +80,11 @@ _mlr() {
             done
 
             # Set words and CURRENT for verb completion
-            # Only override if we found the verb in BUFFER
+            # Only override if we found the verb in LBUFFER
             if (( ${#verb_words} > 0 )); then
                 words=("${verb_words[@]}")
-                # If BUFFER ends with space, we're completing a new word
-                if [[ "$BUFFER" == *" " ]]; then
+                # If LBUFFER ends with space, we're completing a new word
+                if [[ "$LBUFFER" == *" " ]]; then
                     words+=("")
                     CURRENT=${#words}
                 else
@@ -116,8 +128,8 @@ _mlr_field_names() {
     local -a format_flags=()
     local -a buf_words
 
-    # Parse BUFFER to get the full command line
-    buf_words=("${(z)BUFFER}")
+    # Parse LBUFFER (text before cursor) to ignore trailing pipes/commands
+    buf_words=("${(z)LBUFFER}")
 
     # Find --from argument
     local idx=1
@@ -168,7 +180,7 @@ _mlr_field_names() {
     # compset -P '*,' strips everything up to the last comma
     compset -P '*,'
 
-    _describe -t fields 'field name' cols -S ','
+    _describe -t fields 'field name' cols
 }
 
 # Complete field names from join left file (-f option)
@@ -179,7 +191,8 @@ _mlr_join_left_field_names() {
     local -a format_flags=()
     local -a buf_words
 
-    buf_words=("${(z)BUFFER}")
+    # Parse LBUFFER (text before cursor) to ignore trailing pipes/commands
+    buf_words=("${(z)LBUFFER}")
 
     # Find -f argument (join's left file)
     local idx=1
@@ -217,7 +230,8 @@ _mlr_join_left_field_names() {
     [[ ${#cols} -eq 0 ]] && return 1
 
     compset -P '*,'
-    _describe -t fields 'field name' cols -S ','
+
+    _describe -t fields 'field name' cols
 }
 
 _mlr "$@"

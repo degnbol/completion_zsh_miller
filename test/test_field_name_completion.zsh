@@ -56,9 +56,36 @@ if ! grep -A60 '_mlr_field_names()' _mlr | grep -q "compset -P '\*,'"; then
     errors+=("_mlr_field_names should support comma-separated fields with compset -P '*,'")
 fi
 
-# Check suffix comma is added for multi-value completion
-if ! grep -A60 '_mlr_field_names()' _mlr | grep -q "\-S ','"; then
-    errors+=("_mlr_field_names should add comma suffix with -S ','")
+# Check no suffix is added (user types comma themselves if needed)
+if grep -A70 '_mlr_field_names()' _mlr | grep -q "\-S ','"; then
+    errors+=("_mlr_field_names should not add comma suffix (causes issues with trailing commas)")
+fi
+
+# Check that field name functions use LBUFFER (not BUFFER) to handle trailing pipes
+# e.g. mlr --from file.tsv cut -f | sed ... should still complete field names
+# Pattern: match BUFFER} but not LBUFFER}
+if grep -A60 '_mlr_field_names()' _mlr | grep 'BUFFER}' | grep -qv 'LBUFFER}'; then
+    errors+=("_mlr_field_names should use LBUFFER, not BUFFER (to handle trailing pipes)")
+fi
+
+if grep -A60 '_mlr_join_left_field_names()' _mlr | grep 'BUFFER}' | grep -qv 'LBUFFER}'; then
+    errors+=("_mlr_join_left_field_names should use LBUFFER, not BUFFER (to handle trailing pipes)")
+fi
+
+# Check that mlr-tui state handler uses LBUFFER for verb extraction and trailing space check
+# This ensures completion works when there's text after cursor (e.g., pipes, chain operators)
+if sed -n '/mlr-tui)/,/^[[:space:]]*;;/p' _mlr | grep 'buf_words=.*BUFFER}' | grep -qv 'LBUFFER}'; then
+    errors+=("mlr-tui handler should use LBUFFER for buf_words (to handle trailing pipes)")
+fi
+
+if sed -n '/mlr-tui)/,/^[[:space:]]*;;/p' _mlr | grep -q '"\$BUFFER" == \*" "'; then
+    errors+=("mlr-tui handler should check LBUFFER for trailing space, not BUFFER")
+fi
+
+# Check chain detection searches buf_words (from LBUFFER), not line
+# This prevents text after cursor (like "+ count") from being detected as chain delimiters
+if sed -n '/mlr-tui)/,/^[[:space:]]*;;/p' _mlr | grep -q 'line\[idx\].*==.*then'; then
+    errors+=("mlr-tui chain detection should search buf_words, not line (to ignore text after cursor)")
 fi
 
 if [[ ${#errors} -gt 0 ]]; then

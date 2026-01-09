@@ -79,11 +79,13 @@ Miller supports verb chaining with `then` or `+`:
 mlr --csv head -n 5 then cut -f name then sort file.csv
 ```
 
-The `mlr-tui` state handler detects chain delimiters and resets completion context for each verb segment.
+The `mlr-tui` state handler detects chain delimiters and resets completion context for each verb segment. **Important:** Chain detection must search `buf_words` (parsed from `LBUFFER`), not `line` from `_arguments`, because `line` includes text after the cursor which would incorrectly detect chain operators typed after the cursor position.
 
 ### Field Name Completion
 
 `_mlr_field_names` reads the input file (from `--from` or trailing args), extracts column names using `mlr --ojsonl head -n 1 | jq -r 'keys[]'`, and offers them as completions for flags like `-f`, `-g`.
+
+**Important:** Field name completion does not add any suffix (comma or space). Adding a trailing comma causes silent failures in mlr (e.g., `-f name,` produces wrong results). Users type commas themselves when building multi-field lists.
 
 ### Positional Arguments
 
@@ -136,6 +138,21 @@ zstyle ':completion:*' completer _expand _complete _match
 
 ## Common Pitfalls
 
+**Use `LBUFFER` not `BUFFER` when parsing the command line:**
+When there's text after the cursor (e.g., `mlr cut -f <TAB> | sed ...`), `BUFFER` contains the entire line including text after cursor, while `LBUFFER` contains only text before cursor. Always use `LBUFFER` for:
+- Parsing command line to find input files
+- Detecting chain delimiters (`then`, `+`)
+- Checking for trailing space to determine if completing a new word
+```zsh
+# Bad: includes text after cursor, breaks completion
+buf_words=("${(z)BUFFER}")
+if [[ "$BUFFER" == *" " ]]; then
+
+# Good: only text before cursor
+buf_words=("${(z)LBUFFER}")
+if [[ "$LBUFFER" == *" " ]]; then
+```
+
 **Backticks in descriptions must be escaped:**
 In `_mlr.sh`, verb descriptions are double-quoted, so backticks cause command substitution:
 ```zsh
@@ -163,7 +180,7 @@ unfunction _mlr 2>/dev/null; rm -f ~/.zcompdump* && exec zsh
 
 **Debug completion state:**
 ```zsh
-echo "state='$state' line='$line' words='$words' CURRENT=$CURRENT" >> /tmp/debug.txt
+echo "state='$state' LBUFFER='$LBUFFER' line='$line' words='$words' CURRENT=$CURRENT" >> /tmp/debug.txt
 ```
 
 **Test minimal completion:**
