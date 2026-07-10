@@ -1,6 +1,10 @@
--a[{linreg-ols,corr,...} Names of accumulators: one or more of:]
+-a[{linreg-ols,corr,...} Names of accumulators: one or more of the listed]
 -f[{a,b,c,d} Value-field name-pairs on which to compute statistics.]
 -g[{e,f,g} Optional group-by-field names.]
 -v[Print additional output for linreg-pca.]
--s[Print iterative stats. Useful in tail -f contexts, in which]
---fit[Rather than printing regression parameters, applies them to]
+-s[Print iterative stats. Useful in tail -f contexts, in]
+--fit[Rather than printing regression parameters, applies]
+-S[No-op flag for backward compatibility with Miller 5.]
+-F[No-op flag for backward compatibility with Miller 5.]
+-h
+--help

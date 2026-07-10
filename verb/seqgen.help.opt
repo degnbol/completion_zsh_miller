@@ -1,6 +1,6 @@
--f[{name} (default "i") Field name for counters.]
---start[{value} (default 1) Inclusive start value.]
---step[{value} (default 1) Step value.]
---stop[{value} (default 100) Inclusive stop value.]
+-f[{name} Field name for counters. Default "i".]
+--start[{value} Inclusive start value. Default 1.]
+--step[{value} Step value. Default 1. May be negative but not zero (unless]
+--stop[{value} Inclusive stop value. Default 100.]
 -h
 --help

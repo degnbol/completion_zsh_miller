@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
-./flags.help.sh
+# Record the mlr version this data was generated against (drift detection).
+mlr --version > VERSION
+
+./flags.help.sh > flags.help
 
 # Portable in-place sed (works on macOS and Linux)
 sedi() {
@@ -10,8 +13,7 @@ sedi() {
 }
 
 mkdir -p verb/
-mlr -l > verbs.list
-mlr aux-list | grep '^ ' | sed 's/^ *//' | sed 's/^mlr //' >> verbs.list
+./verbs.list.sh > verbs.list
 cat verbs.list | while read verb; do
     mlr $verb --help > verb/$verb.help
 done

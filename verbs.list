@@ -10,6 +10,7 @@ count
 count-similar
 cut
 decimate
+describe
 fill-down
 fill-empty
 filter

@@ -1,6 +1,8 @@
---at-least[{comma-separated names}]
---which-are[{comma-separated names}]
---at-most[{comma-separated names}]
---all-matching[{regular expression}]
---any-matching[{regular expression}]
---none-matching[{regular expression}]
+--at-least[{comma-separated names} Pass records that have at least these field]
+--which-are[{comma-separated names} Pass records whose field names are exactly]
+--at-most[{comma-separated names} Pass records that have at most these field]
+--all-matching[{regular expression} Pass records where all field names match]
+--any-matching[{regular expression} Pass records where any field name matches]
+--none-matching[{regular expression} Pass records where no field name matches]
+-h
+--help

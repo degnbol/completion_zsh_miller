@@ -1,9 +1,11 @@
 Usage: mlr sub [options]
 Replaces old string with new string in specified field(s), with regex support
 for the old string and not handling multiple matches, like the `sub` DSL function.
+The replacement string supports C-style backslash escapes such as \n, \t,
+and \x1f. Write \\ to get a literal backslash.
 See also the `gsub` and `ssub` verbs.
 Options:
--f {a,b,c}  Field names to convert.
--r {regex}  Regular expression for field names to convert.
--a          Convert all field names.
--h|--help   Show this message.
+-f {a,b,c} Field names to apply substitution to.
+-r {regex} Regular expression for field names to apply substitution to.
+-a         Apply substitution to all fields.
+-h|--help  Show this message.

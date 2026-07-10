@@ -1,10 +1,11 @@
 Usage: mlr repeat [options]
 Copies input records to output records multiple times.
-Options must be exactly one of the following:
--n {repeat count}  Repeat each input record this many times.
--f {field name}    Same, but take the repeat count from the specified
-                   field name of each input record.
--h|--help Show this message.
+Options must be exactly one of -n or -f.
+Options:
+-n {repeat count} Repeat each input record this many times.
+-f {field name}   Same as -n, but take the repeat count from the specified field
+                  name of each input record.
+-h|--help         Show this message.
 Example:
   echo x=0 | mlr repeat -n 4 then put '$x=urand()'
 produces:

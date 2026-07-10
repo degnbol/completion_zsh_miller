@@ -6,8 +6,8 @@ please see the DSL functions lstrip, rstrip, strip, collapse_whitespace,
 and clean_whitespace.
 
 Options:
--k|--keys-only    Do not touch values.
--v|--values-only  Do not touch keys.
+-k|--keys-only   Do not touch values.
+-v|--values-only Do not touch keys.
+-h|--help        Show this message.
 It is an error to specify -k as well as -v -- to clean keys and values,
 leave off -k as well as -v.
--h|--help Show this message.

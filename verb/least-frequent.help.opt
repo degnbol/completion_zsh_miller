@@ -1,4 +1,6 @@
--f[{one or more comma-separated field names}. Required flag.]
--n[{count}. Optional flag defaulting to 10.]
+-f[{a,b,c} One or more comma-separated field names to group by. Required flag.]
+-n[{count} Maximum number of results to output. Optional flag defaulting to 10.]
 -b[Suppress counts; show only field values.]
 -o[{name} Field name for output count. Default "count".]
+-h
+--help

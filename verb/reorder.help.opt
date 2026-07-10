@@ -1,5 +1,6 @@
--e[Put specified field names at record end: default is to put them at record start.]
+-e[Put specified field names at record end: default is to put them at]
 -f[{a,b,c} Field names to reorder.]
+-r[{a,b,c} Treat field names as regular expressions. Matched fields are moved to]
 -b[{x} Put field names specified with -f before field name specified by {x},]
 -a[{x} Put field names specified with -f after field name specified by {x},]
 -h

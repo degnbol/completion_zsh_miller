@@ -1,4 +1,5 @@
 -g[{a,b,c} Optional: group-by-field names for samples, e.g. a,b,c.]
--k[{k} Required: number of records to output in total, or by group if using -g.]
+-k[{k} Required: number of records to output in total, or by group if using]
+-g.
 -h
 --help

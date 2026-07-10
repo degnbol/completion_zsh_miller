@@ -1,6 +1,6 @@
--f[{a,b,c} Field names to convert.]
--r[{regex} Regular expression for field names to convert.]
--a[Convert all field names.]
+-f[{a,b,c} Field names to apply substitution to.]
+-r[{regex} Regular expression for field names to apply substitution to.]
+-a[Apply substitution to all fields.]
 -h
 --help
 1:old:

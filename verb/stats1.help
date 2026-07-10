@@ -2,7 +2,32 @@ Usage: mlr stats1 [options]
 Computes univariate statistics for one or more given fields, accumulated across
 the input record stream.
 Options:
--a {sum,count,...} Names of accumulators: one or more of:
+-a {sum,count,...} Names of accumulators: one or more of the listed values. Also
+                   accepts median (same as p50) and percentiles p{n} for n in
+                   0..100, e.g. p10 p25.2 p50 p98 p100.
+-f {a,b,c}         Value-field names on which to compute statistics.
+--fr {regex}       Regex for value-field names on which to compute statistics
+                   (compute statistics on values in all field names matching the
+                   regex).
+--fx {regex}       Inverted regex for value-field names on which to compute
+                   statistics (compute statistics on values in all field names
+                   not matching the regex).
+-g {d,e,f}         Optional group-by-field names.
+--gr {regex}       Regex for optional group-by-field names (group by values in
+                   field names matching the regex).
+--gx {regex}       Inverted regex for optional group-by-field names (group by
+                   values in field names not matching the regex).
+--grfx {regex}     Shorthand for --gr {regex} --fx {that same regex}.
+-i                 Use interpolated percentiles, like R's type=7; default like
+                   type=1. Not sensical for string-valued fields.
+-s                 Print iterative stats. Useful in tail -f contexts, in which
+                   case please avoid pprint-format output since end of input
+                   stream will never be seen. Likewise, if input is coming from
+                   `tail -f` be sure to use `--records-per-batch 1`.
+-S                 No-op flag for backward compatibility with Miller 5.
+-F                 No-op flag for backward compatibility with Miller 5.
+-h|--help          Show this message.
+Names of accumulators for -a, one or more of:
   median   This is the same as p50
   p10 p25.2 p50 p98 p100 etc.
   count    Count instances of fields
@@ -22,28 +47,6 @@ Options:
   max      Compute maximum values of specified fields
   minlen   Compute minimum string-lengths of specified fields
   maxlen   Compute maximum string-lengths of specified fields
-
--f {a,b,c}     Value-field names on which to compute statistics
---fr {regex}   Regex for value-field names on which to compute statistics
-               (compute statistics on values in all field names matching regex
---fx {regex}   Inverted regex for value-field names on which to compute statistics
-               (compute statistics on values in all field names not matching regex)
-
--g {d,e,f}     Optional group-by-field names
---gr {regex}   Regex for optional group-by-field names
-               (group by values in field names matching regex)
---gx {regex}   Inverted regex for optional group-by-field names
-               (group by values in field names not matching regex)
-
---grfx {regex} Shorthand for --gr {regex} --fx {that same regex}
-
--i             Use interpolated percentiles, like R's type=7; default like type=1.
-               Not sensical for string-valued fields.\n");
--s             Print iterative stats. Useful in tail -f contexts, in which
-               case please avoid pprint-format output since end of input
-               stream will never be seen. Likewise, if input is coming from `tail -f`
-               be sure to use `--records-per-batch 1`.
--h|--help      Show this message.
 Example: mlr stats1 -a min,p10,p50,p90,max -f value -g size,shape
 Example: mlr stats1 -a count,mode -f size
 Example: mlr stats1 -a count,mode -f size -g shape

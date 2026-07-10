@@ -14,6 +14,19 @@ Long-to-wide options:
   These pivot/reshape the input data to undo the wide-to-long operation.
   Note: this does not work with tail -f; it produces output records only after
   all input records have been read.
+Options:
+-i {input field names}               Input field names for wide-to-long reshape.
+                                     Use with -o.
+-r {input field regex}               Input field regex for wide-to-long reshape.
+                                     May be repeated. Use with -o. If you have
+                                     multiple regexes, please specify them using
+                                     multiple -r, since regexes can contain
+                                     commas within them.
+-o {key-field name,value-field name} Output key-field and value-field names for
+                                     wide-to-long reshape. Requires -i or -r.
+-s {key-field name,value-field name} Key-field and value-field names for
+                                     long-to-wide reshape.
+-h|--help                            Show this message.
 
 Examples:
 

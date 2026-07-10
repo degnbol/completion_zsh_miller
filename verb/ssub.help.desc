@@ -1,2 +1,5 @@
 Replaces old string with new string in specified field(s), without regex support for
-the old string, like the `ssub` DSL function. See also the `gsub` and `sub` verbs.
+the old string, like the `ssub` DSL function.
+Both the search and replacement strings support C-style backslash escapes such
+as \n, \t, and \x1f. Write \\ to get a literal backslash.
+See also the `gsub` and `sub` verbs.

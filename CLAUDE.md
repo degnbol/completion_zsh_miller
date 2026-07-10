@@ -13,14 +13,15 @@ This directory contains zsh completion for [Miller (mlr)](https://miller.readthe
 - `_mlr` - Generated completion file (do not edit directly)
 - `_mlr.templ` - Template for generating `_mlr`
 - `_mlr.sh` - Script that generates `_mlr` from template and help files
-- `flags.help` - Generated file containing main mlr flags
-- `flags.help.sh` - Script that generates `flags.help` from `mlr help flags`
+- `flags.help` / `flags.help.sh` - Main mlr flags; the `.sh` emits them to stdout
 - `verb/` - Directory containing verb-specific options (*.opt files)
 - `descs.help` - Verb descriptions
-- `verbs.list` - List of verbs
+- `verbs.list` / `verbs.list.sh` - Verb list (chain + aux); the `.sh` emits to stdout
 - `help.topics` - Help topic completions
+- `VERSION` - `mlr --version` the data was generated against
 - `table_unjag.sh` - Helper script for parsing help output
 - `RUNME.zsh` - Script to regenerate everything
+- `check-drift.zsh` - Flags data stale vs installed mlr (cheap, no full regen)
 - `test/` - Test suite
 
 ## Regenerating Completions
@@ -28,8 +29,8 @@ This directory contains zsh completion for [Miller (mlr)](https://miller.readthe
 ```bash
 ./RUNME.zsh
 # Or manually:
-./flags.help.sh  # Regenerate flags.help
-./_mlr.sh        # Regenerate _mlr
+./flags.help.sh > flags.help  # Regenerate flags.help
+./_mlr.sh                     # Regenerate _mlr
 ```
 
 After regenerating, reload in zsh:

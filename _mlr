@@ -53,8 +53,10 @@ _mlr() {
 '-c[Use CSV format for input and output data.]' \
 '--c2c[Use CSV format for input and output data.]' \
 '--csvlite[Use CSV-lite format for input and output data.]' \
+'--dcf[Use Debian control file (DCF) format for input and…]' \
 '--dkvp[Use DKVP format for input and output data.]' \
 '--d2d[Use DKVP format for input and output data.]' \
+'--dkvpx[Use DKVPX format for input and output data.]' \
 '--gen-field-name[Specify field name for --igen. Defaults to "i".]' \
 '--gen-start[Specify start value for --igen. Defaults to 1.]' \
 '--gen-step[Specify step value for --igen. Defaults to 1.]' \
@@ -63,6 +65,7 @@ _mlr() {
 '--iasvlite[Use ASV format for input data.]' \
 '--icsv[Use CSV format for input data.]' \
 '--icsvlite[Use CSV-lite format for input data.]' \
+'--idcf[Use Debian control file (DCF) format for input data.]' \
 '--idkvp[Use DKVP format for input data.]' \
 '--igen[Ignore input files and instead generate sequential…]' \
 '--ijson[Use JSON format for input data.]' \
@@ -77,17 +80,21 @@ _mlr() {
 '--iusv[Use USV format for input data.]' \
 '--iusvlite[Use USV format for input data.]' \
 '--ixtab[Use XTAB format for input data.]' \
+'--iyaml[Use YAML format for input data.]' \
 '--json[Use JSON format for input and output data.]' \
 '-j[Use JSON format for input and output data.]' \
 '--j2j[Use JSON format for input and output data.]' \
 '--jsonl[Use JSON Lines format for input and output data.]' \
 '--l2l[Use JSON Lines format for input and output data.]' \
+'--md[Use markdown-tabular format for input and output…]' \
+'--markdown[Use markdown-tabular format for input and output…]' \
 '--nidx[Use NIDX format for input and output data.]' \
 '--n2n[Use NIDX format for input and output data.]' \
 '--oasv[Use ASV format for output data.]' \
 '--oasvlite[Use ASV format for output data.]' \
 '--ocsv[Use CSV format for output data.]' \
 '--ocsvlite[Use CSV-lite format for output data.]' \
+'--odcf[Use Debian control file (DCF) format for output data.]' \
 '--odkvp[Use DKVP format for output data.]' \
 '--ojson[Use JSON format for output data.]' \
 '--ojsonl[Use JSON Lines format for output data.]' \
@@ -100,6 +107,7 @@ _mlr() {
 '--ousv[Use USV format for output data.]' \
 '--ousvlite[Use USV format for output data.]' \
 '--oxtab[Use XTAB format for output data.]' \
+'--oyaml[Use YAML format for output data.]' \
 '--pprint[Use PPRINT format for input and output data.]' \
 '--p2p[Use PPRINT format for input and output data.]' \
 '--tsv[Use TSV format for input and output data.]' \
@@ -111,6 +119,8 @@ _mlr() {
 '--xtab[Use XTAB format for input and output data.]' \
 '--x2x[Use XTAB format for input and output data.]' \
 '--xvright[Right-justify values for XTAB format.]' \
+'--yaml[Use YAML format for input and output data.]' \
+'--y2y[Use YAML format for input and output data.]' \
 '-i[\{format name\} Use format name for input data. For example: `-i csv`…]' \
 '-o[\{format name\} Use format name for output data. For example: `-o…]' \
 '--flatsep[\{string\}]' \
@@ -125,6 +135,9 @@ _mlr() {
 '--jvstack[Put one key-value pair per line for JSON output…]' \
 '--no-jlistwrap[Do not wrap JSON output in outermost `\[ \]`. This is…]' \
 '--no-jvstack[Put objects/arrays all on one line for JSON output.]' \
+'--no-yarray[Do not wrap YAML output in a single array document;…]' \
+'--yarray[Wrap YAML output in a single top-level array…]' \
+'--ya[Wrap YAML output in a single top-level array…]' \
 '--jknquoteint[Type information from JSON input files is now…]' \
 '--jquoteall[Type information from JSON input files is now…]' \
 '--json-fatal-arrays-on-input' \
@@ -139,6 +152,11 @@ _mlr() {
 '--quote-numeric[Ignored as of version 6. Types are inferred/retained…]' \
 '--quote-original[Ignored as of version 6. Types are inferred/retained…]' \
 '--vflatsep[Ignored as of version 6. This functionality is…]' \
+'--md-aligned' \
+'--markdown-aligned' \
+'--omd-aligned' \
+'--omarkdown-aligned' \
+'--errors-json[Emit parse errors as a JSON object to stderr instead…]' \
 '--fflush[Force buffered output to be written after every…]' \
 '--files[\{filename\} Use this to specify a file which itself contains, one…]' \
 '--from[\{filename\} Use this to specify an input file before the verb(s),…]: :->from_file' \
@@ -155,6 +173,7 @@ _mlr() {
 '--no-dedupe-field-names[By default, if an input record has a field named `x`…]' \
 '--no-fflush[Let buffered output not be written after every output…]' \
 '--no-hash-records[See --hash-records.]' \
+'--no-shell[Disable Millers ability to run external commands:…]' \
 '--norc[Do not load a .mlrrc file.]' \
 '--nr-progress-mod[\{m\} With m a positive integer: print filename and record…]' \
 '--ofmt[\{format\} E.g. `%.18f`, `%.0f`, `%9.6e`. Please use…]' \
@@ -183,6 +202,9 @@ _mlr() {
 '--barred' \
 '--barred-output' \
 '--barred-input[When used in conjunction with --pprint, accepts…]' \
+'--barred-unicode[Uses unicode printing chars for barred output…]' \
+'--fixed[\{string\} Fixed width specification. One of…]' \
+'--fw[\{string\} Shortcut for --fixed left-align-multi-word…]' \
 '--right[Right-justifies all fields for PPRINT output.]' \
 '--cpuprofile[\{CPU-profile file name\}]' \
 '--time[Print elapsed execution time in seconds to stderr at…]' \
@@ -208,6 +230,7 @@ _mlr() {
 '--c2x' \
 '--c2p' \
 '--c2m' \
+'--c2y' \
 '--t2c' \
 '--t2t,-t' \
 '--t2j' \
@@ -217,6 +240,7 @@ _mlr() {
 '--t2x' \
 '--t2p' \
 '--t2m' \
+'--t2y' \
 '--j2c' \
 '--j2t' \
 '--j2j,-j' \
@@ -226,6 +250,7 @@ _mlr() {
 '--j2x' \
 '--j2p' \
 '--j2m' \
+'--j2y' \
 '--l2c' \
 '--l2t' \
 '--l2j' \
@@ -235,6 +260,7 @@ _mlr() {
 '--l2x' \
 '--l2p' \
 '--l2m' \
+'--l2y' \
 '--d2c' \
 '--d2t' \
 '--d2j' \
@@ -244,6 +270,7 @@ _mlr() {
 '--d2x' \
 '--d2p' \
 '--d2m' \
+'--d2y' \
 '--n2c' \
 '--n2t' \
 '--n2j' \
@@ -253,6 +280,7 @@ _mlr() {
 '--n2x' \
 '--n2p' \
 '--n2m' \
+'--n2y' \
 '--x2c' \
 '--x2t' \
 '--x2j' \
@@ -262,6 +290,7 @@ _mlr() {
 '--x2x' \
 '--x2p' \
 '--x2m' \
+'--x2y' \
 '--p2c' \
 '--p2t' \
 '--p2j' \
@@ -270,6 +299,7 @@ _mlr() {
 '--p2n' \
 '--p2x' \
 '--p2m' \
+'--p2y' \
 '--m2c' \
 '--m2t' \
 '--m2j' \
@@ -278,6 +308,17 @@ _mlr() {
 '--m2n' \
 '--m2x' \
 '--m2p' \
+'--m2y' \
+'--y2c' \
+'--y2t' \
+'--y2j' \
+'--y2l' \
+'--y2d' \
+'--y2n' \
+'--y2x' \
+'--y2p' \
+'--y2m' \
+'--y2y' \
 '-g[help flags]' \
 '-l[help list-verbs]' \
 '-L[help usage-verbs]' \
@@ -385,7 +426,7 @@ _arguments "${_arguments_options[@]}" \
 "--lo[\{lo\} Lower-limit value for min-width bar: default \'0.000000\'.]" \
 "--hi[\{hi\} Upper-limit value for max-width bar: default \'100.000000\'.]" \
 "-w[\{n\} Bar-field width: default \'40\'.]" \
-"--auto[Automatically computes limits, ignoring --lo and --hi.]" \
+"--auto[Automatically computes limits, ignoring --lo and --hi. Holds all]" \
 "-c[\{character\} Fill character: default \'*\'.]" \
 "-x[\{character\} Out-of-bounds character: default \'#\'.]" \
 "-b[\{character\} Blank character: default \'.\'.]" \
@@ -396,7 +437,7 @@ _arguments "${_arguments_options[@]}" \
 ;;
 bootstrap)
 _arguments "${_arguments_options[@]}" \
-"-n[Number of samples to output. Defaults to number of input records.]" \
+"-n[\{n\} Number of samples to output. Defaults to number of input records. Must]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -406,11 +447,11 @@ case)
 _arguments "${_arguments_options[@]}" \
 "-k[Case only keys, not keys and values.]" \
 "-v[Case only values, not keys and values.]" \
-"-f+[\{a,b,c\} Specify which field names to case (default: all)]:field:_mlr_field_names" \
-"-u[Convert to uppercase]" \
-"-l[Convert to lowercase]" \
-"-s[Convert to sentence case (capitalize first letter)]" \
-"-t[Convert to title case (capitalize words)]" \
+"-f+[\{a,b,c\} Specify which field names to case (default: all).]:field:_mlr_field_names" \
+"-u[Convert to uppercase.]" \
+"-l[Convert to lowercase.]" \
+"-s[Convert to sentence case (capitalize first letter).]" \
+"-t[Convert to title case (capitalize words).]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -419,8 +460,8 @@ _arguments "${_arguments_options[@]}" \
 cat)
 _arguments "${_arguments_options[@]}" \
 "-n[Prepend field \"n\" to each record with record-counter starting at 1.]" \
-"-N[\{name\} Prepend field \{name\} to each record with record-counter starting at 1.]" \
-"-g+[\{a,b,c\} Optional group-by-field names for counters, e.g. a,b,c]:field:_mlr_field_names" \
+"-N[\{name\} Prepend field \{name\} to each record with record-counter starting at]" \
+"-g+[\{a,b,c\} Optional group-by-field names for counters, e.g. a,b,c.]:field:_mlr_field_names" \
 "--filename[Prepend current filename to each record.]" \
 "--filenum[Prepend current filenum (1-up) to each record.]" \
 "-h" \
@@ -448,11 +489,15 @@ _arguments "${_arguments_options[@]}" \
 ;;
 count-distinct)
 _arguments "${_arguments_options[@]}" \
-"-f+[\{a,b,c\} Field names for distinct count.]:field:_mlr_field_names" \
-"-x+[\{a,b,c\} Field names to exclude for distinct count: use each record\'s others instead.]:field:_mlr_field_names" \
+"-f+[\{a,b,c\} Field names for distinct count (synonym for -g).]:field:_mlr_field_names" \
+"-g+[\{a,b,c\} Field names for distinct count.]:field:_mlr_field_names" \
+"-x+[\{a,b,c\} Field names to exclude for distinct count; use each record\'s other]:field:_mlr_field_names" \
 "-n[Show only the number of distinct values. Not compatible with -u.]" \
-"-o[\{name\} Field name for output count. Default \"count\".]" \
-"-u[Do unlashed counts for multiple field names. With -f a,b and]" \
+"-o[\{name\} Field name for output count. Default \"count\". Ignored with -u.]" \
+"-u[Do unlashed counts for multiple field names. With -f a,b and without]" \
+"-u,[computes counts for distinct combinations of a and b field]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
@@ -468,7 +513,7 @@ _arguments "${_arguments_options[@]}" \
 count)
 _arguments "${_arguments_options[@]}" \
 "-g+[\{a,b,c\} Optional group-by-field names for counts, e.g. a,b,c]:field:_mlr_field_names" \
-"-n[\{n\} Show only the number of distinct values. Not interesting without -g.]" \
+"-n[Show only the number of distinct values. Not interesting without -g.]" \
 "-o[\{name\} Field name for output-count. Default \"count\".]" \
 "-h" \
 "--help" \
@@ -477,10 +522,10 @@ _arguments "${_arguments_options[@]}" \
 ;;
 cut)
 _arguments "${_arguments_options[@]}" \
-"-f+[\{a,b,c\} Comma-separated field names for cut, e.g. a,b,c.]:field:_mlr_field_names" \
-"-o[Retain fields in the order specified here in the argument list.]" \
-"-x[Exclude, rather than include, field names specified by -f.]" \
-"--complement[Exclude, rather than include, field names specified by -f.]" \
+"-f+[\{a,b,c\} Comma-separated field names to include or exclude, e.g. a,b,c.]:field:_mlr_field_names" \
+"-o[Retain fields in the order specified by -f rather than in]" \
+"-x[Exclude, rather than include, the field names specified by -f.]" \
+"--complement[Exclude, rather than include, the field names specified by -f.]" \
 "-r[Treat field names as regular expressions. \"ab\", \"a.*b\" will]" \
 "-h" \
 "--help" \
@@ -498,12 +543,21 @@ _arguments "${_arguments_options[@]}" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
+describe)
+_arguments "${_arguments_options[@]}" \
+"-n[\{n\} List a field\'s distinct values only if it has at most \{n\} of]" \
+"--max-values[\{n\} List a field\'s distinct values only if it has at most \{n\} of]" \
+"-h" \
+"--help" \
+"*:filename or chain:_mlr_files_or_chain" \
+&& ret=0
+;;
 fill-down)
 _arguments "${_arguments_options[@]}" \
 "--all[Operate on all fields in the input.]" \
 "-a[If a given record has a missing value for a given field,]" \
 "--only-if-absent[If a given record has a missing value for a given field,]" \
-"-f+[Field names for fill-down.]:field:_mlr_field_names" \
+"-f+[\{a,b,c\} Field names for fill-down.]:field:_mlr_field_names" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -513,34 +567,39 @@ fill-empty)
 _arguments "${_arguments_options[@]}" \
 "-v[\{string\} Fill-value: defaults to \"N/A\"]" \
 "-S[Don\'t infer type -- so \'-v 0\' would fill string 0 not int 0.]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
 filter)
 _arguments "${_arguments_options[@]}" \
-"-f[\{file name\} File containing a DSL expression (see examples below). If the filename\]:filename:_file]" \
-"-e[\{expression\} You can use this after -f to add an expression. Example use]" \
-"-s[name=value: Predefines out-of-stream variable @name to have]" \
-"-x[(default false) Prints records for which \{expression\} evaluates to false, not true,]" \
+"-f[\{file name\} File containing a DSL expression (see examples below). If the\]:filename:_file]" \
+"-e[\{expression\} DSL expression to evaluate. You can use this after -f to add an]" \
+"-s[\{name=value\} Predefines out-of-stream variable @name to have the given value.]" \
+"-x[Prints records for which \{expression\} evaluates to false, not]" \
 "-q[Does not include the modified record in the output stream.]" \
-"-S[and -F: There are no-ops in Miller 6 and above, since now type-inferencing is done]" \
-"-h" \
-"--help" \
+"-S[No-op in Miller 6 and above, since type-inferencing is now done]" \
+"-F[No-op in Miller 6 and above, since type-inferencing is now done]" \
 "-w[Print warnings about things like uninitialized variables.]" \
 "-W[Same as -w, but exit the process if there are any warnings.]" \
-"-p[Prints the expressions\'s AST (abstract syntax tree), which gives full]" \
+"-p[Prints the expression\'s AST (abstract syntax tree), which gives]" \
 "-d[Like -p but uses a parenthesized-expression format for the AST.]" \
 "-D[Like -d but with output all on one line.]" \
-"-E[Echo DSL expression before printing parse-tree]" \
+"-E[Echo DSL expression before printing parse-tree.]" \
 "-v[Same as -E -p.]" \
-"-X[Exit after parsing but before stream-processing. Useful with -v/-d/-D, if you]" \
+"-X[Exit after parsing but before stream-processing. Useful with]" \
+"-v/-d/-D,[if you only want to look at parser information.]" \
+"--explain[Parse and type-check the DSL expression, report whether it is]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
 flatten)
 _arguments "${_arguments_options[@]}" \
 "-f[Comma-separated list of field names to flatten (default all).]" \
-"-s[Separator, defaulting to mlr --flatsep value.]" \
+"-s[\{string\} Separator, defaulting to mlr --flatsep value.]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -548,10 +607,12 @@ _arguments "${_arguments_options[@]}" \
 ;;
 format-values)
 _arguments "${_arguments_options[@]}" \
-"-i[\{integer format\} Defaults to \"%d\".]" \
-"-f[\{float format\} Defaults to \"%f\".]" \
-"-s[\{string format\} Defaults to \"%s\".]" \
+"-i[\{integer format\} Integer format string; defaults to \"%d\". Examples: \"%06lld\",]" \
+"-f[\{float format\} Float format string; defaults to \"%f\". Examples: \"%8.3lf\",]" \
+"-s[\{string format\} String format string; defaults to \"%s\". Examples: \"_%s\",]" \
 "-n[Coerce field values autodetected as int to float, and then]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
@@ -561,14 +622,15 @@ _arguments "${_arguments_options[@]}" \
 "-g+[\{d,e,f\} Optional group-by-field name(s) for fraction counts]:field:_mlr_field_names" \
 "-p[Produce percents \[0..100\], not fractions \[0..1\]. Output field names]" \
 "-c[Produce cumulative distributions, i.e. running sums: each output]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
 gap)
 _arguments "${_arguments_options[@]}" \
 "-g+[\{a,b,c\} Print a gap whenever values of these fields (e.g. a,b,c) changes.]:field:_mlr_field_names" \
-"-n[\{n\} Print a gap every n records.]" \
-"-n[is ignored if -g is present.]" \
+"-n[\{n\} Print a gap every n records. Ignored if -g is present.]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -600,9 +662,9 @@ _arguments "${_arguments_options[@]}" \
 ;;
 gsub)
 _arguments "${_arguments_options[@]}" \
-"-f+[\{a,b,c\} Field names to convert.]:field:_mlr_field_names" \
-"-r[\{regex\} Regular expression for field names to convert.]" \
-"-a[Convert all field names.]" \
+"-f+[\{a,b,c\} Field names to apply substitution to.]:field:_mlr_field_names" \
+"-r[\{regex\} Regular expression for field names to apply substitution to.]" \
+"-a[Apply substitution to all fields.]" \
 "-h" \
 "--help" \
 "1:old:" \
@@ -612,19 +674,21 @@ _arguments "${_arguments_options[@]}" \
 ;;
 having-fields)
 _arguments "${_arguments_options[@]}" \
-"--at-least+[\{comma-separated names\}]:field:_mlr_field_names" \
-"--which-are+[\{comma-separated names\}]:field:_mlr_field_names" \
-"--at-most+[\{comma-separated names\}]:field:_mlr_field_names" \
-"--all-matching[\{regular expression\}]" \
-"--any-matching[\{regular expression\}]" \
-"--none-matching[\{regular expression\}]" \
+"--at-least+[\{comma-separated names\} Pass records that have at least these field]:field:_mlr_field_names" \
+"--which-are+[\{comma-separated names\} Pass records whose field names are exactly]:field:_mlr_field_names" \
+"--at-most+[\{comma-separated names\} Pass records that have at most these field]:field:_mlr_field_names" \
+"--all-matching[\{regular expression\} Pass records where all field names match]" \
+"--any-matching[\{regular expression\} Pass records where any field name matches]" \
+"--none-matching[\{regular expression\} Pass records where no field name matches]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
 head)
 _arguments "${_arguments_options[@]}" \
 "-g+[\{a,b,c\} Optional group-by-field names for head counts, e.g. a,b,c.]:field:_mlr_field_names" \
-"-n[\{n\} Head-count to print. Default 10.]" \
+"-n[\{n\} Head-count to print. Default 10. A negative count, e.g. -n -2, passes]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -639,11 +703,11 @@ _arguments "${_arguments_options[@]}" \
 ;;
 histogram)
 _arguments "${_arguments_options[@]}" \
-"-f+[\{a,b,c\} Value-field names for histogram counts]:field:_mlr_field_names" \
-"--lo[\{lo\} Histogram low value]" \
-"--hi[\{hi\} Histogram high value]" \
+"-f+[\{a,b,c\} Value-field names for histogram counts.]:field:_mlr_field_names" \
+"--lo[\{lo\} Histogram low value.]" \
+"--hi[\{hi\} Histogram high value.]" \
 "--nbins[\{n\} Number of histogram bins. Defaults to 20.]" \
-"--auto[Automatically computes limits, ignoring --lo and --hi.]" \
+"--auto[Automatically computes limits, ignoring --lo and --hi. Holds all]" \
 "-o[\{prefix\} Prefix for output field name. Default: no prefix.]" \
 "-h" \
 "--help" \
@@ -652,22 +716,24 @@ _arguments "${_arguments_options[@]}" \
 ;;
 join)
 _arguments "${_arguments_options[@]}" \
-"-f[\{left file name\}\]:filename:_file]" \
-"-j+[\{a,b,c\} Comma-separated join-field names for output]:field:_mlr_field_names" \
-"-l+[\{left-file-fields\} \{a,b,c\} Comma-separated join-field names for left input file;]:field:_mlr_join_left_field_names" \
-"-r+[\{a,b,c\} Comma-separated join-field names for right input file(s);]:field:_mlr_field_names" \
-"--lk+[\{left-file-fields\} \{a,b,c\} If supplied, this means keep only the specified field]:field:_mlr_join_left_field_names" \
-"--left-keep-field-names+[\{left-file-fields\} \{a,b,c\} If supplied, this means keep only the specified field]:field:_mlr_join_left_field_names" \
-"--lp[\{text\} Additional prefix for non-join output field names from]" \
-"--rp[\{text\} Additional prefix for non-join output field names from]" \
-"--np[Do not emit paired records]" \
-"--ul[Emit unpaired records from the left file]" \
-"--ur[Emit unpaired records from the right file(s)]" \
-"-s[Require sorted input: records must be sorted]" \
-"--sorted-input[Require sorted input: records must be sorted]" \
-"-u[Enable unsorted input. (This is the default even without -u.)]" \
-"--prepipe[\{command\} As in main input options; see mlr --help for details.]" \
-"--prepipex[\{command\} Likewise.]" \
+"-f[\{left file name\} Left file name for join.\]:filename:_file]" \
+"-j+[\{a,b,c\} Comma-separated join-field names for]:field:_mlr_field_names" \
+"-l+[\{left-file-fields\} \{a,b,c\} Comma-separated join-field names for left]:field:_mlr_join_left_field_names" \
+"-r+[\{a,b,c\} Comma-separated join-field names for right]:field:_mlr_field_names" \
+"--lk+[\{left-file-fields\} \{a,b,c\} If supplied, this means keep only the]:field:_mlr_join_left_field_names" \
+"--left-keep-field-names+[\{left-file-fields\} \{a,b,c\} If supplied, this means keep only the]:field:_mlr_join_left_field_names" \
+"--lp[\{text\} Additional prefix for non-join output field]" \
+"--rp[\{text\} Additional prefix for non-join output field]" \
+"--np[Do not emit paired records.]" \
+"--ul[Emit unpaired records from the left file.]" \
+"--ur[Emit unpaired records from the right]" \
+"-s[Require sorted input: records must be]" \
+"--sorted-input[Require sorted input: records must be]" \
+"-u[Enable unsorted input. (This is the default]" \
+"--prepipe[\{command\} Shell command to prepipe the left-file]" \
+"--prepipex[\{command\} Shell command to prepipe the left-file]" \
+"-h" \
+"--help" \
 "-i[\{one of csv,dkvp,nidx,pprint,xtab\}]" \
 "--irs[\{record-separator character\}]" \
 "--ifs[\{field-separator character\}]" \
@@ -682,7 +748,7 @@ _arguments "${_arguments_options[@]}" \
 ;;
 json-parse)
 _arguments "${_arguments_options[@]}" \
-"-f[\{...\} Comma-separated list of field names to json-parse (default all).]" \
+"-f+[\{a,b,c\} Comma-separated list of field names to json-parse (default all).]:field:_mlr_field_names" \
 "-k[If supplied, then on parse fail for any cell, keep the (unparsable)]" \
 "-h" \
 "--help" \
@@ -691,7 +757,7 @@ _arguments "${_arguments_options[@]}" \
 ;;
 json-stringify)
 _arguments "${_arguments_options[@]}" \
-"-f[\{...\} Comma-separated list of field names to json-parse (default all).]" \
+"-f+[\{a,b,c\} Comma-separated list of field names to json-stringify (default]:field:_mlr_field_names" \
 "--jvstack[Produce multi-line JSON output.]" \
 "--no-jvstack[Produce single-line JSON output per record (default).]" \
 "-h" \
@@ -715,10 +781,12 @@ _arguments "${_arguments_options[@]}" \
 ;;
 least-frequent)
 _arguments "${_arguments_options[@]}" \
-"-f+[\{one or more comma-separated field names\}. Required flag.]:field:_mlr_field_names" \
-"-n[\{count\}. Optional flag defaulting to 10.]" \
+"-f+[\{a,b,c\} One or more comma-separated field names to group by. Required flag.]:field:_mlr_field_names" \
+"-n[\{count\} Maximum number of results to output. Optional flag defaulting to 10.]" \
 "-b[Suppress counts; show only field values.]" \
 "-o[\{name\} Field name for output count. Default \"count\".]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
@@ -731,35 +799,54 @@ _arguments "${_arguments_options[@]}" \
 ;;
 merge-fields)
 _arguments "${_arguments_options[@]}" \
-"-a[\{sum,count,...\} Names of accumulators. One or more of:]" \
-"-f+[\{a,b,c\} Value-field names on which to compute statistics. Requires -o.]:field:_mlr_field_names" \
+"-a[\{sum,count,...\} Names of accumulators: one or more of the accumulators listed]" \
+"-f+[\{a,b,c\} Value-field names on which to compute statistics. Requires]:field:_mlr_field_names" \
+"-o." \
 "-r+[\{a,b,c\} Regular expressions for value-field names on which to compute]:field:_mlr_field_names" \
-"-c+[\{a,b,c\} Substrings for collapse mode. All fields which have the same names]:field:_mlr_field_names" \
-"-i[Use interpolated percentiles, like R\'s type=7; default like type=1.]" \
+"-c+[\{a,b,c\} Substrings for collapse mode: all fields which have the same]:field:_mlr_field_names" \
+"-i[Use interpolated percentiles, like R\'s type=7; default like]" \
 "-o[\{name\} Output field basename for -f/-r.]" \
-"-k[Keep the input fields which contributed to the output statistics;]" \
+"-k[Keep the input fields which contributed to the output]" \
+"-S[No-op flag for backward compatibility with Miller 5.]" \
+"-F[No-op flag for backward compatibility with Miller 5.]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
 most-frequent)
 _arguments "${_arguments_options[@]}" \
-"-f+[\{one or more comma-separated field names\}. Required flag.]:field:_mlr_field_names" \
-"-n[\{count\}. Optional flag defaulting to 10.]" \
+"-f+[\{a,b,c\} One or more comma-separated field names to group by. Required flag.]:field:_mlr_field_names" \
+"-n[\{count\} Maximum number of results to output. Optional flag defaulting to 10.]" \
 "-b[Suppress counts; show only field values.]" \
 "-o[\{name\} Field name for output count. Default \"count\".]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
 nest)
 _arguments "${_arguments_options[@]}" \
-"--explode,--implode[One is required.]" \
-"--values,--pairs[One is required.]" \
-"--across-records,--across-fields[One is required.]" \
-"-f[\{field name\} Required.]" \
-"--nested-fs[\{string\} Defaults to \";\". Field separator for nested values.]" \
-"--nested-ps[\{string\} Defaults to \":\". Pair separator for nested key-value pairs.]" \
-"--evar[\{string\} Shorthand for --explode --values --across-records --nested-fs \{string\}]" \
-"--ivar[\{string\} Shorthand for --implode --values --across-records --nested-fs \{string\}]" \
+"--explode[Explode field values into separate fields/records. One of]" \
+"--explode[or --implode is required.]" \
+"--implode[Reverse of --explode. One of --explode or --implode is]" \
+"--values[Operate on field values. One of --values or --pairs is]" \
+"--pairs[Operate on field key-value pairs. One of --values or]" \
+"--pairs[is required.]" \
+"--across-records[Explode/implode across records. One of --across-records or]" \
+"--across-fields[is required.]" \
+"--across-fields[Explode/implode across fields. One of --across-records or]" \
+"--across-fields[is required.]" \
+"-f[\{field name\} Required field name to operate on.]" \
+"-r[\{field names\} Like -f but treat arguments as a regular expression. Match]" \
+"--nested-fs[\{string\} Field separator for nested values. Defaults to \";\".]" \
+"--nested-ps[\{string\} Pair separator for nested key-value pairs. Defaults to \":\".]" \
+"--evar[\{string\} Shorthand for --explode --values --across-records]" \
+"--nested-fs[\{string\}.]" \
+"--ivar[\{string\} Shorthand for --implode --values --across-records]" \
+"--nested-fs[\{string\}.]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
@@ -772,22 +859,25 @@ _arguments "${_arguments_options[@]}" \
 ;;
 put)
 _arguments "${_arguments_options[@]}" \
-"-f[\{file name\} File containing a DSL expression (see examples below). If the filename\]:filename:_file]" \
-"-e[\{expression\} You can use this after -f to add an expression. Example use]" \
-"-s[name=value: Predefines out-of-stream variable @name to have]" \
-"-x[(default false) Prints records for which \{expression\} evaluates to false, not true,]" \
+"-f[\{file name\} File containing a DSL expression (see examples below). If the\]:filename:_file]" \
+"-e[\{expression\} DSL expression to evaluate. You can use this after -f to add an]" \
+"-s[\{name=value\} Predefines out-of-stream variable @name to have the given value.]" \
+"-x[Prints records for which \{expression\} evaluates to false, not]" \
 "-q[Does not include the modified record in the output stream.]" \
-"-S[and -F: There are no-ops in Miller 6 and above, since now type-inferencing is done]" \
-"-h" \
-"--help" \
+"-S[No-op in Miller 6 and above, since type-inferencing is now done]" \
+"-F[No-op in Miller 6 and above, since type-inferencing is now done]" \
 "-w[Print warnings about things like uninitialized variables.]" \
 "-W[Same as -w, but exit the process if there are any warnings.]" \
-"-p[Prints the expressions\'s AST (abstract syntax tree), which gives full]" \
+"-p[Prints the expression\'s AST (abstract syntax tree), which gives]" \
 "-d[Like -p but uses a parenthesized-expression format for the AST.]" \
 "-D[Like -d but with output all on one line.]" \
-"-E[Echo DSL expression before printing parse-tree]" \
+"-E[Echo DSL expression before printing parse-tree.]" \
 "-v[Same as -E -p.]" \
-"-X[Exit after parsing but before stream-processing. Useful with -v/-d/-D, if you]" \
+"-X[Exit after parsing but before stream-processing. Useful with]" \
+"-v/-d/-D,[if you only want to look at parser information.]" \
+"--explain[Parse and type-check the DSL expression, report whether it is]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
@@ -821,8 +911,8 @@ _arguments "${_arguments_options[@]}" \
 ;;
 rename)
 _arguments "${_arguments_options[@]}" \
-"-r[Treat old field names as regular expressions. \"ab\", \"a.*b\"]" \
-"-g[Do global replacement within each field name rather than]" \
+"-r[Treat old field names as regular expressions. \"ab\", \"a.*b\" will match]" \
+"-g[Do global replacement within each field name rather than first-match]" \
 "-h" \
 "--help" \
 "1:old,new pairs:_mlr_rename_field_names" \
@@ -831,8 +921,9 @@ _arguments "${_arguments_options[@]}" \
 ;;
 reorder)
 _arguments "${_arguments_options[@]}" \
-"-e[Put specified field names at record end: default is to put them at record start.]" \
+"-e[Put specified field names at record end: default is to put them at]" \
 "-f+[\{a,b,c\} Field names to reorder.]:field:_mlr_field_names" \
+"-r+[\{a,b,c\} Treat field names as regular expressions. Matched fields are moved to]:field:_mlr_field_names" \
 "-b[\{x\} Put field names specified with -f before field name specified by \{x\},]" \
 "-a[\{x\} Put field names specified with -f after field name specified by \{x\},]" \
 "-h" \
@@ -843,7 +934,7 @@ _arguments "${_arguments_options[@]}" \
 repeat)
 _arguments "${_arguments_options[@]}" \
 "-n[\{repeat count\} Repeat each input record this many times.]" \
-"-f[\{field name\} Same, but take the repeat count from the specified]" \
+"-f[\{field name\} Same as -n, but take the repeat count from the specified field]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -869,13 +960,20 @@ _arguments "${_arguments_options[@]}" \
 "-i[\{input field names\} -o \{key-field name,value-field name\}]" \
 "-r[\{input field regex\} -o \{key-field name,value-field name\}]" \
 "-s[\{key-field name,value-field name\}]" \
+"-i[\{input field names\} Input field names for wide-to-long reshape.]" \
+"-r[\{input field regex\} Input field regex for wide-to-long reshape.]" \
+"-o[\{key-field name,value-field name\} Output key-field and value-field names for]" \
+"-s[\{key-field name,value-field name\} Key-field and value-field names for]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
 sample)
 _arguments "${_arguments_options[@]}" \
 "-g+[\{a,b,c\} Optional: group-by-field names for samples, e.g. a,b,c.]:field:_mlr_field_names" \
-"-k[\{k\} Required: number of records to output in total, or by group if using -g.]" \
+"-k[\{k\} Required: number of records to output in total, or by group if using]" \
+"-g." \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -883,7 +981,15 @@ _arguments "${_arguments_options[@]}" \
 ;;
 sec2gmt)
 _arguments "${_arguments_options[@]}" \
-"-1[through -9: format the seconds using 1..9 decimal places, respectively.]" \
+"-1[Format seconds with 1 decimal place.]" \
+"-2[Format seconds with 2 decimal places.]" \
+"-3[Format seconds with 3 decimal places.]" \
+"-4[Format seconds with 4 decimal places.]" \
+"-5[Format seconds with 5 decimal places.]" \
+"-6[Format seconds with 6 decimal places.]" \
+"-7[Format seconds with 7 decimal places.]" \
+"-8[Format seconds with 8 decimal places.]" \
+"-9[Format seconds with 9 decimal places.]" \
 "--millis[Input numbers are treated as milliseconds since the epoch.]" \
 "--micros[Input numbers are treated as microseconds since the epoch.]" \
 "--nanos[Input numbers are treated as nanoseconds since the epoch.]" \
@@ -894,15 +1000,17 @@ _arguments "${_arguments_options[@]}" \
 ;;
 sec2gmtdate)
 _arguments "${_arguments_options[@]}" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
 seqgen)
 _arguments "${_arguments_options[@]}" \
-"-f[\{name\} (default \"i\") Field name for counters.]" \
-"--start[\{value\} (default 1) Inclusive start value.]" \
-"--step[\{value\} (default 1) Step value.]" \
-"--stop[\{value\} (default 100) Inclusive stop value.]" \
+"-f[\{name\} Field name for counters. Default \"i\".]" \
+"--start[\{value\} Inclusive start value. Default 1.]" \
+"--step[\{value\} Step value. Default 1. May be negative but not zero (unless]" \
+"--stop[\{value\} Inclusive stop value. Default 100.]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -924,7 +1032,9 @@ _arguments "${_arguments_options[@]}" \
 ;;
 sort-within-records)
 _arguments "${_arguments_options[@]}" \
-"-r[Recursively sort subobjects/submaps, e.g. for JSON input.]" \
+"-f[\{names\} Sort only these keys; others preserve record order.]" \
+"-r[\{regex\} Sort only keys matching this regex; others preserve record order.]" \
+"-n[Sort field names naturally (e.g. 2 before 12). Combines with -f/-r.]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -932,17 +1042,17 @@ _arguments "${_arguments_options[@]}" \
 ;;
 sort)
 _arguments "${_arguments_options[@]}" \
-"-f+[\{comma-separated field names\} Lexical ascending]:field:_mlr_field_names" \
-"-r+[\{comma-separated field names\} Lexical descending]:field:_mlr_field_names" \
-"-c+[\{comma-separated field names\} Case-folded lexical ascending]:field:_mlr_field_names" \
-"-cr+[\{comma-separated field names\} Case-folded lexical descending]:field:_mlr_field_names" \
-"-n+[\{comma-separated field names\} Numerical ascending; nulls sort last]:field:_mlr_field_names" \
-"-nf+[\{comma-separated field names\} Same as -n]:field:_mlr_field_names" \
-"-nr+[\{comma-separated field names\} Numerical descending; nulls sort first]:field:_mlr_field_names" \
-"-t+[\{comma-separated field names\} Natural ascending]:field:_mlr_field_names" \
-"-b[Move sort fields to start of record, as in reorder -b]" \
-"-tr+[\{comma-separated field names\} Natural descending]:field:_mlr_field_names" \
-"-rt+[\{comma-separated field names\} Natural descending]:field:_mlr_field_names" \
+"-f+[\{a,b,c\} Lexical ascending sort on the specified field names.]:field:_mlr_field_names" \
+"-r+[\{a,b,c\} Lexical descending sort on the specified field names.]:field:_mlr_field_names" \
+"-c+[\{a,b,c\} Case-folded lexical ascending sort on the specified field names.]:field:_mlr_field_names" \
+"-cr+[\{a,b,c\} Case-folded lexical descending sort on the specified field]:field:_mlr_field_names" \
+"-n+[\{a,b,c\} Numerical ascending sort on the specified field names; nulls]:field:_mlr_field_names" \
+"-nf+[\{a,b,c\} Same as -n.]:field:_mlr_field_names" \
+"-nr+[\{a,b,c\} Numerical descending sort on the specified field names; nulls]:field:_mlr_field_names" \
+"-t+[\{a,b,c\} Natural ascending sort on the specified field names.]:field:_mlr_field_names" \
+"-b[Move sort fields to start of record, as in reorder -b.]" \
+"-tr+[\{a,b,c\} Natural descending sort on the specified field names.]:field:_mlr_field_names" \
+"-rt+[\{a,b,c\} Natural descending sort on the specified field names.]:field:_mlr_field_names" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -951,7 +1061,7 @@ _arguments "${_arguments_options[@]}" \
 sparsify)
 _arguments "${_arguments_options[@]}" \
 "-s[\{filler string\} What values to remove. Defaults to the empty string.]" \
-"-f+[\{a,b,c\} Specify field names to be operated on; any other fields won\'t be]:field:_mlr_field_names" \
+"-f+[\{a,b,c\} Specify field names to be operated on; any other fields won\'t]:field:_mlr_field_names" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -959,15 +1069,16 @@ _arguments "${_arguments_options[@]}" \
 ;;
 split)
 _arguments "${_arguments_options[@]}" \
-"-n[\{n\}: Cap file sizes at N records.]" \
-"-m[\{m\}: Produce M files, round-robining records among them.]" \
-"-g+[\{a,b,c\}: Write separate files with records having distinct values for fields named a,b,c.]:field:_mlr_field_names" \
-"--prefix[\{p\} Specify filename prefix; default \"split\".]" \
-"--suffix[\{s\} Specify filename suffix; default is from mlr output format, e.g. \"csv\".]" \
-"-a[Append to existing file(s), if any, rather than overwriting.]" \
-"-v[Send records along to downstream verbs as well as splitting to files.]" \
+"-n[\{n\} Cap output file sizes at N records.]" \
+"-m[\{m\} Produce M files, round-robining records among them.]" \
+"-g+[\{a,b,c\} Write separate files with records having distinct values for the]:field:_mlr_field_names" \
+"--prefix[\{p\} Output filename prefix. Default \"split\".]" \
+"--suffix[\{s\} Output filename suffix. Default is from the output format, e.g.]" \
+"--folder[\{f\} Output directory. Default is current directory.]" \
+"-a[Append to existing files rather than overwriting.]" \
+"-v[Send records downstream as well as splitting to files.]" \
 "-e[Do NOT URL-escape names of output files.]" \
-"-j[\{J\} Use string J to join filename parts; default \"_\".]" \
+"-j[\{J\} String used to join filename parts. Default \"_\".]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -975,9 +1086,9 @@ _arguments "${_arguments_options[@]}" \
 ;;
 ssub)
 _arguments "${_arguments_options[@]}" \
-"-f+[\{a,b,c\} Field names to convert.]:field:_mlr_field_names" \
-"-r[\{regex\} Regular expression for field names to convert.]" \
-"-a[Convert all field names.]" \
+"-f+[\{a,b,c\} Field names to apply substitution to.]:field:_mlr_field_names" \
+"-r[\{regex\} Regular expression for field names to apply substitution to.]" \
+"-a[Apply substitution to all fields.]" \
 "-h" \
 "--help" \
 "1:old:" \
@@ -987,16 +1098,18 @@ _arguments "${_arguments_options[@]}" \
 ;;
 stats1)
 _arguments "${_arguments_options[@]}" \
-"-a[\{sum,count,...\} Names of accumulators: one or more of:]" \
-"-f+[\{a,b,c\} Value-field names on which to compute statistics]:field:_mlr_field_names" \
+"-a[\{sum,count,...\} Names of accumulators: one or more of the listed values. Also]" \
+"-f+[\{a,b,c\} Value-field names on which to compute statistics.]:field:_mlr_field_names" \
 "--fr[\{regex\} Regex for value-field names on which to compute statistics]" \
-"--fx[\{regex\} Inverted regex for value-field names on which to compute statistics]" \
-"-g+[\{d,e,f\} Optional group-by-field names]:field:_mlr_field_names" \
-"--gr[\{regex\} Regex for optional group-by-field names]" \
-"--gx[\{regex\} Inverted regex for optional group-by-field names]" \
-"--grfx[\{regex\} Shorthand for --gr \{regex\} --fx \{that same regex\}]" \
-"-i[Use interpolated percentiles, like R\'s type=7; default like type=1.]" \
+"--fx[\{regex\} Inverted regex for value-field names on which to compute]" \
+"-g+[\{d,e,f\} Optional group-by-field names.]:field:_mlr_field_names" \
+"--gr[\{regex\} Regex for optional group-by-field names (group by values in]" \
+"--gx[\{regex\} Inverted regex for optional group-by-field names (group by]" \
+"--grfx[\{regex\} Shorthand for --gr \{regex\} --fx \{that same regex\}.]" \
+"-i[Use interpolated percentiles, like R\'s type=7; default like]" \
 "-s[Print iterative stats. Useful in tail -f contexts, in which]" \
+"-S[No-op flag for backward compatibility with Miller 5.]" \
+"-F[No-op flag for backward compatibility with Miller 5.]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -1004,23 +1117,27 @@ _arguments "${_arguments_options[@]}" \
 ;;
 stats2)
 _arguments "${_arguments_options[@]}" \
-"-a[\{linreg-ols,corr,...\} Names of accumulators: one or more of:]" \
+"-a[\{linreg-ols,corr,...\} Names of accumulators: one or more of the listed]" \
 "-f[\{a,b,c,d\} Value-field name-pairs on which to compute statistics.]" \
 "-g+[\{e,f,g\} Optional group-by-field names.]:field:_mlr_field_names" \
 "-v[Print additional output for linreg-pca.]" \
-"-s[Print iterative stats. Useful in tail -f contexts, in which]" \
-"--fit[Rather than printing regression parameters, applies them to]" \
+"-s[Print iterative stats. Useful in tail -f contexts, in]" \
+"--fit[Rather than printing regression parameters, applies]" \
+"-S[No-op flag for backward compatibility with Miller 5.]" \
+"-F[No-op flag for backward compatibility with Miller 5.]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
 step)
 _arguments "${_arguments_options[@]}" \
-"-a[\{delta,rsum,...\} Names of steppers: comma-separated, one or more of:]" \
-"-f+[\{a,b,c\} Value-field names on which to compute statistics]:field:_mlr_field_names" \
-"-g+[\{d,e,f\} Optional group-by-field names]:field:_mlr_field_names" \
-"-F[Computes integerable things (e.g. counter) in floating point.]" \
+"-a[\{delta,rsum,...\} Names of steppers: comma-separated, one or more of the]" \
+"-f+[\{a,b,c\} Value-field names on which to compute statistics.]:field:_mlr_field_names" \
+"-g+[\{d,e,f\} Optional group-by-field names.]:field:_mlr_field_names" \
+"-F[Computes integerable things (e.g. counter) in floating]" \
 "-d+[\{x,y,z\} Weights for EWMA. 1 means current sample gets all weight (no]:field:_mlr_field_names" \
-"-o+[\{a,b,c\} Custom suffixes for EWMA output fields. If omitted, these default to]:field:_mlr_field_names" \
+"-o+[\{a,b,c\} Custom suffixes for EWMA output fields. If omitted, these]:field:_mlr_field_names" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -1028,9 +1145,9 @@ _arguments "${_arguments_options[@]}" \
 ;;
 sub)
 _arguments "${_arguments_options[@]}" \
-"-f+[\{a,b,c\} Field names to convert.]:field:_mlr_field_names" \
-"-r[\{regex\} Regular expression for field names to convert.]" \
-"-a[Convert all field names.]" \
+"-f+[\{a,b,c\} Field names to apply substitution to.]:field:_mlr_field_names" \
+"-r[\{regex\} Regular expression for field names to apply substitution to.]" \
+"-a[Apply substitution to all fields.]" \
 "-h" \
 "--help" \
 "1:old:" \
@@ -1041,9 +1158,9 @@ _arguments "${_arguments_options[@]}" \
 summary)
 _arguments "${_arguments_options[@]}" \
 "-a[\{mean,sum,etc.\} Use only the specified summarizers.]" \
-"-x[\{mean,sum,etc.\} Use all summarizers, except the specified ones.]" \
+"-x[\{mean,sum,etc.\} Use all summarizers except the specified ones.]" \
 "--all[Use all available summarizers.]" \
-"--transpose[Show output with field names as column names..]" \
+"--transpose[Show output with field names as column names.]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -1053,7 +1170,8 @@ surv)
 _arguments "${_arguments_options[@]}" \
 "-d[\{field\} Name of duration field (time-to-event or censoring).]" \
 "-s[\{field\} Name of status field (0=censored, 1=event).]" \
-"-h,[--help Show this message.]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
@@ -1066,8 +1184,8 @@ _arguments "${_arguments_options[@]}" \
 ;;
 tail)
 _arguments "${_arguments_options[@]}" \
-"-g+[\{a,b,c\} Optional group-by-field names for head counts, e.g. a,b,c.]:field:_mlr_field_names" \
-"-n[\{n\} Head-count to print. Default 10.]" \
+"-g+[\{a,b,c\} Optional group-by-field names for tail counts, e.g. a,b,c.]:field:_mlr_field_names" \
+"-n[\{n\} Tail-count to print. Default 10. A leading \'+\' means start at the nth]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -1084,9 +1202,9 @@ _arguments "${_arguments_options[@]}" \
 ;;
 template)
 _arguments "${_arguments_options[@]}" \
-"-f+[\{a,b,c\} Comma-separated field names for template, e.g. a,b,c.]:field:_mlr_field_names" \
-"-t[\{filename\} CSV file whose header line will be used for template.\]:filename:_file]" \
-"--fill-with[\{filler string\} What to fill absent fields with. Defaults to the empty string.]" \
+"-f+[\{a,b,c\} Comma-separated field names for template, e.g.]:field:_mlr_field_names" \
+"-t[\{filename\} CSV file whose header line will be used for\]:filename:_file]" \
+"--fill-with[\{filler string\} What to fill absent fields with. Defaults to the]" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -1110,10 +1228,13 @@ _arguments "${_arguments_options[@]}" \
 "-f+[\{a,b,c\} Value-field names for top counts.]:field:_mlr_field_names" \
 "-g+[\{d,e,f\} Optional group-by-field names for top counts.]:field:_mlr_field_names" \
 "-n[\{count\} How many records to print per category; default 1.]" \
-"-a[Print all fields for top-value records; default is]" \
+"-a[Print all fields for top-value records; default is to print only]" \
+"--max[Print top largest values. This is the default.]" \
 "--min[Print top smallest values; default is top largest values.]" \
-"-F[Keep top values as floats even if they look like integers.]" \
-"-o[\{name\} Field name for output indices. Default \"top_idx\".]" \
+"-F[Keep top values as floats even if they look like integers (ignored in]" \
+"-o[\{name\} Field name for output indices. Default \"top_idx\". Ignored if -a is]" \
+"-h" \
+"--help" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
@@ -1134,19 +1255,22 @@ _arguments "${_arguments_options[@]}" \
 ;;
 uniq)
 _arguments "${_arguments_options[@]}" \
-"-g+[\{d,e,f\} Group-by-field names for uniq counts.]:field:_mlr_field_names" \
-"-x+[\{a,b,c\} Field names to exclude for uniq: use each record\'s others instead.]:field:_mlr_field_names" \
+"-g+[\{d,e,f\} Group-by field names for uniq counts.]:field:_mlr_field_names" \
+"-f+[\{d,e,f\} Synonym for -g.]:field:_mlr_field_names" \
+"-x+[\{a,b,c\} Field names to exclude for uniq; use each record\'s other fields]:field:_mlr_field_names" \
 "-c[Show repeat counts in addition to unique values.]" \
 "-n[Show only the number of distinct values.]" \
 "-o[\{name\} Field name for output count. Default \"count\".]" \
-"-a[Output each unique record only once. Incompatible with -g.]" \
+"-a[Output each unique record only once. Incompatible with -g. With -c,]" \
+"-h" \
+"--help" \
 "-f+[\{d,e,f\} Synonym for -g.]:field:_mlr_field_names" \
 "*:filename or chain:_mlr_files_or_chain" \
 && ret=0
 ;;
 unspace)
 _arguments "${_arguments_options[@]}" \
-"-f[\{x\} Replace spaces with specified filler character.]" \
+"-f[\{x\} Replace spaces with specified filler character. Default \"_\".]" \
 "-k[Unspace only keys, not keys and values.]" \
 "-v[Unspace only values, not keys and values.]" \
 "-h" \
@@ -1156,8 +1280,8 @@ _arguments "${_arguments_options[@]}" \
 ;;
 unsparsify)
 _arguments "${_arguments_options[@]}" \
-"--fill-with[\{filler string\} What to fill absent fields with. Defaults to]" \
-"-f+[\{a,b,c\} Specify field names to be operated on. Any other fields won\'t be]:field:_mlr_field_names" \
+"--fill-with[\{filler string\} What to fill absent fields with. Defaults to the]" \
+"-f+[\{a,b,c\} Specify field names to be operated on; others are]:field:_mlr_field_names" \
 "-h" \
 "--help" \
 "*:filename or chain:_mlr_files_or_chain" \
@@ -1196,6 +1320,7 @@ case "$state" in
 "format-conversion-keystroke-saver-flags" \
 "json-only-flags" \
 "legacy-flags" \
+"markdown-only-flags" \
 "miscellaneous-flags" \
 "output-colorization-flags" \
 "pprint-only-flags" \
@@ -1249,24 +1374,25 @@ _mlr_commands() {
 "bootstrap:Emits an n-sample, with replacement, of the input records. See also mlr sample and mlr shuffle." \
 "case:Uppercases strings in record keys and/or values." \
 "cat:Passes input records directly to output. Most useful for format conversion." \
-"check:Consumes records without printing any output, Useful for doing a well-formatted check on input data. with the exception that warnings are printed to stderr. Current checks are: * Data are parseable * If any key is the empty string" \
+"check:Consumes records without printing any output, with the exception that warnings are printed to stderr. Useful for doing a well-formatted check on input data. Current checks are: * Data are parseable * If any key is the empty string" \
 "clean-whitespace:For each record, for each field in the record, whitespace-cleans the keys and/or values. Whitespace-cleaning entails stripping leading and trailing whitespace, and replacing multiple whitespace with singles. For finer-grained control, please see the DSL functions lstrip, rstrip, strip, collapse_whitespace, and clean_whitespace." \
 "count-distinct:Prints number of records having distinct values for specified field names. Same as uniq -c." \
 "count-similar:Ingests all records, then emits each record augmented by a count of the number of other records having the same group-by field values." \
 "count:Prints number of records, optionally grouped by distinct values for specified field names." \
 "cut:Passes through input records with specified fields included/excluded." \
 "decimate:Passes through one of every n records, optionally by category." \
+"describe:Shows a compact schema for the input data: field names, types, and value shape. Emits one output record per input field, with types seen, counts, cardinality, min/max, and (for low-cardinality fields) the complete set of distinct values." \
 "fill-down:If a given record has a missing value for a given field, fill that from the corresponding value from a previous record, if any. By default, a 'missing' field either is absent, or has the empty-string value. With -a, a field is 'missing' only if it is absent." \
 "fill-empty:Fills empty-string fields with specified fill-value." \
 "filter:Lets you use a domain-specific language to programmatically filter which stream records will be output. See also: https://miller.readthedocs.io/en/latest/reference-verbs" \
 "flatten:Flattens multi-level maps to single-level ones. Example: field with name 'a' and value '{\"b\": { \"c\": 4 }}' becomes name 'a.b.c' and value 4." \
 "format-values:Applies format strings to all field values, depending on autodetected type. * If a field value is detected to be integer, applies integer format. * Else, if a field value is detected to be float, applies float format. * Else, applies string format." \
 "fraction:For each record's value in specified fields, computes the ratio of that value to the sum of values in that field over all input records. E.g. with input records  x=1  x=2  x=3  and  x=4, emits output records x=1,x_fraction=0.1  x=2,x_fraction=0.2  x=3,x_fraction=0.3  and  x=4,x_fraction=0.4" \
-"gap:Emits an empty record every n records, or when certain values change." \
+"gap:Emits an empty record every n records, or when certain values change. One of -n or -g is required." \
 "grep:Passes through records which match the regular expression." \
-"group-by:Outputs records in batches having identical values at specified field names.Options:" \
+"group-by:Outputs records in batches having identical values at specified field names." \
 "group-like:Outputs records in batches having identical field names." \
-"gsub:Replaces old string with new string in specified field(s), with regex support for the old string and handling multiple matches, like the \`gsub\` DSL function. See also the \`sub\` and \`ssub\` verbs." \
+"gsub:Replaces old string with new string in specified field(s), with regex support for the old string and handling multiple matches, like the \`gsub\` DSL function. The replacement string supports C-style backslash escapes such as \n, \t, and \x1f. Write \\ to get a literal backslash. See also the \`sub\` and \`ssub\` verbs." \
 "having-fields:Conditionally passes through records depending on each record's field names." \
 "head:Passes through the first n records, optionally by category. Without -g, ceases consuming more input (i.e. is fast) when n records have been read." \
 "help:{topic} Print help documention." \
@@ -1294,19 +1420,19 @@ _mlr_commands() {
 "reshape:" \
 "sample:Reservoir sampling (subsampling without replacement), optionally by category. See also mlr bootstrap and mlr shuffle." \
 "sec2gmt:Replaces a numeric field representing seconds since the epoch with the corresponding GMT timestamp; leaves non-numbers as-is. This is nothing more than a keystroke-saver for the sec2gmt function:   mlr sec2gmt time1,time2 is the same as   mlr put '$time1 = sec2gmt($time1); $time2 = sec2gmt($time2)'" \
-"sec2gmtdate:Replaces a numeric field representing seconds since the epoch with the corresponding GMT year-month-day timestamp; leaves non-numbers as-is. This is nothing more than a keystroke-saver for the sec2gmtdate function:   ../c/mlr sec2gmtdate time1,time2 is the same as   ../c/mlr put '$time1=sec2gmtdate($time1);$time2=sec2gmtdate($time2)'" \
-"seqgen:Passes input records directly to output. Most useful for format conversion. Produces a sequence of counters.  Discards the input record stream. Produces output as specified by the options" \
+"sec2gmtdate:Replaces a numeric field representing seconds since the epoch with the corresponding GMT year-month-day timestamp; leaves non-numbers as-is. This is nothing more than a keystroke-saver for the sec2gmtdate function:   mlr sec2gmtdate time1,time2 is the same as   mlr put '$time1=sec2gmtdate($time1);$time2=sec2gmtdate($time2)'" \
+"seqgen:Produces a sequence of counters.  Discards the input record stream. Produces output as specified by the options." \
 "shuffle:Outputs records randomly permuted. No output records are produced until all input records are read. See also mlr bootstrap and mlr sample." \
 "skip-trivial-records:Passes through all records except those with zero fields, or those for which all fields have empty value." \
 "sort-within-records:Outputs records sorted lexically ascending by keys." \
 "sort:Sorts records primarily by the first specified field, secondarily by the second field, and so on.  (Any records not having all specified sort keys will appear at the end of the output, in the order they were encountered, regardless of the specified sort order.) The sort is stable: records that compare equal will sort in the order they were encountered in the input record stream." \
 "sparsify:Unsets fields for which the key is the empty string (or, optionally, another specified value). Only makes sense with output format not being CSV or TSV." \
 "split:" \
-"ssub:Replaces old string with new string in specified field(s), without regex support for the old string, like the \`ssub\` DSL function. See also the \`gsub\` and \`sub\` verbs." \
+"ssub:Replaces old string with new string in specified field(s), without regex support for the old string, like the \`ssub\` DSL function. Both the search and replacement strings support C-style backslash escapes such as \n, \t, and \x1f. Write \\ to get a literal backslash. See also the \`gsub\` and \`sub\` verbs." \
 "stats1:Computes univariate statistics for one or more given fields, accumulated across the input record stream." \
 "stats2:Computes bivariate statistics for one or more given field-name pairs, accumulated across the input record stream." \
 "step:Computes values dependent on earlier/later records, optionally grouped by category." \
-"sub:Replaces old string with new string in specified field(s), with regex support for the old string and not handling multiple matches, like the \`sub\` DSL function. See also the \`gsub\` and \`ssub\` verbs." \
+"sub:Replaces old string with new string in specified field(s), with regex support for the old string and not handling multiple matches, like the \`sub\` DSL function. The replacement string supports C-style backslash escapes such as \n, \t, and \x1f. Write \\ to get a literal backslash. See also the \`gsub\` and \`ssub\` verbs." \
 "summary:Show summary statistics about the input data." \
 "surv:" \
 "tac:Prints records in reverse order from the order in which they were encountered." \
@@ -1314,13 +1440,13 @@ _mlr_commands() {
 "tee:" \
 "template:Places input-record fields in the order specified by list of column names. If the input record is missing a specified field, it will be filled with the fill-with. If the input record possesses an unspecified field, it will be discarded." \
 "termcvt:" \
-"top:Prints the n records with smallest/largest values at specified fields, optionally by category. If -a is given, then the top records are emitted with the same fields as they appeared in the input. Without -a, only fields from -f, fields from -g, and the top-index field are emitted. For more information please see https://miller.readthedocs.io/en/latest/reference-verbs#top" \
+"top:Options: Prints the n records with smallest/largest values at specified fields, optionally by category. If -a is given, then the top records are emitted with the same fields as they appeared in the input. Without -a, only fields from -f, fields from -g, and the top-index field are emitted. For more information please see https://miller.readthedocs.io/en/latest/reference-verbs#top" \
 "unflatten:Reverses flatten. Example: field with name 'a.b.c' and value 4 becomes name 'a' and value '{\"b\": { \"c\": 4 }}'." \
 "unhex:" \
 "uniq:Prints distinct values for specified field names. With -c, same as count-distinct. For uniq, -f is a synonym for -g." \
 "unspace:Replaces spaces in record keys and/or values with _. This is helpful for PPRINT output." \
 "unsparsify:Prints records with the union of field names over all input records. For field names absent in a given record but present in others, fills in a value. This verb retains all input before producing any output." \
-"utf8-to-latin1:Recursively converts record strings from Latin-1 to UTF-8. For field-level control, please see the utf8_to_latin1 DSL function." \
+"utf8-to-latin1:Recursively converts record strings from UTF-8 to Latin-1. For field-level control, please see the utf8_to_latin1 DSL function." \
 "version:mlr version 6.4.0 for darwin/arm64/go1.19" \
     )
     _describe -t commands 'mlr commands' commands "$@"

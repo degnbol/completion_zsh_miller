@@ -4,24 +4,25 @@ bar:Replaces a numeric field with a number of asterisks, allowing for cheesy bar
 bootstrap:Emits an n-sample, with replacement, of the input records. See also mlr sample and mlr shuffle.
 case:Uppercases strings in record keys and/or values.
 cat:Passes input records directly to output. Most useful for format conversion.
-check:Consumes records without printing any output, Useful for doing a well-formatted check on input data. with the exception that warnings are printed to stderr. Current checks are: * Data are parseable * If any key is the empty string
+check:Consumes records without printing any output, with the exception that warnings are printed to stderr. Useful for doing a well-formatted check on input data. Current checks are: * Data are parseable * If any key is the empty string
 clean-whitespace:For each record, for each field in the record, whitespace-cleans the keys and/or values. Whitespace-cleaning entails stripping leading and trailing whitespace, and replacing multiple whitespace with singles. For finer-grained control, please see the DSL functions lstrip, rstrip, strip, collapse_whitespace, and clean_whitespace.
 count-distinct:Prints number of records having distinct values for specified field names. Same as uniq -c.
 count-similar:Ingests all records, then emits each record augmented by a count of the number of other records having the same group-by field values.
 count:Prints number of records, optionally grouped by distinct values for specified field names.
 cut:Passes through input records with specified fields included/excluded.
 decimate:Passes through one of every n records, optionally by category.
+describe:Shows a compact schema for the input data: field names, types, and value shape. Emits one output record per input field, with types seen, counts, cardinality, min/max, and (for low-cardinality fields) the complete set of distinct values.
 fill-down:If a given record has a missing value for a given field, fill that from the corresponding value from a previous record, if any. By default, a 'missing' field either is absent, or has the empty-string value. With -a, a field is 'missing' only if it is absent.
 fill-empty:Fills empty-string fields with specified fill-value.
 filter:Lets you use a domain-specific language to programmatically filter which stream records will be output. See also: https://miller.readthedocs.io/en/latest/reference-verbs
 flatten:Flattens multi-level maps to single-level ones. Example: field with name 'a' and value '{"b": { "c": 4 }}' becomes name 'a.b.c' and value 4.
 format-values:Applies format strings to all field values, depending on autodetected type. * If a field value is detected to be integer, applies integer format. * Else, if a field value is detected to be float, applies float format. * Else, applies string format.
 fraction:For each record's value in specified fields, computes the ratio of that value to the sum of values in that field over all input records. E.g. with input records  x=1  x=2  x=3  and  x=4, emits output records x=1,x_fraction=0.1  x=2,x_fraction=0.2  x=3,x_fraction=0.3  and  x=4,x_fraction=0.4
-gap:Emits an empty record every n records, or when certain values change.
+gap:Emits an empty record every n records, or when certain values change. One of -n or -g is required.
 grep:Passes through records which match the regular expression.
-group-by:Outputs records in batches having identical values at specified field names.Options:
+group-by:Outputs records in batches having identical values at specified field names.
 group-like:Outputs records in batches having identical field names.
-gsub:Replaces old string with new string in specified field(s), with regex support for the old string and handling multiple matches, like the `gsub` DSL function. See also the `sub` and `ssub` verbs.
+gsub:Replaces old string with new string in specified field(s), with regex support for the old string and handling multiple matches, like the `gsub` DSL function. The replacement string supports C-style backslash escapes such as \n, \t, and \x1f. Write \\ to get a literal backslash. See also the `sub` and `ssub` verbs.
 having-fields:Conditionally passes through records depending on each record's field names.
 head:Passes through the first n records, optionally by category. Without -g, ceases consuming more input (i.e. is fast) when n records have been read.
 help:{topic} Print help documention.
@@ -49,19 +50,19 @@ repl:
 reshape:
 sample:Reservoir sampling (subsampling without replacement), optionally by category. See also mlr bootstrap and mlr shuffle.
 sec2gmt:Replaces a numeric field representing seconds since the epoch with the corresponding GMT timestamp; leaves non-numbers as-is. This is nothing more than a keystroke-saver for the sec2gmt function:   mlr sec2gmt time1,time2 is the same as   mlr put '$time1 = sec2gmt($time1); $time2 = sec2gmt($time2)'
-sec2gmtdate:Replaces a numeric field representing seconds since the epoch with the corresponding GMT year-month-day timestamp; leaves non-numbers as-is. This is nothing more than a keystroke-saver for the sec2gmtdate function:   ../c/mlr sec2gmtdate time1,time2 is the same as   ../c/mlr put '$time1=sec2gmtdate($time1);$time2=sec2gmtdate($time2)'
-seqgen:Passes input records directly to output. Most useful for format conversion. Produces a sequence of counters.  Discards the input record stream. Produces output as specified by the options
+sec2gmtdate:Replaces a numeric field representing seconds since the epoch with the corresponding GMT year-month-day timestamp; leaves non-numbers as-is. This is nothing more than a keystroke-saver for the sec2gmtdate function:   mlr sec2gmtdate time1,time2 is the same as   mlr put '$time1=sec2gmtdate($time1);$time2=sec2gmtdate($time2)'
+seqgen:Produces a sequence of counters.  Discards the input record stream. Produces output as specified by the options.
 shuffle:Outputs records randomly permuted. No output records are produced until all input records are read. See also mlr bootstrap and mlr sample.
 skip-trivial-records:Passes through all records except those with zero fields, or those for which all fields have empty value.
 sort-within-records:Outputs records sorted lexically ascending by keys.
 sort:Sorts records primarily by the first specified field, secondarily by the second field, and so on.  (Any records not having all specified sort keys will appear at the end of the output, in the order they were encountered, regardless of the specified sort order.) The sort is stable: records that compare equal will sort in the order they were encountered in the input record stream.
 sparsify:Unsets fields for which the key is the empty string (or, optionally, another specified value). Only makes sense with output format not being CSV or TSV.
 split:
-ssub:Replaces old string with new string in specified field(s), without regex support for the old string, like the `ssub` DSL function. See also the `gsub` and `sub` verbs.
+ssub:Replaces old string with new string in specified field(s), without regex support for the old string, like the `ssub` DSL function. Both the search and replacement strings support C-style backslash escapes such as \n, \t, and \x1f. Write \\ to get a literal backslash. See also the `gsub` and `sub` verbs.
 stats1:Computes univariate statistics for one or more given fields, accumulated across the input record stream.
 stats2:Computes bivariate statistics for one or more given field-name pairs, accumulated across the input record stream.
 step:Computes values dependent on earlier/later records, optionally grouped by category.
-sub:Replaces old string with new string in specified field(s), with regex support for the old string and not handling multiple matches, like the `sub` DSL function. See also the `gsub` and `ssub` verbs.
+sub:Replaces old string with new string in specified field(s), with regex support for the old string and not handling multiple matches, like the `sub` DSL function. The replacement string supports C-style backslash escapes such as \n, \t, and \x1f. Write \\ to get a literal backslash. See also the `gsub` and `ssub` verbs.
 summary:Show summary statistics about the input data.
 surv:
 tac:Prints records in reverse order from the order in which they were encountered.
@@ -69,11 +70,11 @@ tail:Passes through the last n records, optionally by category.
 tee:
 template:Places input-record fields in the order specified by list of column names. If the input record is missing a specified field, it will be filled with the fill-with. If the input record possesses an unspecified field, it will be discarded.
 termcvt:
-top:Prints the n records with smallest/largest values at specified fields, optionally by category. If -a is given, then the top records are emitted with the same fields as they appeared in the input. Without -a, only fields from -f, fields from -g, and the top-index field are emitted. For more information please see https://miller.readthedocs.io/en/latest/reference-verbs#top
+top:Options: Prints the n records with smallest/largest values at specified fields, optionally by category. If -a is given, then the top records are emitted with the same fields as they appeared in the input. Without -a, only fields from -f, fields from -g, and the top-index field are emitted. For more information please see https://miller.readthedocs.io/en/latest/reference-verbs#top
 unflatten:Reverses flatten. Example: field with name 'a.b.c' and value 4 becomes name 'a' and value '{"b": { "c": 4 }}'.
 unhex:
 uniq:Prints distinct values for specified field names. With -c, same as count-distinct. For uniq, -f is a synonym for -g.
 unspace:Replaces spaces in record keys and/or values with _. This is helpful for PPRINT output.
 unsparsify:Prints records with the union of field names over all input records. For field names absent in a given record but present in others, fills in a value. This verb retains all input before producing any output.
-utf8-to-latin1:Recursively converts record strings from Latin-1 to UTF-8. For field-level control, please see the utf8_to_latin1 DSL function.
+utf8-to-latin1:Recursively converts record strings from UTF-8 to Latin-1. For field-level control, please see the utf8_to_latin1 DSL function.
 version:mlr version 6.4.0 for darwin/arm64/go1.19

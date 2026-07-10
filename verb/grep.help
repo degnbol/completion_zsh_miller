@@ -1,9 +1,9 @@
 Usage: mlr grep [options] {regular expression}
 Passes through records which match the regular expression.
 Options:
--i  Use case-insensitive search.
--v  Invert: pass through records which do not match the regex.
--a  Only grep for values, not keys and values.
+-i        Use case-insensitive search.
+-v        Invert: pass through records which do not match the regex.
+-a        Only grep for values, not keys and values.
 -h|--help Show this message.
 Note that "mlr filter" is more powerful, but requires you to know field names.
 By contrast, "mlr grep" allows you to regex-match the entire record. It does this

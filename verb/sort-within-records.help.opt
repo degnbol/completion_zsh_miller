@@ -1,3 +1,5 @@
--r[Recursively sort subobjects/submaps, e.g. for JSON input.]
+-f[{names} Sort only these keys; others preserve record order.]
+-r[{regex} Sort only keys matching this regex; others preserve record order.]
+-n[Sort field names naturally (e.g. 2 before 12). Combines with -f/-r.]
 -h
 --help

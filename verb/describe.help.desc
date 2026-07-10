@@ -1,0 +1,3 @@
+Shows a compact schema for the input data: field names, types, and value shape.
+Emits one output record per input field, with types seen, counts, cardinality,
+min/max, and (for low-cardinality fields) the complete set of distinct values.

@@ -1,3 +1,9 @@
 -i[{input field names} -o {key-field name,value-field name}]
 -r[{input field regex} -o {key-field name,value-field name}]
 -s[{key-field name,value-field name}]
+-i[{input field names} Input field names for wide-to-long reshape.]
+-r[{input field regex} Input field regex for wide-to-long reshape.]
+-o[{key-field name,value-field name} Output key-field and value-field names for]
+-s[{key-field name,value-field name} Key-field and value-field names for]
+-h
+--help

@@ -1,7 +1,12 @@
--a[{sum,count,...} Names of accumulators. One or more of:]
--f[{a,b,c} Value-field names on which to compute statistics. Requires -o.]
+-a[{sum,count,...} Names of accumulators: one or more of the accumulators listed]
+-f[{a,b,c} Value-field names on which to compute statistics. Requires]
+-o.
 -r[{a,b,c} Regular expressions for value-field names on which to compute]
--c[{a,b,c} Substrings for collapse mode. All fields which have the same names]
--i[Use interpolated percentiles, like R\'s type=7; default like type=1.]
+-c[{a,b,c} Substrings for collapse mode: all fields which have the same]
+-i[Use interpolated percentiles, like R\'s type=7; default like]
 -o[{name} Output field basename for -f/-r.]
--k[Keep the input fields which contributed to the output statistics;]
+-k[Keep the input fields which contributed to the output]
+-S[No-op flag for backward compatibility with Miller 5.]
+-F[No-op flag for backward compatibility with Miller 5.]
+-h
+--help

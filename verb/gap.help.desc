@@ -1,1 +1,2 @@
 Emits an empty record every n records, or when certain values change.
+One of -n or -g is required.

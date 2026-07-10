@@ -1,0 +1,4 @@
+-n[{n} List a field\'s distinct values only if it has at most {n} of]
+--max-values[{n} List a field\'s distinct values only if it has at most {n} of]
+-h
+--help

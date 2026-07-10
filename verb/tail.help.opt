@@ -1,4 +1,4 @@
--g[{a,b,c} Optional group-by-field names for head counts, e.g. a,b,c.]
--n[{n} Head-count to print. Default 10.]
+-g[{a,b,c} Optional group-by-field names for tail counts, e.g. a,b,c.]
+-n[{n} Tail-count to print. Default 10. A leading \'+\' means start at the nth]
 -h
 --help

@@ -1,6 +1,8 @@
 Usage: mlr tail [options]
 Passes through the last n records, optionally by category.
 Options:
--g {a,b,c} Optional group-by-field names for head counts, e.g. a,b,c.
--n {n} Head-count to print. Default 10.
--h|--help Show this message.
+-g {a,b,c} Optional group-by-field names for tail counts, e.g. a,b,c.
+-n {n}     Tail-count to print. Default 10. A leading '+' means start at the nth
+           record rather than print the last n: e.g. -n +3 passes through all
+           but the first 2 records, optionally by category.
+-h|--help  Show this message.

@@ -1,7 +1,10 @@
--g[{d,e,f} Group-by-field names for uniq counts.]
--x[{a,b,c} Field names to exclude for uniq: use each record\'s others instead.]
+-g[{d,e,f} Group-by field names for uniq counts.]
+-f[{d,e,f} Synonym for -g.]
+-x[{a,b,c} Field names to exclude for uniq; use each record\'s other fields]
 -c[Show repeat counts in addition to unique values.]
 -n[Show only the number of distinct values.]
 -o[{name} Field name for output count. Default "count".]
--a[Output each unique record only once. Incompatible with -g.]
+-a[Output each unique record only once. Incompatible with -g. With -c,]
+-h
+--help
 -f[{d,e,f} Synonym for -g.]

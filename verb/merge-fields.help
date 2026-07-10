@@ -2,7 +2,25 @@ Usage: mlr merge-fields [options]
 Computes univariate statistics for each input record, accumulated across
 specified fields.
 Options:
--a {sum,count,...}  Names of accumulators. One or more of:
+-a {sum,count,...} Names of accumulators: one or more of the accumulators listed
+                   below.
+-f {a,b,c}         Value-field names on which to compute statistics. Requires
+                   -o.
+-r {a,b,c}         Regular expressions for value-field names on which to compute
+                   statistics. Requires -o.
+-c {a,b,c}         Substrings for collapse mode: all fields which have the same
+                   names after removing substrings will be accumulated together.
+                   Please see examples below.
+-i                 Use interpolated percentiles, like R's type=7; default like
+                   type=1. Not sensical for string-valued fields.
+-o {name}          Output field basename for -f/-r.
+-k                 Keep the input fields which contributed to the output
+                   statistics; the default is to omit them.
+-S                 No-op flag for backward compatibility with Miller 5.
+-F                 No-op flag for backward compatibility with Miller 5.
+-h|--help          Show this message.
+
+Accumulators for -a:
   count    Count instances of fields
   null_count Count number of empty-string/JSON-null instances per field
   distinct_count Count number of distinct values per field
@@ -20,17 +38,6 @@ Options:
   max      Compute maximum values of specified fields
   minlen   Compute minimum string-lengths of specified fields
   maxlen   Compute maximum string-lengths of specified fields
--f {a,b,c}  Value-field names on which to compute statistics. Requires -o.
--r {a,b,c}  Regular expressions for value-field names on which to compute
-            statistics. Requires -o.
--c {a,b,c}  Substrings for collapse mode. All fields which have the same names
-            after removing substrings will be accumulated together. Please see
-            examples below.
--i          Use interpolated percentiles, like R's type=7; default like type=1.
-            Not sensical for string-valued fields.
--o {name}   Output field basename for -f/-r.
--k          Keep the input fields which contributed to the output statistics;
-            the default is to omit them.
 
 String-valued data make sense unless arithmetic on them is required,
 e.g. for sum, mean, interpolated percentiles, etc. In case of mixed data,

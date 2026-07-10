@@ -1,12 +1,19 @@
 Usage: mlr having-fields [options]
 Conditionally passes through records depending on each record's field names.
 Options:
-  --at-least      {comma-separated names}
-  --which-are     {comma-separated names}
-  --at-most       {comma-separated names}
-  --all-matching  {regular expression}
-  --any-matching  {regular expression}
-  --none-matching {regular expression}
+--at-least {comma-separated names}   Pass records that have at least these field
+                                     names.
+--which-are {comma-separated names}  Pass records whose field names are exactly
+                                     these.
+--at-most {comma-separated names}    Pass records that have at most these field
+                                     names.
+--all-matching {regular expression}  Pass records where all field names match
+                                     the regex.
+--any-matching {regular expression}  Pass records where any field name matches
+                                     the regex.
+--none-matching {regular expression} Pass records where no field name matches
+                                     the regex.
+-h|--help                            Show this message.
 Examples:
   mlr having-fields --which-are amount,status,owner
   mlr having-fields --any-matching 'sda[0-9]'

@@ -1,3 +1,3 @@
--n[Number of samples to output. Defaults to number of input records.]
+-n[{n} Number of samples to output. Defaults to number of input records. Must]
 -h
 --help

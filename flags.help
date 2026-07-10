@@ -36,8 +36,10 @@
 -c[Use CSV format for input and output data.]
 --c2c[Use CSV format for input and output data.]
 --csvlite[Use CSV-lite format for input and output data.]
+--dcf[Use Debian control file (DCF) format for input and…]
 --dkvp[Use DKVP format for input and output data.]
 --d2d[Use DKVP format for input and output data.]
+--dkvpx[Use DKVPX format for input and output data.]
 --gen-field-name[Specify field name for --igen. Defaults to "i".]
 --gen-start[Specify start value for --igen. Defaults to 1.]
 --gen-step[Specify step value for --igen. Defaults to 1.]
@@ -46,6 +48,7 @@
 --iasvlite[Use ASV format for input data.]
 --icsv[Use CSV format for input data.]
 --icsvlite[Use CSV-lite format for input data.]
+--idcf[Use Debian control file (DCF) format for input data.]
 --idkvp[Use DKVP format for input data.]
 --igen[Ignore input files and instead generate sequential…]
 --ijson[Use JSON format for input data.]
@@ -60,17 +63,21 @@
 --iusv[Use USV format for input data.]
 --iusvlite[Use USV format for input data.]
 --ixtab[Use XTAB format for input data.]
+--iyaml[Use YAML format for input data.]
 --json[Use JSON format for input and output data.]
 -j[Use JSON format for input and output data.]
 --j2j[Use JSON format for input and output data.]
 --jsonl[Use JSON Lines format for input and output data.]
 --l2l[Use JSON Lines format for input and output data.]
+--md[Use markdown-tabular format for input and output…]
+--markdown[Use markdown-tabular format for input and output…]
 --nidx[Use NIDX format for input and output data.]
 --n2n[Use NIDX format for input and output data.]
 --oasv[Use ASV format for output data.]
 --oasvlite[Use ASV format for output data.]
 --ocsv[Use CSV format for output data.]
 --ocsvlite[Use CSV-lite format for output data.]
+--odcf[Use Debian control file (DCF) format for output data.]
 --odkvp[Use DKVP format for output data.]
 --ojson[Use JSON format for output data.]
 --ojsonl[Use JSON Lines format for output data.]
@@ -83,6 +90,7 @@
 --ousv[Use USV format for output data.]
 --ousvlite[Use USV format for output data.]
 --oxtab[Use XTAB format for output data.]
+--oyaml[Use YAML format for output data.]
 --pprint[Use PPRINT format for input and output data.]
 --p2p[Use PPRINT format for input and output data.]
 --tsv[Use TSV format for input and output data.]
@@ -94,6 +102,8 @@
 --xtab[Use XTAB format for input and output data.]
 --x2x[Use XTAB format for input and output data.]
 --xvright[Right-justify values for XTAB format.]
+--yaml[Use YAML format for input and output data.]
+--y2y[Use YAML format for input and output data.]
 -i[{format name} Use format name for input data. For example: `-i csv`…]
 -o[{format name} Use format name for output data. For example: `-o…]
 --flatsep[{string}]
@@ -108,6 +118,9 @@
 --jvstack[Put one key-value pair per line for JSON output…]
 --no-jlistwrap[Do not wrap JSON output in outermost `\[ \]`. This is…]
 --no-jvstack[Put objects/arrays all on one line for JSON output.]
+--no-yarray[Do not wrap YAML output in a single array document;…]
+--yarray[Wrap YAML output in a single top-level array…]
+--ya[Wrap YAML output in a single top-level array…]
 --jknquoteint[Type information from JSON input files is now…]
 --jquoteall[Type information from JSON input files is now…]
 --json-fatal-arrays-on-input
@@ -122,6 +135,11 @@
 --quote-numeric[Ignored as of version 6. Types are inferred/retained…]
 --quote-original[Ignored as of version 6. Types are inferred/retained…]
 --vflatsep[Ignored as of version 6. This functionality is…]
+--md-aligned
+--markdown-aligned
+--omd-aligned
+--omarkdown-aligned
+--errors-json[Emit parse errors as a JSON object to stderr instead…]
 --fflush[Force buffered output to be written after every…]
 --files[{filename} Use this to specify a file which itself contains, one…]
 --from[{filename} Use this to specify an input file before the verb(s),…]: :->from_file
@@ -138,6 +156,7 @@
 --no-dedupe-field-names[By default, if an input record has a field named `x`…]
 --no-fflush[Let buffered output not be written after every output…]
 --no-hash-records[See --hash-records.]
+--no-shell[Disable Miller's ability to run external commands:…]
 --norc[Do not load a .mlrrc file.]
 --nr-progress-mod[{m} With m a positive integer: print filename and record…]
 --ofmt[{format} E.g. `%.18f`, `%.0f`, `%9.6e`. Please use…]
@@ -166,6 +185,9 @@
 --barred
 --barred-output
 --barred-input[When used in conjunction with --pprint, accepts…]
+--barred-unicode[Uses unicode printing chars for barred output…]
+--fixed[{string} Fixed width specification. One of…]
+--fw[{string} Shortcut for --fixed left-align-multi-word…]
 --right[Right-justifies all fields for PPRINT output.]
 --cpuprofile[{CPU-profile file name}]
 --time[Print elapsed execution time in seconds to stderr at…]
@@ -191,6 +213,7 @@
 --c2x
 --c2p
 --c2m
+--c2y
 --t2c
 --t2t,-t
 --t2j
@@ -200,6 +223,7 @@
 --t2x
 --t2p
 --t2m
+--t2y
 --j2c
 --j2t
 --j2j,-j
@@ -209,6 +233,7 @@
 --j2x
 --j2p
 --j2m
+--j2y
 --l2c
 --l2t
 --l2j
@@ -218,6 +243,7 @@
 --l2x
 --l2p
 --l2m
+--l2y
 --d2c
 --d2t
 --d2j
@@ -227,6 +253,7 @@
 --d2x
 --d2p
 --d2m
+--d2y
 --n2c
 --n2t
 --n2j
@@ -236,6 +263,7 @@
 --n2x
 --n2p
 --n2m
+--n2y
 --x2c
 --x2t
 --x2j
@@ -245,6 +273,7 @@
 --x2x
 --x2p
 --x2m
+--x2y
 --p2c
 --p2t
 --p2j
@@ -253,6 +282,7 @@
 --p2n
 --p2x
 --p2m
+--p2y
 --m2c
 --m2t
 --m2j
@@ -261,6 +291,17 @@
 --m2n
 --m2x
 --m2p
+--m2y
+--y2c
+--y2t
+--y2j
+--y2l
+--y2d
+--y2n
+--y2x
+--y2p
+--y2m
+--y2y
 -g[help flags]
 -l[help list-verbs]
 -L[help usage-verbs]

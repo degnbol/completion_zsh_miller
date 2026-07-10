@@ -1,3 +1,2 @@
-Passes input records directly to output. Most useful for format conversion.
 Produces a sequence of counters.  Discards the input record stream. Produces
-output as specified by the options
+output as specified by the options.

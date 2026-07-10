@@ -3,5 +3,6 @@ Passes through the first n records, optionally by category.
 Without -g, ceases consuming more input (i.e. is fast) when n records have been read.
 Options:
 -g {a,b,c} Optional group-by-field names for head counts, e.g. a,b,c.
--n {n} Head-count to print. Default 10.
--h|--help Show this message.
+-n {n}     Head-count to print. Default 10. A negative count, e.g. -n -2, passes
+           through all but the last n records, optionally by category.
+-h|--help  Show this message.

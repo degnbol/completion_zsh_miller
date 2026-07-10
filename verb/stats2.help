@@ -1,7 +1,27 @@
 Usage: mlr stats2 [options]
 Computes bivariate statistics for one or more given field-name pairs,
 accumulated across the input record stream.
--a {linreg-ols,corr,...}  Names of accumulators: one or more of:
+Options:
+-a {linreg-ols,corr,...} Names of accumulators: one or more of the listed
+                         values.
+-f {a,b,c,d}             Value-field name-pairs on which to compute statistics.
+                         There must be an even number of names.
+-g {e,f,g}               Optional group-by-field names.
+-v                       Print additional output for linreg-pca.
+-s                       Print iterative stats. Useful in tail -f contexts, in
+                         which case please avoid pprint-format output since end
+                         of input stream will never be seen. Likewise, if input
+                         is coming from `tail -f`, be sure to use
+                         `--records-per-batch 1`.
+--fit                    Rather than printing regression parameters, applies
+                         them to the input data to compute new fit fields. All
+                         input records are held in memory until end of input
+                         stream. Has effect only for linreg-ols, linreg-pca, and
+                         logireg.
+-S                       No-op flag for backward compatibility with Miller 5.
+-F                       No-op flag for backward compatibility with Miller 5.
+-h|--help                Show this message.
+Names of accumulators for -a, one or more of:
   linreg-ols Linear regression using ordinary least squares
   linreg-pca Linear regression using principal component analysis
   r2       Quality metric for linreg-ols (linreg-pca emits its own)
@@ -9,18 +29,6 @@ accumulated across the input record stream.
   corr     Sample correlation
   cov      Sample covariance
   covx     Sample-covariance matrix
--f {a,b,c,d}   Value-field name-pairs on which to compute statistics.
-               There must be an even number of names.
--g {e,f,g}     Optional group-by-field names.
--v             Print additional output for linreg-pca.
--s             Print iterative stats. Useful in tail -f contexts, in which
-               case please avoid pprint-format output since end of input
-               stream will never be seen. Likewise, if input is coming from
-               `tail -f`, be sure to use `--records-per-batch 1`.
---fit          Rather than printing regression parameters, applies them to
-               the input data to compute new fit fields. All input records are
-               held in memory until end of input stream. Has effect only for
-               linreg-ols, linreg-pca, and logireg.
 Only one of -s or --fit may be used.
 Example: mlr stats2 -a linreg-pca -f x,y
 Example: mlr stats2 -a linreg-ols,r2 -f x,y -g size,shape

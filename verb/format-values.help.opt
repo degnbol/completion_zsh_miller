@@ -1,4 +1,6 @@
--i[{integer format} Defaults to "%d".]
--f[{float format} Defaults to "%f".]
--s[{string format} Defaults to "%s".]
+-i[{integer format} Integer format string; defaults to "%d". Examples: "%06lld",]
+-f[{float format} Float format string; defaults to "%f". Examples: "%8.3lf",]
+-s[{string format} String format string; defaults to "%s". Examples: "_%s",]
 -n[Coerce field values autodetected as int to float, and then]
+-h
+--help

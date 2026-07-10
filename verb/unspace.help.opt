@@ -1,4 +1,4 @@
--f[{x} Replace spaces with specified filler character.]
+-f[{x} Replace spaces with specified filler character. Default "_".]
 -k[Unspace only keys, not keys and values.]
 -v[Unspace only values, not keys and values.]
 -h

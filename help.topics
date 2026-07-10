@@ -14,6 +14,7 @@ flatten-unflatten-flags
 format-conversion-keystroke-saver-flags
 json-only-flags
 legacy-flags
+markdown-only-flags
 miscellaneous-flags
 output-colorization-flags
 pprint-only-flags
