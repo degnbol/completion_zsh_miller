@@ -1,6 +1,8 @@
 # Miller Zsh Completion
 
-This directory contains zsh completion for [Miller (mlr)](https://miller.readthedocs.io/).
+Zsh completion for [Miller (mlr)](https://miller.readthedocs.io/).
+Design rationale lives in **DESIGN.md** — read it before restructuring
+dispatch, escaping, or completion behaviour.
 
 ## Running Tests
 
@@ -40,68 +42,33 @@ unfunction _mlr 2>/dev/null; rm -f ~/.zcompdump* && exec zsh
 
 ## Architecture
 
-### Template (`_mlr.templ`)
+`_mlr.templ` contains the main `_mlr()` function (`_arguments` for global
+flags), state handlers (`from_file`, `mlr-tui`), and helpers
+(`_mlr_commands`, `_mlr_files_or_chain`, `_mlr_field_names`,
+`_mlr_join_left_field_names`, `_mlr_rename_field_names`). `_mlr.sh`
+replaces its placeholders:
 
-The template contains:
-1. Main `_mlr()` function with `_arguments` call for global flags
-2. State handlers (`from_file`, `mlr-tui`) for special completions
-3. Helper functions: `_mlr_commands`, `_mlr_files_or_chain`, `_mlr_field_names`
-
-Placeholders replaced by `_mlr.sh`:
 - `#FLAGS` - Main mlr flags from `flags.help`
 - `#SUBCMDS` - Verb-specific option handling from `verb/*.opt`
 - `#DESCS` - Verb descriptions from `descs.help`
 
-### Key Design Decisions
+### Do not regress (rationale for each: DESIGN.md)
 
-**`_arguments_options=(-S -C)`**
-- `-S`: Don't complete options after `--`
-- `-C`: Modify curcontext for state actions
-- Note: `-s` (option stacking) was intentionally removed as it causes cursor positioning issues
+- `_arguments_options=(-S -C)`: never re-add `-s` — cursor jumps.
+- `--from` completes via the `from_file` state, not a direct
+  `:filename:_files` spec — substring matching breaks.
+- Keep the early return `[[ -z "$line" && "$state" == "mlr-tui" ]]` —
+  cursor jumps when completing main flags.
+- Field-name completion must not add a trailing comma or space —
+  `-f name,` silently breaks mlr. `rename` is the exception.
+- Parse `LBUFFER`, never `BUFFER` or `line`, when scanning the command
+  line for files, chain delimiters (`then`/`+`), or trailing space —
+  text after the cursor must be ignored.
 
-**State-based file completion for `--from`**
-```zsh
-'--from[...]: :->from_file'
-# Instead of:
-'--from[...]:filename:_files'
-```
-Using `_alternative 'files:filename:_files'` in a state handler enables proper substring matching (e.g., `tion.zsh` -> `completion.zsh`). Direct `_files` in `_arguments` doesn't respect the global `matcher-list`.
+## Positional Arguments
 
-**Early return for option completion**
-```zsh
-[[ -z "$line" && "$state" == "mlr-tui" ]] && return ret
-```
-When completing main flags (before any verb), `$line` is empty. Without this check, the `mlr-tui` state handler runs and manipulates `words`/`CURRENT`, causing cursor positioning issues. The condition also checks for `mlr-tui` state specifically so other states like `from_file` still work.
-
-### Verb Chaining
-
-Miller supports verb chaining with `then` or `+`:
-```bash
-mlr --csv head -n 5 then cut -f name then sort file.csv
-```
-
-The `mlr-tui` state handler detects chain delimiters and resets completion context for each verb segment. **Important:** Chain detection must search `buf_words` (parsed from `LBUFFER`), not `line` from `_arguments`, because `line` includes text after the cursor which would incorrectly detect chain operators typed after the cursor position.
-
-### Field Name Completion
-
-`_mlr_field_names` reads the input file (from `--from` or trailing args), extracts column names using `mlr --ojsonl head -n 1 | jq -r 'keys[]'`, and offers them as completions for flags like `-f`, `-g`.
-
-**Important:** Field name completion does not add any suffix (comma or space). Adding a trailing comma causes silent failures in mlr (e.g., `-f name,` produces wrong results). Users type commas themselves when building multi-field lists.
-
-**Known limitation:** Completing with empty prefix and text after cursor (e.g., `mlr uniq -f <TAB>,other`) doesn't show completions. This is a zsh edge case where PREFIX is empty but SUFFIX exists - zsh's completion matching doesn't handle this well. Workaround: type at least one character before TAB.
-
-### Rename Field Completion
-
-`_mlr_rename_field_names` handles the `rename` verb's `old1,new1,old2,new2,...` argument format:
-- Counts commas in IPREFIX to determine position (odd = old name, even = new name)
-- Only completes at "old" name positions (field names from input file)
-- Adds comma suffix since pairs are comma-separated
-
-**Note:** Same empty PREFIX limitation as `_mlr_field_names` applies here (see above).
-
-### Positional Arguments
-
-Some verbs require positional arguments not documented in `--help`. These are added manually in `RUNME.zsh`:
+Some verbs require positional arguments not documented in `--help`. These
+are added manually in `RUNME.zsh`:
 
 ```zsh
 # sub/gsub/ssub require old and new pattern args
@@ -111,28 +78,8 @@ for verb in sub gsub ssub; do
 done
 ```
 
-The `_mlr.sh` script detects lines starting with `N:` (e.g., `1:old:`) and passes them through as positional argument specs without escaping.
-
-## Zsh Completion Concepts
-
-### Matcher List (in `~/dotfiles/zsh/completion.zsh`)
-
-```zsh
-zstyle ':completion:*' matcher-list \
-    'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
-    'r:|[._-]=* r:|=*' \
-    'l:|=* r:|=*'
-```
-- Case-insensitive matching
-- Partial matching at separators
-- Substring matching anywhere
-
-### Completer Chain
-
-```zsh
-zstyle ':completion:*' completer _expand _complete _match
-```
-- `_approximate` was removed to prevent typo-tolerant matches (e.g., `--cs` matching `--asv` instead of `--csv`)
+`_mlr.sh` detects lines starting with `N:` (e.g., `1:old:`) and passes them
+through as positional argument specs without escaping.
 
 ## Important: Generated Files
 
@@ -150,21 +97,6 @@ zstyle ':completion:*' completer _expand _complete _match
 
 ## Common Pitfalls
 
-**Use `LBUFFER` not `BUFFER` when parsing the command line:**
-When there's text after the cursor (e.g., `mlr cut -f <TAB> | sed ...`), `BUFFER` contains the entire line including text after cursor, while `LBUFFER` contains only text before cursor. Always use `LBUFFER` for:
-- Parsing command line to find input files
-- Detecting chain delimiters (`then`, `+`)
-- Checking for trailing space to determine if completing a new word
-```zsh
-# Bad: includes text after cursor, breaks completion
-buf_words=("${(z)BUFFER}")
-if [[ "$BUFFER" == *" " ]]; then
-
-# Good: only text before cursor
-buf_words=("${(z)LBUFFER}")
-if [[ "$LBUFFER" == *" " ]]; then
-```
-
 **Backticks in descriptions must be escaped:**
 In `_mlr.sh`, verb descriptions are double-quoted, so backticks cause command substitution:
 ```zsh
@@ -174,6 +106,18 @@ In `_mlr.sh`, verb descriptions are double-quoted, so backticks cause command su
 sed 's/`/\\`/g'
 ```
 
+**Square brackets in option descriptions must be escaped:**
+Zsh's `_arguments` uses `[description]` syntax, so nested brackets in descriptions cause parse errors:
+```zsh
+# Bad: nested [0..100] breaks _arguments parsing
+"-p[Produce percents [0..100], not fractions [0..1]]"
+# Error: _arguments:comparguments:327: invalid option definition
+
+# Good: inner brackets escaped
+"-p[Produce percents \[0..100\], not fractions \[0..1\]]"
+```
+The `escape_inner_brackets` function in `_mlr.sh` handles this automatically.
+
 **Aux commands have `mlr ` prefix in help output:**
 `mlr aux-list` outputs commands like `mlr hex`, not just `hex`. Strip the prefix:
 ```zsh
@@ -182,6 +126,10 @@ mlr aux-list | sed 's/^mlr //'
 
 **The `rm` command with glob patterns can be dangerous:**
 Be careful with patterns like `rm verb/mlr\ *` - shell expansion issues can delete unintended files.
+
+**Empty PREFIX with text after cursor shows no completions**
+(e.g., `mlr uniq -f <TAB>,other`) — known zsh limitation, not a bug here.
+See DESIGN.md.
 
 ## Troubleshooting
 
@@ -212,15 +160,3 @@ Usually caused by unescaped special characters. Check for:
 - Unescaped backticks in double-quoted strings
 - Verb names with special characters (hyphens in case labels need quoting)
 - Missing escape for `{`, `}`, `'`, `"`
-
-**Square brackets in option descriptions must be escaped:**
-Zsh's `_arguments` uses `[description]` syntax, so nested brackets in descriptions cause parse errors:
-```zsh
-# Bad: nested [0..100] breaks _arguments parsing
-"-p[Produce percents [0..100], not fractions [0..1]]"
-# Error: _arguments:comparguments:327: invalid option definition
-
-# Good: inner brackets escaped
-"-p[Produce percents \[0..100\], not fractions \[0..1\]]"
-```
-The `escape_inner_brackets` function in `_mlr.sh` handles this automatically using awk to escape `[` and `]` inside the description while preserving the outer delimiters.
