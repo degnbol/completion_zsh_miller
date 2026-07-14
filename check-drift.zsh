@@ -14,14 +14,14 @@ if [[ "$recorded_version" != "$installed_version" ]]; then
     drift=1
 fi
 
-verb_diff=$(diff verbs.list =(./verbs.list.sh) || true)
+verb_diff=$(diff data/verbs.list =(src/verbs.list.sh) || true)
 if [[ -n "$verb_diff" ]]; then
     echo "verbs (< recorded, > installed):"
     echo "$verb_diff"
     drift=1
 fi
 
-flag_diff=$(diff flags.help =(./flags.help.sh) || true)
+flag_diff=$(diff data/flags.help =(src/flags.help.sh) || true)
 if [[ -n "$flag_diff" ]]; then
     echo "flags (< recorded, > installed):"
     echo "$flag_diff"

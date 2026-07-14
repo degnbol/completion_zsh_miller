@@ -12,27 +12,27 @@ dispatch, escaping, or completion behaviour.
 
 ## File Structure
 
-- `_mlr` - Generated completion file (do not edit directly)
-- `_mlr.templ` - Template for generating `_mlr`
-- `_mlr.sh` - Script that generates `_mlr` from template and help files
-- `flags.help` / `flags.help.sh` - Main mlr flags; the `.sh` emits them to stdout
-- `verb/` - Directory containing verb-specific options (*.opt files)
-- `descs.help` - Verb descriptions
-- `verbs.list` / `verbs.list.sh` - Verb list (chain + aux); the `.sh` emits to stdout
-- `help.topics` - Help topic completions
-- `VERSION` - `mlr --version` the data was generated against
-- `table_unjag.sh` - Helper script for parsing help output
-- `RUNME.zsh` - Script to regenerate everything
+Root: product + entry points + docs. `src/` = hand-edited generators,
+`data/` = regenerated data (both do-not-edit-directly targets below).
+
+- `_mlr` - Generated completion file
+- `RUNME.zsh` - Regenerate everything (`data/` then `_mlr`)
 - `check-drift.zsh` - Flags data stale vs installed mlr (cheap, no full regen)
-- `test/` - Test suite
+- `VERSION` - `mlr --version` the data was generated against; `test/`
+- `src/_mlr.templ` - Template for `_mlr` (main function, states, helpers)
+- `src/_mlr.sh` - Generates `_mlr` from template + `data/` help files
+- `src/flags.help.sh`, `src/verbs.list.sh` - Emit flags / verb list to stdout
+- `src/table_unjag.sh` - Helper for parsing help output
+- `data/flags.help`, `data/descs.help`, `data/verbs.list`, `data/help.topics`
+- `data/verb/*.{help,desc,opt}` - Per-verb help, descriptions, options
 
 ## Regenerating Completions
 
 ```bash
 ./RUNME.zsh
 # Or manually:
-./flags.help.sh > flags.help  # Regenerate flags.help
-./_mlr.sh                     # Regenerate _mlr
+src/flags.help.sh > data/flags.help  # Regenerate data/flags.help
+src/_mlr.sh                          # Regenerate _mlr
 ```
 
 After regenerating, reload in zsh:
@@ -73,8 +73,8 @@ are added manually in `RUNME.zsh`:
 ```zsh
 # sub/gsub/ssub require old and new pattern args
 for verb in sub gsub ssub; do
-    echo '1:old:' >> verb/$verb.help.opt
-    echo '2:new:' >> verb/$verb.help.opt
+    echo '1:old:' >> data/verb/$verb.help.opt
+    echo '2:new:' >> data/verb/$verb.help.opt
 done
 ```
 

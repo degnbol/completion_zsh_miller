@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 # Emit the main mlr flags (one per line) for completion, to stdout.
+cd ${0:A:h}
 {
     mlr help flags | grep '^-' | sed 's/ or -/|-/g' | sed -E 's/ +/\t/' | sed -E 's/ +/ /g' |
         ./table_unjag.sh 1 $'\t' '|' | sed 's/\[/\\[/g' | sed 's/\]/\\]/g' |

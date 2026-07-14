@@ -15,7 +15,7 @@ grep -q 'from_file)' _mlr || errors+=("from_file state handler missing")
 grep -A2 'from_file)' _mlr | grep -q '_alternative' || errors+=("from_file should use _alternative")
 
 # flags.help should have the state completion
-grep -q '^--from.*:->from_file' flags.help || errors+=("flags.help missing state completion for --from")
+grep -q '^--from.*:->from_file' data/flags.help || errors+=("data/flags.help missing state completion for --from")
 
 if [[ ${#errors} -gt 0 ]]; then
     echo "Errors: ${errors[*]}" >&2

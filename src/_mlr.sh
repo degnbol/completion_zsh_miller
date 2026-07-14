@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
-# write _mlr by replacing #FLAGS, #SUBCMDS and #DESCS in _mlr.templ.
+# write _mlr by replacing #FLAGS, #SUBCMDS and #DESCS in src/_mlr.templ.
+cd ${0:A:h:h}
 
 # Helper function: print lines from template between markers
 # Usage: template_section START_PATTERN END_PATTERN
@@ -10,13 +11,13 @@ template_section() {
     local start="$1" end="$2"
     if [[ -z "$start" && -n "$end" ]]; then
         # From beginning to end pattern (exclusive)
-        sed -n "1,/^${end}/{ /^${end}/d; p; }" _mlr.templ
+        sed -n "1,/^${end}/{ /^${end}/d; p; }" src/_mlr.templ
     elif [[ -n "$start" && -n "$end" ]]; then
         # From start pattern to end pattern (both exclusive)
-        sed -n "/^${start}/,/^${end}/{ /^${start}/d; /^${end}/d; p; }" _mlr.templ
+        sed -n "/^${start}/,/^${end}/{ /^${start}/d; /^${end}/d; p; }" src/_mlr.templ
     elif [[ -n "$start" && -z "$end" ]]; then
         # From start pattern to end of file (start exclusive)
-        sed -n "/^${start}/,\${ /^${start}/d; p; }" _mlr.templ
+        sed -n "/^${start}/,\${ /^${start}/d; p; }" src/_mlr.templ
     fi
 }
 
@@ -43,12 +44,12 @@ template_section "" "#FLAGS" > _mlr
 
 # ' for some reason can't be escaped in _mlr without breaking things so I remove the one instance ("Don't")
 # I also tried using double quotes instead but then things in ticks `` are executed which is a problem as well.
-tr -d "'" < flags.help | sed "s/^/'/" | sed "s/$/' \\\/" | sed 's/{/\\{/g' | sed 's/}/\\}/g' >> _mlr
+tr -d "'" < data/flags.help | sed "s/^/'/" | sed "s/$/' \\\/" | sed 's/{/\\{/g' | sed 's/}/\\}/g' >> _mlr
 
 # Section 2: #FLAGS to #SUBCMDS
 template_section "#FLAGS" "#SUBCMDS" >> _mlr
 
-for file in verb/*opt; do
+for file in data/verb/*opt; do
     echo "${file:r:r:t})" >> _mlr
     echo '_arguments "${_arguments_options[@]}" \' >> _mlr
     # Process each option line:
@@ -110,7 +111,7 @@ _arguments -C "1: :->cmds"
 case "$state" in
     cmds)
         _values "mlr_help command" \' >> _mlr
-sed 's/^/"/' help.topics | sed 's/$/" \\/' >> _mlr
+sed 's/^/"/' data/help.topics | sed 's/$/" \\/' >> _mlr
 echo '        ;;
 esac
 ;;' >> _mlr
@@ -119,7 +120,7 @@ esac
 template_section "#SUBCMDS" "#DESCS" >> _mlr
 
 # add verb descriptions (escape backticks to prevent command substitution)
-sed 's/"/\\"/g' descs.help | sed 's/`/\\`/g' | sed 's/^/"/' | sed 's/$/" \\/' >> _mlr
+sed 's/"/\\"/g' data/descs.help | sed 's/`/\\`/g' | sed 's/^/"/' | sed 's/$/" \\/' >> _mlr
 
 # Section 4: #DESCS to end
 template_section "#DESCS" "" >> _mlr
