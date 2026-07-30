@@ -204,7 +204,7 @@
 --ps[{string} Specify PS for input and output.]
 --repifs[Let IFS be repeated: e.g. for splitting on multiple…]
 --rs[{string} Specify RS for input and output.]
---c2c,-c
+-c
 --c2t
 --c2j
 --c2l
@@ -215,7 +215,7 @@
 --c2m
 --c2y
 --t2c
---t2t,-t
+-t
 --t2j
 --t2l
 --t2d
@@ -226,7 +226,7 @@
 --t2y
 --j2c
 --j2t
---j2j,-j
+-j
 --j2l
 --j2d
 --j2n

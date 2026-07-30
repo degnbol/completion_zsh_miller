@@ -5,8 +5,9 @@ cd ${0:A:h}
     mlr help flags | grep '^-' | sed 's/ or -/|-/g' | sed -E 's/ +/\t/' | sed -E 's/ +/ /g' |
         ./table_unjag.sh 1 $'\t' '|' | sed 's/\[/\\[/g' | sed 's/\]/\\]/g' |
         sed -E 's/\t(.*)/[\1]/' | sed '/[.}]]$/!s/]$/…]/'
-    # add format conversion table
-    mlr help flags | grep '^|' | grep -o -- '--[^ ]*'
+    # add format conversion table; diagonal cells read "--c2c,-c" — the long form
+    # is already listed above with a description, so keep only its short alias.
+    mlr help flags | grep '^|' | grep -o -- '--[^ ]*' | sed 's/--[^,]*,//'
     # add help shorthands
     mlr help topics | grep 'mlr -' | sed 's/ *mlr //' | sed 's/ = mlr /[/' | sed 's/$/]/'
 # make --from complete filenames using state-based completion for proper substring matching
